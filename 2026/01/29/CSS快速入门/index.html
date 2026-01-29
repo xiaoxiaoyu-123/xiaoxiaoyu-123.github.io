@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>📚 CSS基础语法速通：零基础入门指南 | 小🐟博客</title><meta name="author" content="小余"><meta name="copyright" content="小余"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="从零开始的CSS完整入门指南，包含基础语法、选择器详解、盒模型和实战示例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="📚 CSS基础语法速通：零基础入门指南">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/01/29/CSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="从零开始的CSS完整入门指南，包含基础语法、选择器详解、盒模型和实战示例">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xiaoxiaoyu-123.github.io/img/bg28.jpg">
+<meta property="article:published_time" content="2026-01-29T08:48:17.208Z">
+<meta property="article:modified_time" content="2026-01-29T11:51:03.010Z">
+<meta property="article:author" content="小余">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="前端基础">
+<meta property="article:tag" content="网页设计">
+<meta property="article:tag" content="样式表">
+<meta property="article:tag" content="零基础教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoxiaoyu-123.github.io/img/bg28.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "📚 CSS基础语法速通：零基础入门指南",
+  "url": "https://xiaoxiaoyu-123.github.io/2026/01/29/CSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/",
+  "image": "https://xiaoxiaoyu-123.github.io/img/bg28.jpg",
+  "datePublished": "2026-01-29T08:48:17.208Z",
+  "dateModified": "2026-01-29T11:51:03.010Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "小余",
+      "url": "https://xiaoxiaoyu-123.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/01/29/CSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '📚 CSS基础语法速通：零基础入门指南',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><style>
+  .custom-subtitle {
+    font-size: 1.3rem;
+    color: pink;
+    margin-top: 10px;
+    min-height: 30px;
+    text-align: center;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: pink;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/../img/bg28.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">小🐟博客</span></a><a class="nav-page-title" href="/"><span class="site-name">📚 CSS基础语法速通：零基础入门指南</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">📚 CSS基础语法速通：零基础入门指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-29T08:48:17.208Z" title="发表于 2026-01-29 16:48:17">2026-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-29T11:51:03.010Z" title="更新于 2026-01-29 19:51:03">2026-01-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="🌟CSS快速入门"><a href="#🌟CSS快速入门" class="headerlink" title="🌟CSS快速入门"></a><span style="color:pink; font-family:Arial;text-align:center">🌟CSS快速入门</span></h1><h2 id="📖-第一章：初识CSS"><a href="#📖-第一章：初识CSS" class="headerlink" title="📖 第一章：初识CSS"></a>📖 第一章：初识CSS</h2><h3 id="什么是CSS？主要作用是做啥的？"><a href="#什么是CSS？主要作用是做啥的？" class="headerlink" title="什么是CSS？主要作用是做啥的？"></a>什么是CSS？主要作用是做啥的？</h3><p>CSS（Cascading Style Sheets，层叠样式表）是用于控制网页视觉表现的语言。如果说HTML是网页的骨架，那么CSS就是网页的皮肤和衣服。</p>
+<h3 id="CSS根据书写位置，可以分为几类？"><a href="#CSS根据书写位置，可以分为几类？" class="headerlink" title="CSS根据书写位置，可以分为几类？"></a>CSS根据书写位置，可以分为几类？</h3><p>根据书写位置，可以分为以下三类：</p>
+<ul>
+<li>行内样式表-写到标签内部可以控制，当前标签的样式。</li>
+<li>内部样式表-写到head标签中，可以控制当前页面的样式。</li>
+<li>外部样式表-独新建一个CSS文件，控制整个网站的样式。<br>相关代码：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>内联和内部样式表<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./css/外部样式表测试.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        /* 内部样式表：在HTML文档的<span class="tag">&lt;<span class="name">head</span>&gt;</span>标签中使用<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css">标签定义样式 */</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">        <span class="selector-tag">div</span> &#123;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">            <span class="attribute">color</span>: blue;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">            <span class="attribute">font-size</span>: <span class="number">16px</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    </span></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>内联样式表<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 内联样式表：直接在HTML标签中使用style属性定义样式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;color: red; font-size: 14px;&quot;</span>&gt;</span>这是一个红色的段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 内部样式表：在HTML文档的&lt;head&gt;标签中使用&lt;style&gt;标签定义样式，优先级次于内联样式表。 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>这是一个蓝色的段落。<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 外部样式表：将样式定义在外部的CSS文件中，通过&lt;link&gt;标签引入，优先级最低。 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>这是一个绿色的段落。<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 总结：</span></span><br><span class="line"><span class="comment">    内联样式表：直接在HTML标签中使用style属性定义样式，优先级最高。</span></span><br><span class="line"><span class="comment">    内部样式表：在HTML文档的&lt;head&gt;标签中使用&lt;style&gt;标签定义样式，优先级次于内联样式表。</span></span><br><span class="line"><span class="comment">    外部样式表：将样式定义在外部的CSS文件中，通过&lt;link&gt;标签引入，优先级最低。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第二章-🎯-第二章：基础选择器详解"><a href="#第二章-🎯-第二章：基础选择器详解" class="headerlink" title="第二章  🎯 第二章：基础选择器详解"></a>第二章  🎯 第二章：基础选择器详解</h2><h3 id="基础选择器是什么？"><a href="#基础选择器是什么？" class="headerlink" title="基础选择器是什么？"></a>基础选择器是什么？</h3><p>基础选择器指的是有单个选择器组成，常见的有：</p>
+<ul>
+<li>类型（标签）选择器，用于设置标签的通用样式（比如重置body的默认边距，统一所有<p>的行高）</li>
+<li>类选择器，日常样式的主力军（90%的样式都用它，可重复使用，最灵活）</li>
+<li>id选择器，用于唯一的页面结构元素（比如页面头部、导航栏、底部这些唯一的大块区域）</li>
+<li>通配符选择器，全局样式初始化（最常用于清除所有元素的默认边距）</li>
+</ul>
+<h3 id="标签（类型）选择器"><a href="#标签（类型）选择器" class="headerlink" title="标签（类型）选择器"></a>标签（类型）选择器</h3><p>类型选择器选择某个类型的元素，也称为标签选择器<br>使用语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">            color: pink;</span><br><span class="line">            font-size: 18px;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>含义：选择所有的div标签修改样式：文本颜色改成粉色，字体大小为18px</p>
+<h3 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h3><p>类选择器选择1个或者多个元素，实现差异化选择<br>使用语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">css:</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    .pink &#123;</span><br><span class="line">        color: pink;</span><br><span class="line">        font-size: 20px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">html:</span><br><span class="line">&lt;div class=&quot;pink&quot;&gt; Hello World &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>含义：选择类名为pink的标签修改样式，文本颜色改成粉色，字体大小为20px<br>注意：</p>
+<ul>
+<li>1.类名自定义，不能是中文，纯数字</li>
+<li>2.多个英文单词组成尽量使用-链接</li>
+<li>3.类名要有意义，尽量见名知义</li>
+<li>4.class属性可以有多类名中间用空格隔开</li>
+</ul>
+<h3 id="id选择器"><a href="#id选择器" class="headerlink" title="id选择器"></a>id选择器</h3><p>选择HTML中具有特定id属性的唯一元素，<br>使用语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">css:</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    #pink &#123;</span><br><span class="line">        color: pink;</span><br><span class="line">        font-size: 20px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">html:</span><br><span class="line">&lt;div id=&quot;pink&quot;&gt; Hello World &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>含义：</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io">小余</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io/2026/01/29/CSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">https://xiaoxiaoyu-123.github.io/2026/01/29/CSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xiaoxiaoyu-123.github.io" target="_blank">小🐟博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CSS/">CSS</a><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">前端基础</a><a class="post-meta__tags" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/">网页设计</a><a class="post-meta__tags" href="/tags/%E6%A0%B7%E5%BC%8F%E8%A1%A8/">样式表</a><a class="post-meta__tags" href="/tags/%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">零基础教程</a></div><div class="post-share"><div class="social-share" data-image="/../img/bg28.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/11/11/%E8%BF%91%E5%86%B5%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="近来情况的碎碎念"><img class="cover" src="/../img/bg39.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">近来情况的碎碎念</div></div><div class="info-2"><div class="info-item-1">考完CMC初赛与网球新生杯后的个人随想，关于学习、比赛与写作状态的反思</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/18/%E5%88%9D%E9%9F%B3%E6%9C%AA%E6%9D%A5%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2/" title="用HTML和CSS实现登录界面"><img class="cover" src="/../img/Miku01.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-18</div><div class="info-item-2">用HTML和CSS实现登录界面</div></div><div class="info-2"><div class="info-item-1">使用HTML和CSS实现的初音未来主题登录界面，包含渐变背景和毛玻璃效果</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">小余</div><div class="author-info-description">小余的博客，欢迎访问</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xiaoxiaoyu-123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://xiaoxiaoyu-123.github.io" target="_blank" title="博客"><i class="fa-solid fa-heart"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%8C%9FCSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">🌟CSS快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E5%88%9D%E8%AF%86CSS"><span class="toc-number">1.1.</span> <span class="toc-text">📖 第一章：初识CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFCSS%EF%BC%9F%E4%B8%BB%E8%A6%81%E4%BD%9C%E7%94%A8%E6%98%AF%E5%81%9A%E5%95%A5%E7%9A%84%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是CSS？主要作用是做啥的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E6%A0%B9%E6%8D%AE%E4%B9%A6%E5%86%99%E4%BD%8D%E7%BD%AE%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA%E5%87%A0%E7%B1%BB%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">CSS根据书写位置，可以分为几类？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%F0%9F%8E%AF-%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.2.</span> <span class="toc-text">第二章  🎯 第二章：基础选择器详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">基础选择器是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%EF%BC%88%E7%B1%BB%E5%9E%8B%EF%BC%89%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">标签（类型）选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#id%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.2.4.</span> <span class="toc-text">id选择器</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/29/CSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="📚 CSS基础语法速通：零基础入门指南"><img src="/../img/bg28.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="📚 CSS基础语法速通：零基础入门指南"/></a><div class="content"><a class="title" href="/2026/01/29/CSS%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="📚 CSS基础语法速通：零基础入门指南">📚 CSS基础语法速通：零基础入门指南</a><time datetime="2026-01-29T08:48:17.208Z" title="发表于 2026-01-29 16:48:17">2026-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/11/%E8%BF%91%E5%86%B5%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="近来情况的碎碎念"><img src="/../img/bg39.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="近来情况的碎碎念"/></a><div class="content"><a class="title" href="/2025/11/11/%E8%BF%91%E5%86%B5%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="近来情况的碎碎念">近来情况的碎碎念</a><time datetime="2025-11-11T14:51:49.260Z" title="发表于 2025-11-11 22:51:49">2025-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/02/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%89%E5%91%A8/" title="每周总结第三期"><img src="/../img/Miku08.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="每周总结第三期"/></a><div class="content"><a class="title" href="/2025/11/02/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%89%E5%91%A8/" title="每周总结第三期">每周总结第三期</a><time datetime="2025-11-02T11:55:47.401Z" title="发表于 2025-11-02 19:55:47">2025-11-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/26/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%91%A8/" title="每周总结第二期"><img src="/../img/Miku05.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="每周总结第二期"/></a><div class="content"><a class="title" href="/2025/10/26/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%91%A8/" title="每周总结第二期">每周总结第二期</a><time datetime="2025-10-26T13:53:43.491Z" title="发表于 2025-10-26 21:53:43">2025-10-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/19/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E5%91%A8/" title="每周总结第一期"><img src="/../img/Miku03.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="每周总结第一期"/></a><div class="content"><a class="title" href="/2025/10/19/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E5%91%A8/" title="每周总结第一期">每周总结第一期</a><time datetime="2025-10-19T10:55:56.045Z" title="发表于 2025-10-19 18:55:56">2025-10-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/../img/bg28.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 小余</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><div class="js-pjax"></div><script>
+  // 等待页面加载完成
+  document.addEventListener('DOMContentLoaded', function() {
+    // 找到标题区域
+    const header = document.querySelector('.header-wrapper') || 
+                  document.querySelector('.site-header') ||
+                  document.querySelector('header');
+    
+    if (header) {
+      // 创建打字效果容器
+      const typedEl = document.createElement('div');
+      typedEl.className = 'custom-subtitle';
+      typedEl.id = 'custom-subtitle';
+      
+      // 插入到标题下方
+      const title = header.querySelector('h1') || header.querySelector('.site-title');
+      if (title) {
+        title.parentNode.insertBefore(typedEl, title.nextSibling);
+      } else {
+        header.appendChild(typedEl);
+      }
+      
+      // 动态加载typed.js
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
+      script.onload = function() {
+        new Typed('#custom-subtitle', {
+          strings: [
+            '✨ 欢迎来到小余的技术博客',
+            '📚 分享前端学习经验',
+            '🎨 探索设计与创意',
+            '🚀 持续学习，不断进步'
+          ],
+          typeSpeed: 100,
+          backSpeed: 50,
+          loop: true,
+          showCursor: true,
+          cursorChar: '|'
+        });
+      };
+      document.head.appendChild(script);
+    }
+  });
+</script>
+<script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

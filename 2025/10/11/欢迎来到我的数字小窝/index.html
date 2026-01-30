@@ -230,71 +230,88 @@
       document.head.appendChild(script);
     }
   });
+</script>
 
-# live2d看板娘互动设置  // 注释：Live2D看板娘的互动功能设置
-  if (typeof window.L2Dwidget !== 'undefined') {  // 如果：Live2D库已加载
-  const live2dConfig = {  // 定义配置对象
- "model": {  // 模型设置：
-  "jsonPath": "https://unpkg.com/live2d-widget-model-miku@latest/assets/miku.model.json",  // 模型文件地址
-  "scale": 1  // 缩放：原始大小
-},
-  "display": {  // 显示设置：
-  "position": "left",   // 位置：右侧
-  "width": 100,          // 宽度：150像素
-  "height": 200,         // 高度：300像素
-  "hOffset": 0,          // 水平偏移：0
-  "vOffset": -20         // 垂直偏移：向上20像素
-},
-  "mobile": {    // 移动端设置：
-  "show": true,   // 显示：是
-  "scale": 0.5    // 缩放：一半大小
-},
-  "react": {                    // 交互设置：
-  "opacityDefault": 0.7,      // 默认透明度：70%
-  "opacityOnHover": 0.8       // 悬停透明度：80%
-},
-  "dialog": {                 // 对话框设置：
-  "enable": true,           // 启用对话框
-  "hitokoto": true,         // 启用一言功能
-  "script": {               // 对话脚本：
-    "click": {              // 点击事件：
-    "default": [          // 普通点击对话：
-      "别碰我！",
-      "再摸我就要生气了！",
-      "有什么事吗？",
-      "嘿嘿嘿…"
-  ],
-  "sleeping": [         // 睡觉时点击对话：
-    "Zzz…",
-    "别吵我睡觉…"
-  ]
-},
-"hover": {              // 悬停事件：
-  "default": [          // 悬停对话：
-    "看什么看？",
-    "想摸我吗？",
-    "今天的天气真好呢！"
-  ]
-},
-"idle": {               // 空闲事件：
-  "default": [          // 随机空闲对话：
-    "主人今天过得怎么样？",
-    "要一起学习吗？",
-    "休息一下吧~",
-    "喜欢我的新衣服吗？",
-    "小🐟的博客真好看！"
-  ],
-  "timing": [           // 定时对话：
-        {"hour": 9, "text": "早上好！该开始工作了！"},
-        {"hour": 12, "text": "中午了，该吃午饭啦！"},
-        {"hour": 18, "text": "傍晚了，该休息一下了~"},
-        {"hour": 22, "text": "夜深了，早点休息哦！"}
-          ]
-        }
+# live2d看板娘互动设置
+<script>
+if (typeof window.L2Dwidget !== 'undefined') {
+const live2dConfig = {
+  "model": {
+    "jsonPath": "https://unpkg.com/live2d-widget-model-shizuku@latest/assets/shizuku.model.json",
+    "scale": 1
+  },
+  "display": {
+    "position": "right",
+    "width": 150,
+    "height": 300,
+    "hOffset": 0,
+    "vOffset": -20
+  },
+  "mobile": {
+    "show": true,
+    "scale": 0.5
+  },
+  "react": {
+    "opacityDefault": 0.7,
+    "opacityOnHover": 0.8
+  },
+  "dialog": {
+    "enable": true,           // 开启对话框
+    "hitokoto": true,         // 开启一言（从网络获取句子）
+    "script": {
+      // 点击模型时的对话
+      "click": {
+        "default": [          // 默认点击对话
+          "别碰我！",
+          "再摸我就要生气了！",
+          "有什么事吗？",
+          "嘿嘿嘿…"
+        ],
+        "sleeping": [         // 睡觉时的对话
+          "Zzz…",
+          "别吵我睡觉…"
+        ]
+      },
+      // 鼠标悬停时的对话
+      "hover": {
+        "default": [
+          "看什么看？",
+          "想摸我吗？",
+          "今天的天气真好呢！"
+        ]
+      },
+      // 空闲时的随机对话
+      "idle": {
+        "default": [
+          "主人今天过得怎么样？",
+          "要一起学习吗？",
+          "休息一下吧~",
+          "喜欢我的新衣服吗？",
+          "小🐟的博客真好看！"
+        ],
+        "timing": [           // 定时对话
+          {
+            "hour": 9,
+            "text": "早上好！该开始工作了！"
+          },
+          {
+            "hour": 12,
+            "text": "中午了，该吃午饭啦！"
+          },
+          {
+            "hour": 18,
+            "text": "傍晚了，该休息一下了~"
+          },
+          {
+            "hour": 22,
+            "text": "夜深了，早点休息哦！"
+          }
+        ]
       }
     }
-  };
-  window.L2Dwidget.init(live2dConfig);  // 初始化看板娘
-}  // 结束if条件
+  }
+};
+window.L2Dwidget.init(live2dConfig);
+}
 </script>
 <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>✨ 棉花糖今天吃啥 | 小🐟博客</title><meta name="author" content="小余"><meta name="copyright" content="小余"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这是一个利用Claude Code人工开发的小程序，用于解决用户在吃啥这方面的选择困难症。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="✨ 棉花糖今天吃啥">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="这是一个利用Claude Code人工开发的小程序，用于解决用户在吃啥这方面的选择困难症。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xiaoxiaoyu-123.github.io/img/Miku07.jpg">
+<meta property="article:published_time" content="2026-08-20T12:53:04.220Z">
+<meta property="article:modified_time" content="2026-08-24T22:26:24.035Z">
+<meta property="article:author" content="小余">
+<meta property="article:tag" content="小程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoxiaoyu-123.github.io/img/Miku07.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "✨ 棉花糖今天吃啥",
+  "url": "https://xiaoxiaoyu-123.github.io/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/",
+  "image": "https://xiaoxiaoyu-123.github.io/img/Miku07.jpg",
+  "datePublished": "2026-08-20T12:53:04.220Z",
+  "dateModified": "2026-08-24T22:26:24.035Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "小余",
+      "url": "https://xiaoxiaoyu-123.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '✨ 棉花糖今天吃啥',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><style>
+  .custom-subtitle {
+    font-size: 1.3rem;
+    color: pink;
+    margin-top: 10px;
+    min-height: 30px;
+    text-align: center;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: pink;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">50</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/../img/Miku07.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">小🐟博客</span></a><a class="nav-page-title" href="/"><span class="site-name">✨ 棉花糖今天吃啥</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">✨ 棉花糖今天吃啥</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-08-20T12:53:04.220Z" title="发表于 2026-08-20 20:53:04">2026-08-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-24T22:26:24.035Z" title="更新于 2026-08-25 06:26:24">2026-08-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%EF%BC%8Cuniapp/">前端，uniapp</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%EF%BC%8Cuniapp/lucky-canves/">lucky-canves</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%EF%BC%8Cuniapp/lucky-canves/spring-boot/">spring-boot</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%EF%BC%8Cuniapp/lucky-canves/spring-boot/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="棉花糖今天吃啥"><a href="#棉花糖今天吃啥" class="headerlink" title="棉花糖今天吃啥"></a>棉花糖今天吃啥</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>小程序v1.0.2版本早于5.16号正式发布在微信小程序上了，由于界面较简便+功能过少，打算六月份中下旬优化小程序后再重新写一篇博客记录。拖着拖着到了现在8.20才写这篇博客记录。在学校的时候7.20开始重构优化项目，本想着回家前7.24前把这个小程序重构完，然而事与愿违，一托再托，回家后8.6才开始正式继续重构项目，这次前端从微信原生开发框架迁移为uniapp框架，后端从node.js（express）迁移为spring-boot框架，数据库从supabase迁移至MySQL。整个项目重构过程90%以上是用Claude Code写的了，特别是后端跟数据库完全是用Claude Code写的。运维方面，通过1panel运维管理面板部署了spring boot的后端服务。已于8.11日在微信小程序管理后台上正式发布了前前后后修改改改后的V2.0.5版本，现可正常在微信上使用。</p>
+<h2 id="为什么要把好好的小程序拆了重来"><a href="#为什么要把好好的小程序拆了重来" class="headerlink" title="为什么要把好好的小程序拆了重来"></a>为什么要把好好的小程序拆了重来</h2><p>v1.0.2 其实能正常用：抽签、转盘、固定菜品，解决”今天中午吃什么”这个世纪难题基本够用了。但它实在<strong>太简陋</strong>了——界面是原生组件拼的，功能就那几个 tab，后端还是个 node.js（express）+ Supabase 的玩具组合。</p>
+<p>本来想着六月中下旬抽个周末优化一下，结果一拖就是两个多月。七月二十号在学校的时候终于开了个头，当时信心满满打算回家前（7.24）就把重构做完，<strong>结果又是事与愿违</strong>——学校一堆事，回到家又躺了几天，真正坐下来开始写已经是 8.6 的事了。人啊，永远不要给”过几天就能做完”的项目立 flag。</p>
+<h2 id="技术栈大换血"><a href="#技术栈大换血" class="headerlink" title="技术栈大换血"></a>技术栈大换血</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>旧</th>
+<th>新</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前端</td>
+<td>微信原生</td>
+<td>uni-app（Vue3）</td>
+</tr>
+<tr>
+<td>后端</td>
+<td>node.js（express）</td>
+<td>Spring Boot 3 + MyBatis</td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>Supabase</td>
+<td>MySQL</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>无</td>
+<td>1Panel 容器化</td>
+</tr>
+</tbody></table>
+<p><strong>前端为什么换 uni-app</strong>：以后要是想上别的平台（抖音、支付宝啥的），一套代码直接打包过去；而且 Vue3 的组件化写起来比原生舒服太多了。最关键的是对微信发布流程零影响——AppID、域名、审核都不变，该咋发布还咋发布。</p>
+<p><strong>后端为什么换 Spring Boot</strong>：说实话是被 express 的异步回调折磨过，加上自己正在学的学习管理系统就是这套三层架构（Controller→Service→Mapper），正好把它的 <code>Result&lt;T&gt;</code> 返回风格也复用过来，写起来顺手。</p>
+<p><strong>数据库为什么换 MySQL</strong>：Supabase 免费层 + 行级安全策略（RLS）那套，对个人项目来说太重了，查个东西还绕。换成 MySQL 自己建表、自己写 SQL，清爽。</p>
+<h2 id="后端：100-Claude-Code-写的"><a href="#后端：100-Claude-Code-写的" class="headerlink" title="后端：100% Claude Code 写的"></a>后端：100% Claude Code 写的</h2><p>这大概是整个重构里最”夸张”的部分——我用 Claude Code 开了 <strong>9 个并行子代理</strong>，一次性把后端整个搭了出来：</p>
+<ul>
+<li>48 个 Java 源文件</li>
+<li>5 个 Controller、22 个接口</li>
+<li>3 张表的 DDL（user &#x2F; dish_history &#x2F; custom_dish，后来又加了 feedback）</li>
+</ul>
+<p>数据库迁移也是它干的：把 Supabase 的 PostgreSQL 表结构翻译成 MySQL 语法，废弃 RLS，改成后端业务逻辑鉴权。我基本只负责”提需求 → 验收 → 说哪里不对重来”。那段时间，我更像产品经理。</p>
+<h2 id="前端迁移的坑（能写一大篇）"><a href="#前端迁移的坑（能写一大篇）" class="headerlink" title="前端迁移的坑（能写一大篇）"></a>前端迁移的坑（能写一大篇）</h2><h3 id="编译阶段"><a href="#编译阶段" class="headerlink" title="编译阶段"></a>编译阶段</h3><ul>
+<li><code>manifest.json</code> 忘了加 <code>&quot;vueVersion&quot;: &quot;3&quot;</code>，编译一直报错，折腾了半天</li>
+<li><code>@dcloudio</code> 的 alpha 版本和 HBuilderX 内置版对不上，<code>uni</code> 直接不是内部命令</li>
+<li>生命周期 <code>onShow/onLaunch</code> 要从 <code>@dcloudio/uni-app</code> 导入，而不是从 <code>vue</code></li>
+</ul>
+<h3 id="九宫格菜品图片——最磨人的一个-bug"><a href="#九宫格菜品图片——最磨人的一个-bug" class="headerlink" title="九宫格菜品图片——最磨人的一个 bug"></a>九宫格菜品图片——最磨人的一个 bug</h3><p>微信的 canvas 2D 在开发者工具里报 <code>nodeId</code> 错误，真机上又加载不了 HTTPS 网络图片。为了这几张菜品图，我试了 <code>getImageInfo</code>、<code>downloadFile</code>、隐藏 <code>&lt;image&gt;</code> 拿 path……<strong>全都不行</strong>。一度怀疑人生，甚至想把图片去掉算了。</p>
+<p>最后绕过了 canvas 本身：改用微信原生的 <strong>cover-image 组件覆盖在 canvas 上层</strong> 来显示菜品图。代价是弹窗又被 cover-image 挡住（原生组件层级高），于是弹窗也改成了 cover-view。一环套一环，但总算是能看了。</p>
+<h3 id="真机和开发者工具总是不一样"><a href="#真机和开发者工具总是不一样" class="headerlink" title="真机和开发者工具总是不一样"></a>真机和开发者工具总是不一样</h3><p>这类小程序开发的经典痛点：开发者工具里好好的，真机上一塌糊涂；或者反过来。这个项目里至少碰到三次——颜色渲染、图片加载、弹窗层级，全是”工具里没毛病，真机就翻车”。最后只能一遍遍”传上去 → 预览 → 看效果 → 改”，非常费人。</p>
+<h2 id="上云：1Panel-部署"><a href="#上云：1Panel-部署" class="headerlink" title="上云：1Panel 部署"></a>上云：1Panel 部署</h2><p>后端部署用的是 <strong>1Panel</strong> 运维面板：</p>
+<ul>
+<li>8080 端口被占 → 改用 8081</li>
+<li>MySQL8 认证插件问题 → 改 <code>mysql_native_password</code></li>
+<li>Nginx 反代 <code>/api</code>、<code>/static</code>、<code>/uploads</code></li>
+<li>头像上传：微信的 <code>wxfile://</code> 临时路径<strong>只有本机能看</strong>，别人的头像永远是裂图 → 改成先上传到后端 <code>uploads/avatars/</code> 存成永久 URL，所有人都能看</li>
+</ul>
+<h2 id="数据同步：最折磨人的一环"><a href="#数据同步：最折磨人的一环" class="headerlink" title="数据同步：最折磨人的一环"></a>数据同步：最折磨人的一环</h2><p>小程序的抽选是<strong>本地优先、云端兜底</strong>的架构：</p>
+<ol>
+<li>抽选先写本地，异步推云端，成功后给这条记录打 <code>synced</code> 标记</li>
+<li>启动时把没同步上的记录自动补推（重试队列）</li>
+<li>这样断网也能抽选，联网自动补上</li>
+</ol>
+<p>这套架构本身没毛病，但中间踩了一个巨坑：<strong>storage key 不一致</strong>——登录时写的是 <code>what-eat_user_id</code>，api 层读的却是 <code>user_id</code>（恒为 null），导致云端同步<strong>全部静默失败</strong>，本地数据永远比云端多，统计页和排行榜怎么都对不上。</p>
+<p>8.8 那天终于把这个数据一致性问题彻底收拾干净：</p>
+<ul>
+<li>统计页（TOP5 &#x2F; 来源占比 &#x2F; 本月打卡 &#x2F; 月度趋势）、我的页、排行榜<strong>统一改读后端</strong>，本地只当离线兜底</li>
+<li>启动时始终补推未同步记录，不再”标记成已同步就丢掉”</li>
+<li>请求遇到 401（后端重启后 token 失效）自动重新登录重试</li>
+</ul>
+<h2 id="安全加固：原来小程序也有这么多漏洞"><a href="#安全加固：原来小程序也有这么多漏洞" class="headerlink" title="安全加固：原来小程序也有这么多漏洞"></a>安全加固：原来小程序也有这么多漏洞</h2><p>做安全审计之前，我以为个人小程序没人看、不会有啥问题。结果一查 <code>SECURITY.md</code>，列了一大串：</p>
+<ul>
+<li>🔴 严重：所有接口无身份鉴权（能枚举 userId 篡改他人数据、刷榜、看别人隐私）、无鉴权文件上传</li>
+<li>🟠 高危：管理后台密码无限试（暴力破解）、CORS 全开、错误信息直接甩给客户端</li>
+<li>🟡 中危：无限流、管理后台 N+1 全量加载、参数不校验（空 code 直接 500）</li>
+</ul>
+<p>然后一个一个修：</p>
+<ul>
+<li>登录签发 <strong>token</strong>，加 <code>AuthInterceptor</code> 拦截器，接口不再信任 URL 里的 userId（根治越权）</li>
+<li>上传接口加鉴权 + 图片类型白名单 + 2MB 上限</li>
+<li>管理后台<strong>连续输错 5 次锁 15 分钟</strong>，多设备 token 互不顶掉</li>
+<li>CORS 收紧到固定来源</li>
+<li>全局异常处理器，错误信息不再泄露内部细节</li>
+<li>参数校验：空 code、非法月份、超长昵称&#x2F;菜名，全部返回友好提示而不是 500</li>
+</ul>
+<p>有一说一，这个小程序大概也没几个人用，但既然是自己从零写到上线的后端，还是想把它弄得像样一点。</p>
+<h2 id="关于-Claude-Code-的碎碎念"><a href="#关于-Claude-Code-的碎碎念" class="headerlink" title="关于 Claude Code 的碎碎念"></a>关于 Claude Code 的碎碎念</h2><p>整个项目重构，<strong>90% 以上的代码是 Claude Code 写的</strong>，特别是后端和数据库，几乎是我”描述需求 + 验收”就完成了。</p>
+<p>这种工作方式挺奇妙的：以前写代码是被一个 bug 卡一晚上，现在是<strong>被一个描述不清楚的需求卡一晚上</strong>——因为得先想清楚”我到底想要什么效果”，剩下的交给它写。当然它也不是万能的：</p>
+<ul>
+<li>上下文有上限，项目大了会话会<strong>超限中断</strong>，只能开新会话，之前的”记忆”就没了</li>
+<li>微信 canvas 这种平台的坑，它和我一样会反复试错</li>
+<li>有时候要来回掰扯很多轮，它才能理解我的真实意图</li>
+</ul>
+<p>但整体结论很明确：<strong>一个人 + Claude Code，是真的能把一个小程序从零做到上线发布。</strong></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>从 v1.0.2 到 V2.0.5，前后折腾了近一个月（集中冲刺也就两三天，剩下的全是碎片时间），换了三套技术栈，踩了无数个坑，终于在 8.11 把 V2.0.5 发布到了微信小程序上。</p>
+<p>现在自己每天中午点开它，抽个签决定吃什么——偶尔抽到不好吃的，还会默默怪它。但这大概就是这个小程序的意义：<strong>它不一定能帮你决定人生大事，但能帮你决定今天中午吃什么。</strong></p>
+<p>棉花糖今天吃啥，就这么继续吃下去吧。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io">小余</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/">https://xiaoxiaoyu-123.github.io/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xiaoxiaoyu-123.github.io" target="_blank">小🐟博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></div><div class="post-share"><div class="social-share" data-image="/../img/Miku07.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/08/25/%E7%BB%99%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85win11%E7%B3%BB%E7%BB%9F/" title="💻 给电脑重装win11系统"><img class="cover" src="/../img/Miku1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">💻 给电脑重装win11系统</div></div><div class="info-2"><div class="info-item-1">手把手教你重装 Windows 11，记录分区报错、强制联网、键盘无法输入等常见卡点的解决方法，附完整问题速查表。</div></div></div></a><a class="pagination-related" href="/2026/07/14/%E5%85%B3%E4%BA%8E%E6%9A%91%E5%81%87%E7%9A%84%E8%AE%A1%E5%88%92/" title="关于暑假的计划"><img class="cover" src="/../img/Miku1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">关于暑假的计划</div></div><div class="info-2"><div class="info-item-1">开始学习java后端，争取一个暑假一个多月入门后端</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">小余</div><div class="author-info-description">小余的博客，欢迎访问</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">50</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xiaoxiaoyu-123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://xiaoxiaoyu-123.github.io" target="_blank" title="博客"><i class="fa-solid fa-heart"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5"><span class="toc-number">1.</span> <span class="toc-text">棉花糖今天吃啥</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%8A%8A%E5%A5%BD%E5%A5%BD%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8B%86%E4%BA%86%E9%87%8D%E6%9D%A5"><span class="toc-number">1.2.</span> <span class="toc-text">为什么要把好好的小程序拆了重来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E5%A4%A7%E6%8D%A2%E8%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">技术栈大换血</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%EF%BC%9A100-Claude-Code-%E5%86%99%E7%9A%84"><span class="toc-number">1.4.</span> <span class="toc-text">后端：100% Claude Code 写的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E8%BF%81%E7%A7%BB%E7%9A%84%E5%9D%91%EF%BC%88%E8%83%BD%E5%86%99%E4%B8%80%E5%A4%A7%E7%AF%87%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">前端迁移的坑（能写一大篇）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5"><span class="toc-number">1.5.1.</span> <span class="toc-text">编译阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E5%AE%AB%E6%A0%BC%E8%8F%9C%E5%93%81%E5%9B%BE%E7%89%87%E2%80%94%E2%80%94%E6%9C%80%E7%A3%A8%E4%BA%BA%E7%9A%84%E4%B8%80%E4%B8%AA-bug"><span class="toc-number">1.5.2.</span> <span class="toc-text">九宫格菜品图片——最磨人的一个 bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%9F%E6%9C%BA%E5%92%8C%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E6%80%BB%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7"><span class="toc-number">1.5.3.</span> <span class="toc-text">真机和开发者工具总是不一样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BA%91%EF%BC%9A1Panel-%E9%83%A8%E7%BD%B2"><span class="toc-number">1.6.</span> <span class="toc-text">上云：1Panel 部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%EF%BC%9A%E6%9C%80%E6%8A%98%E7%A3%A8%E4%BA%BA%E7%9A%84%E4%B8%80%E7%8E%AF"><span class="toc-number">1.7.</span> <span class="toc-text">数据同步：最折磨人的一环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%EF%BC%9A%E5%8E%9F%E6%9D%A5%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B9%9F%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.8.</span> <span class="toc-text">安全加固：原来小程序也有这么多漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Claude-Code-%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-number">1.9.</span> <span class="toc-text">关于 Claude Code 的碎碎念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">1.10.</span> <span class="toc-text">结语</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/27/%E9%9F%A6%E4%BC%AF%E6%95%88%E5%BA%94/" title="💗 韦伯效应：为什么你越付出，对方反而越无感？"><img src="/../img/xxx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="💗 韦伯效应：为什么你越付出，对方反而越无感？"/></a><div class="content"><a class="title" href="/2026/08/27/%E9%9F%A6%E4%BC%AF%E6%95%88%E5%BA%94/" title="💗 韦伯效应：为什么你越付出，对方反而越无感？">💗 韦伯效应：为什么你越付出，对方反而越无感？</a><time datetime="2026-08-27T10:16:16.581Z" title="发表于 2026-08-27 18:16:16">2026-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/27/%E6%81%8B%E7%88%B1%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="💗 恋爱碎碎念：不是吃喝玩乐，是敢不敢把最真实的自己交出去"><img src="/../img/xxx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="💗 恋爱碎碎念：不是吃喝玩乐，是敢不敢把最真实的自己交出去"/></a><div class="content"><a class="title" href="/2026/08/27/%E6%81%8B%E7%88%B1%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="💗 恋爱碎碎念：不是吃喝玩乐，是敢不敢把最真实的自己交出去">💗 恋爱碎碎念：不是吃喝玩乐，是敢不敢把最真实的自己交出去</a><time datetime="2026-08-27T09:59:37.093Z" title="发表于 2026-08-27 17:59:37">2026-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/25/%E7%BB%99%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85win11%E7%B3%BB%E7%BB%9F/" title="💻 给电脑重装win11系统"><img src="/../img/Miku1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="💻 给电脑重装win11系统"/></a><div class="content"><a class="title" href="/2026/08/25/%E7%BB%99%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85win11%E7%B3%BB%E7%BB%9F/" title="💻 给电脑重装win11系统">💻 给电脑重装win11系统</a><time datetime="2026-08-24T23:01:35.769Z" title="发表于 2026-08-25 07:01:35">2026-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/" title="✨ 棉花糖今天吃啥"><img src="/../img/Miku07.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="✨ 棉花糖今天吃啥"/></a><div class="content"><a class="title" href="/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/" title="✨ 棉花糖今天吃啥">✨ 棉花糖今天吃啥</a><time datetime="2026-08-20T12:53:04.220Z" title="发表于 2026-08-20 20:53:04">2026-08-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/14/%E5%85%B3%E4%BA%8E%E6%9A%91%E5%81%87%E7%9A%84%E8%AE%A1%E5%88%92/" title="关于暑假的计划"><img src="/../img/Miku1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于暑假的计划"/></a><div class="content"><a class="title" href="/2026/07/14/%E5%85%B3%E4%BA%8E%E6%9A%91%E5%81%87%E7%9A%84%E8%AE%A1%E5%88%92/" title="关于暑假的计划">关于暑假的计划</a><time datetime="2026-07-14T04:56:36.762Z" title="发表于 2026-07-14 12:56:36">2026-07-14</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/../img/Miku07.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 小余</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><div class="js-pjax"></div><script>
+  // 等待页面加载完成
+  document.addEventListener('DOMContentLoaded', function() {
+    // 找到标题区域
+    const header = document.querySelector('.header-wrapper') || 
+                  document.querySelector('.site-header') ||
+                  document.querySelector('header');
+    
+    if (header) {
+      // 创建打字效果容器
+      const typedEl = document.createElement('div');
+      typedEl.className = 'custom-subtitle';
+      typedEl.id = 'custom-subtitle';
+      
+      // 插入到标题下方
+      const title = header.querySelector('h1') || header.querySelector('.site-title');
+      if (title) {
+        title.parentNode.insertBefore(typedEl, title.nextSibling);
+      } else {
+        header.appendChild(typedEl);
+      }
+      
+      // 动态加载typed.js
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
+      script.onload = function() {
+        new Typed('#custom-subtitle', {
+          strings: [
+            '✨ 欢迎来到小🐟的技术博客',
+            '📚 分享前端学习经验',
+            '🎨 探索设计与创意',
+            '🚀 持续学习，不断进步'
+          ],
+          typeSpeed: 100,
+          backSpeed: 50,
+          loop: true,
+          showCursor: true,
+          cursorChar: '|'
+        });
+      };
+      document.head.appendChild(script);
+    }
+  });
+</script>
+
+# live2d看板娘互动设置
+<script src="https://cdn.jsdelivr.net/npm/live2d-widget@latest/lib/L2Dwidget.min.js"></script>
+<script>
+if (typeof window.L2Dwidget !== 'undefined') {
+const live2dConfig = {
+  "model": {
+    "jsonPath": "https://unpkg.com/live2d-widget-model-miku@latest/assets/miku.model.json",
+    "scale": 1
+  },
+  "display": {
+    "position": "right",
+    "width": 100,
+    "height": 200,
+    "hOffset": 0,
+    "vOffset": -20
+  },
+  "mobile": {
+    "show": true,
+    "scale": 0.5
+  },
+  "react": {
+    "opacityDefault": 0.7,
+    "opacityOnHover": 0.8
+  },
+  "dialog": {
+    "enable": true,           // 开启对话框
+    "hitokoto": true,         // 开启一言（从网络获取句子）
+    "script": {
+      // 点击模型时的对话
+      "click": {
+        "default": [          // 默认点击对话
+          "别碰我！",
+          "再摸我就要生气了！",
+          "有什么事吗？",
+          "嘿嘿嘿…"
+        ],
+        "sleeping": [         // 睡觉时的对话
+          "Zzz…",
+          "别吵我睡觉…"
+        ]
+      },
+      // 鼠标悬停时的对话
+      "hover": {
+        "default": [
+          "看什么看？",
+          "想摸我吗？",
+          "今天的天气真好呢！"
+        ]
+      },
+      // 空闲时的随机对话
+      "idle": {
+        "default": [
+          "主人今天过得怎么样？",
+          "要一起学习吗？",
+          "休息一下吧~",
+          "喜欢我的新衣服吗？",
+          "小🐟的博客真好看！"
+        ],
+        "timing": [           // 定时对话
+          {
+            "hour": 9,
+            "text": "早上好！该开始工作了！"
+          },
+          {
+            "hour": 12,
+            "text": "中午了，该吃午饭啦！"
+          },
+          {
+            "hour": 18,
+            "text": "傍晚了，该休息一下了~"
+          },
+          {
+            "hour": 22,
+            "text": "夜深了，早点休息哦！"
+          }
+        ]
+      }
+    }
+  }
+};
+window.L2Dwidget.init(live2dConfig);
+}
+</script>
+<script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":25,"vOffset":-20},"mobile":{"show":true,"scale":0.7},"react":{"opacityDefault":0.8,"opacityOnHover":0.9},"dialog":{"enable":true,"hitokoto":true,"script":{"click":{"default":["初音未来登场！","World is mine！","我是虚拟歌姬~"]},"idle":{"default":["喜欢Vocaloid吗？","一起来听歌吧！🎶","39！(Thank you!)"]}}},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

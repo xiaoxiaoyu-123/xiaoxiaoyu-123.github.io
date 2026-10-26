@@ -155,34 +155,10 @@ index_site_info_top:
 # The height of top_img, eg: 300px/300em/300rem
 index_top_img_height:
 
-# _config.butterfly.yml
-
-
 # --------------------------------------
-# Live2D 看板娘设置 (For Butterfly 5.x)
+# Live2D 看板娘：唯一配置源 = 下方 inject.bottom 里的 L2Dwidget 脚本（miku 模型，屏幕右侧）
+# Butterfly 5.x 不读取 live2d: 字段，原主题级 live2d 配置已删除；要换模型/改位置/改台词，只改 inject 里的脚本
 # --------------------------------------
-
-live2d:                     # Live2D看板娘配置
-  enable: true              # 启用：是
-  # 模型来源                 # 注释：指定模型资源的来源
-  scriptFrom: local         # 脚本来源：本地
-  # 模型配置                 # 注释：模型相关设置
-  model:                    # 模型：
-    # 使用模型名称，不是URL   # 注释：填写模型包名，不是网址
-    use: live2d-widget-model-miku  # 使用：白裙少女模型
-    scale: 1                # 缩放：1（100%大小）
-  display:                  # 显示设置：
-    position: right         # 位置：屏幕右侧
-    width: 100              # 宽度：100像素
-    height: 200             # 高度：200像素
-    hOffset: 0              # 水平偏移：0（不左右移动）
-    vOffset: -20            # 垂直偏移：-20（上移20像素）
-  mobile:                   # 移动端设置：
-    show: true              # 显示：是
-    scale: 0.5              # 缩放：0.5（缩小一半）
-  react:                    # 交互设置：
-    opacityDefault: 0.7     # 默认透明度：0.7（70%透明）
-    opacityOnHover: 0.8     # 悬停透明度：0.8（80%透明）
 
 
 # 显示打字效果

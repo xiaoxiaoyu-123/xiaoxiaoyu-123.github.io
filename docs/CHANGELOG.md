@@ -2,6 +2,17 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 看板娘更换：miku Live2d → 开源鲸鱼娘（dsh-whale-musume）
+
+### 变更
+- 接入 [dsh-whale-musume](https://github.com/Sutera-Diffusus/dsh-whale-musume)（MIT）：`assets/` 三件套 + 92 张立绘自托管至 `source/assets/`（13MB），Butterfly inject 挂载 `whale-moe-core.js` + `dsh-whale-moe.js`
+- 下线 miku Live2d 注入块（git 历史可回滚）；L2Dwidget 外链依赖清零
+
+### 移植要点（DSH 宿主 → Hexo）
+- 该桌宠的核心（状态机+表现层）**零宿主依赖**，立绘根路径 `/assets/generated/` 与 Hexo 根路径部署天然匹配，无需改它一行代码
+- DSH 专属功能自动降级：工作姿态联动、设置面板、TTS 语音在博客上不可用；保留：立绘/空闲动作/点击台词/拖拽/贴边探头/视线跟随鼠标/养成数据（localStorage）
+- 已验证：脚本挂载 3 处、L2Dwidget 残留 0、立绘 HTTP 200、`[data-dsh-whale-root]` 成功渲染且图片加载成功
+
 ## [2026-10-27] 阶段三：性能选项 + 主题深度定制完成
 
 ### 性能

@@ -19,7 +19,7 @@ cover: ../img/anime-tech-html-20251014.png
    - 📝 内容组织：告诉浏览器如何显示文本、图片等内容
 ### 为什么要学习HTML？
   在我们了解了HTML是什么之后，我们要清楚学习HTML有什么用，才能更明白我们是为什么而学习HTML.
-  ![](../img/posts-html01)
+  ![](../img/posts-html01.png)
   **HTML的核心价值：**
 - 🌐 所有网页的基础：没有HTML就没有网页
 - 🚀 前端开发的起点：学习前端的第一步
@@ -291,7 +291,7 @@ HTML是标签语言，标签就是<>，标签分为单标签和双标签。单�
 
 
 ### 学习路径建议
-![ ](../img/post-html03)
+![ ](../img/posts-html03.png)
 
 ### 推荐学习资源 
 - 视频教程：[@B站黑马HTML入门教程](https://www.bilibili.com/video/BV1kM4y127Li/?vd_source)

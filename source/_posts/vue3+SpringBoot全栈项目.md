@@ -4,7 +4,7 @@ date: 2026-10-19 19:00
 description: 
 categories: [Vue3,SpringBoot]
 tags: [Vue3,SpringBoot]
-cover: ../img/anime-tech-linux-20260419.jpg
+cover: ../img/anime-tech-vue3springboot-20261019.jpg
 ---
 # 
 此项目是

@@ -22,6 +22,8 @@ from pathlib import Path
 
 WORK = Path(__file__).parent
 API_URL = "https://ark.cn-beijing.volces.com/api/v3/images/generations"
+# 绕过系统代理直连（方舟在北京，走挂掉的本地代理只会 connection refused）
+OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 # 每个文章主题的道具/姿势描述（新增文章时在这里加一条，或用 --theme/--props 覆盖）
 THEMES = {
@@ -77,7 +79,7 @@ def gen_once(model: str, prompt: str, ref_png: Path, size: str, out: Path, seed:
     last_err = None
     for attempt in (1, 2, 3):
         try:
-            with urllib.request.urlopen(req, timeout=300) as r:
+            with OPENER.open(req, timeout=300) as r:
                 resp = json.loads(r.read().decode("utf-8"))
             break
         except Exception as e:  # 网络/限流抖动重试

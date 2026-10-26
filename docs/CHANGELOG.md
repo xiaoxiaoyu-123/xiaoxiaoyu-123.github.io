@@ -2,6 +2,21 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 全站封面铺开完成：12 篇文章换上新海报
+
+### 新增
+- `.claude/poster-work/gen_posters_seedream.py`：**整张海报一次生成**流水线（角色垫图 + 图库海报风格参考双输入，文案读 configs/*.json），不再依赖 HTML 排版层
+
+### 变更
+- 11 篇旧 SenseNova 封面 + 1 篇错挂封面全部替换为 Seedream flash 整张海报（1920×1080 JPG，276~337KB）
+- 角色按主题分配（12 个角色全部出场）：1Panel→leo、CSS→libra、Git→gemini、HTML→aries、Linux→sagittarius、Markdown→virgo、MySQL→aquarius、Hexo→asahi-shio、评教→komazawa-noi、部署→taurus、前端项目→cancer、AI全栈→osawa-mahiro
+- 《AI全栈心理健康助手项目》cover 从错挂的 linux 海报改为专属新图
+
+### 质检经验（沉淀在 03 方案 §5）
+- flash 文字准确率约 80%/张；底部信息条与带文字气泡是乱码重灾区（已从模板移除）
+- 角色锁定必须把 profile 的 appearance 外貌描述写进 prompt，仅靠垫图+一句 same hairstyle 不够
+- 三轮迭代共生成 22 张（含重做），全部逐张目检后交付
+
 ## [2026-10-27] 阶段一「地基治理」完成（6 个 git 提交）
 
 ### 版本控制

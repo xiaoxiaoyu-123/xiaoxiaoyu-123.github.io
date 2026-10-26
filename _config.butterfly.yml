@@ -164,6 +164,7 @@ index_top_img_height:
 # 显示打字效果
 inject:
   head:
+    - <link rel="stylesheet" href="/assets/dsh-whale-moe.css">
     - |
       <style>
         .custom-subtitle {
@@ -250,89 +251,10 @@ inject:
         });
       </script>
 
-      # live2d看板娘互动设置
-      <script src="https://cdn.jsdelivr.net/npm/live2d-widget@latest/lib/L2Dwidget.min.js"></script>
-      <script>
-      if (typeof window.L2Dwidget !== 'undefined') {
-      const live2dConfig = {
-        "model": {
-          "jsonPath": "https://unpkg.com/live2d-widget-model-miku@latest/assets/miku.model.json",
-          "scale": 1
-        },
-        "display": {
-          "position": "right",
-          "width": 100,
-          "height": 200,
-          "hOffset": 0,
-          "vOffset": -20
-        },
-        "mobile": {
-          "show": true,
-          "scale": 0.5
-        },
-        "react": {
-          "opacityDefault": 0.7,
-          "opacityOnHover": 0.8
-        },
-        "dialog": {
-          "enable": true,           // 开启对话框
-          "hitokoto": true,         // 开启一言（从网络获取句子）
-          "script": {
-            // 点击模型时的对话
-            "click": {
-              "default": [          // 默认点击对话
-                "别碰我！",
-                "再摸我就要生气了！",
-                "有什么事吗？",
-                "嘿嘿嘿…"
-              ],
-              "sleeping": [         // 睡觉时的对话
-                "Zzz…",
-                "别吵我睡觉…"
-              ]
-            },
-            // 鼠标悬停时的对话
-            "hover": {
-              "default": [
-                "看什么看？",
-                "想摸我吗？",
-                "今天的天气真好呢！"
-              ]
-            },
-            // 空闲时的随机对话
-            "idle": {
-              "default": [
-                "主人今天过得怎么样？",
-                "要一起学习吗？",
-                "休息一下吧~",
-                "喜欢我的新衣服吗？",
-                "小🐟的博客真好看！"
-              ],
-              "timing": [           // 定时对话
-                {
-                  "hour": 9,
-                  "text": "早上好！该开始工作了！"
-                },
-                {
-                  "hour": 12,
-                  "text": "中午了，该吃午饭啦！"
-                },
-                {
-                  "hour": 18,
-                  "text": "傍晚了，该休息一下了~"
-                },
-                {
-                  "hour": 22,
-                  "text": "夜深了，早点休息哦！"
-                }
-              ]
-            }
-          }
-        }
-      };
-      window.L2Dwidget.init(live2dConfig);
-      }
-      </script>
+      # 鲸鱼娘桌宠（dsh-whale-musume，MIT 协议：github.com/Sutera-Diffusus/dsh-whale-musume）
+      # 资源自托管在 /assets/，状态机+表现层自动启动；原 miku Live2d 已下线（git 历史可回滚）
+      <script src="/assets/whale-moe-core.js"></script>
+      <script src="/assets/dsh-whale-moe.js"></script>
 
 
 # Article layout on the homepage

@@ -2,6 +2,13 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 阶段二决策记录：Giscus + Umami 自托管 + 保持 permalink
+
+### 决策
+- 评论系统选定 **Giscus**（GitHub Discussions，零成本）；待用户在 GitHub 开启 Discussions、安装 giscus App 后提供 repo_id/category_id
+- 站点统计选定 **Umami 自托管**（1Panel 应用商店部署）；待用户提供 serverURL + website_id 后接入并下线 busuanzi
+- permalink 评估结论：**保持日期式 URL 不变**（避免断链，收益不值得）
+
 ## [2026-10-27] 阶段二第一批：本地搜索 + 占位符清零 + 分类规范化
 
 ### 新增

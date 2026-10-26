@@ -2,6 +2,32 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 阶段一「地基治理」完成（6 个 git 提交）
+
+### 版本控制
+- `git init`（main 分支），改造前原状先做基线提交，之后每项改动独立提交可回滚
+- 新增 `.gitignore`（public、node_modules、.deploy_git、db.json、海报产物）
+
+### 清理
+- 删除 `source/_posts/test.vue`、`_config.landscape.yml`
+- 移除 `symbols_count_time` 死配置、`_config.yml` 与 `_config.butterfly.yml` 两处失效 live2d 配置
+- 卸载 11 个依赖：hexo-theme-landscape、hexo-helper-live2d、9 个 live2d 模型包
+- **Live2d 收敛为唯一配置源**：`_config.butterfly.yml` inject.bottom 的 L2Dwidget 脚本（miku，右侧）
+
+### 图片
+- 11 张 anime-tech 封面 PNG→JPG：18MB→2MB（单张 ≤244KB）；`source/img` 总体积 33MB→15MB
+- 首页横幅、2 篇文章 cover、2 张正文截图同步压缩；16 篇文章引用路径已同步
+- 补齐主题缺失图片：favicon（头像裁切）、bg03~06 横幅、404.jpg、friend_404.gif
+- 修复文章内失效引用：HTML速通补 `.png` 后缀、纠正 `post-html03` 笔误、每周总结三移除丢失的 zj03、搭载之旅示例图转行内代码
+
+### 验证结果（hexo clean && generate）
+- 247 文件 / 130 页生成成功；最新文章《AI全栈心理健康助手项目》已在 `public/2026/10/19/`
+- 页面引用图片无缺失（代码块内示例路径除外）；L2Dwidget / typed.js / favicon 全部正常
+- 待用户确认后执行 `hexo deploy`
+
+### 遗留
+- `source/img/zj01.jpg`（818KB）、`preview.jpg`（717KB）无任何引用，待用户决定是否删除
+
 ## [2026-10-27] 改造完成：全量角色库建成，流水线正式切换 Seedream 5.0 flash
 
 ### 角色库（.claude/poster-work/characters/）

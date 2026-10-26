@@ -1,7 +1,7 @@
 ---
 title: 快捷清理电脑C盘
 date: 2026-04-15 17:34:21
-categories: [电脑清理]
+categories: [电脑技巧]
 tags: [电脑清理, C盘清理]
 description: 快捷清理电脑C盘，释放空间，优化系统性能
 cover: ../img/View06.jpg

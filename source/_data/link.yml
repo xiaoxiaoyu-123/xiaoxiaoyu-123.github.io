@@ -1,23 +1,20 @@
-- class_name: 友情鏈接
-  class_desc: 那些人，那些事
+- class_name: 建站工具
+  class_desc: 这个博客用到的优秀开源项目
   link_list:
     - name: Hexo
-      link: https://hexo.io/zh-tw/
+      link: https://hexo.io/zh-cn/
       avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
-      descr: 快速、簡單且強大的網誌框架
+      descr: 快速、简单且强大的静态博客框架
+    - name: Butterfly
+      link: https://butterfly.js.org/
+      avatar: https://butterfly.js.org/img/favicon.png
+      descr: 本站正在使用的主题，好看又强大
 
-- class_name: 網站
-  class_desc: 值得推薦的網站
-  link_list:
-    - name: Youtube
-      link: https://www.youtube.com/
-      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
-      descr: 視頻網站
-    - name: Weibo
-      link: https://www.weibo.com/
-      avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
-      descr: 中國最大社交分享平台
-    - name: Twitter
-      link: https://twitter.com/
-      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
-      descr: 社交分享平台
+# 想添加朋友？按下面的格式接着往上写就行：
+# - class_name: 小伙伴们
+#   class_desc: 欢迎交换友链～
+#   link_list:
+#     - name: 朋友名
+#       link: https://xxx.github.io/
+#       avatar: https://xxx/avatar.png
+#       descr: 一句话介绍

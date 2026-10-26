@@ -46,7 +46,7 @@ code_blocks:
 #   icon: link || the description || color
 social:
   fab fa-github:  https://github.com/xiaoxiaoyu-123|| Github || '#24292e'
-  fas fa-envelope: mailto:xxxxxx@gmail.com || Email || '#4a7dbe'
+  fas fa-envelope: mailto:2933652936@qq.com || Email || '#4a7dbe'
   fa-solid fa-heart: https://xiaoxiaoyu-123.github.io || 博客 || 
 # --------------------------------------
 # Image Settings
@@ -444,15 +444,15 @@ aside:
     category: true
   card_author:
     enable: true
-    description:
+    description: 一条潜水的🐟儿
     button:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/xxxxxx
+      link: https://github.com/xiaoxiaoyu-123
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: 欢迎来到小🐟的博客，记录前端学习与生活碎碎念～
   card_recent_post:
     enable: true
     # If set 0 will show all
@@ -633,8 +633,8 @@ math:
 search:
   # Choose: algolia_search / local_search / docsearch
   # leave it empty if you don't need search
-  use:
-  placeholder:
+  use: local_search
+  placeholder: 想找点什么？
 
   # Algolia Search
   algolia_search:

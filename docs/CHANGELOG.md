@@ -2,6 +2,22 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 阶段三：性能选项 + 主题深度定制完成
+
+### 性能
+- 原生 lazyload（`native: true`）：全站图片 `loading='lazy'`，首屏不再全量加载
+- fancybox 灯箱：文章图片可点击放大
+- instantpage：悬停预加载下一页
+- **CDN 全本地化**：安装 hexo-butterfly-extjs 1.5.8，`third_party_provider: local`，fancybox/instantpage/fontawesome 等主题资源全部走 `/pluginsSrc/`——代理软件没开时页面加载慢的问题顺带解决（仅剩 Live2d 模型与 typed.js 两处外链）
+
+### 主题
+- `theme_color` 启用玫红主色系（#ff7c9c）：链接/分页/滚动条/引用等与粉色站点底色统一，替换默认蓝
+- 暗色模式配色适配：页面底色 #1f1a20 暗玫瑰、卡片阴影加深，夜间不再粉底刺眼
+
+### 验证
+- 302 文件生成；首页/文章页 HTML 确认 lazy 属性、fancybox 本地资源、暗色 CSS、玫红主色（css/index.css）
+- 预览服务已重启（HTTP 200）
+
 ## [2026-10-27] 阶段二决策记录：Giscus + Umami 自托管 + 保持 permalink
 
 ### 决策

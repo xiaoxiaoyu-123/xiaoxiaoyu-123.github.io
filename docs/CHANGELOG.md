@@ -2,6 +2,21 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 阶段二第一批：本地搜索 + 占位符清零 + 分类规范化
+
+### 新增
+- 本地搜索：hexo-generator-searchdb 1.5.0，主题启用 `local_search`，生成 search.json（27 条全站索引）；Butterfly 搜索弹窗对 json 格式自动兼容
+
+### 修正
+- 占位符全部清零：社交邮箱（原 xxxxxx@gmail.com）、侧栏 Follow Me 按钮（原 github.com/xxxxxx）、公告文案（原 "This is my Blog"）
+- 友链数据 `_data/link.yml`：Hexo 模板默认内容（繁体示例站）→ 真实建站工具条目 + 友链添加模板注释
+- 音乐页：补上介绍内容，修复 front-matter `descriptiao` 拼写错误
+- 分类规范化 8 处：错挂修正（《Agent开发实习》→[前端,求职]）、空分类补齐（《关于暑假的计划》→[学习]）、近义合并（电脑清理/电脑系统→[电脑技巧]，生活随想→[随笔]）、命名规范（去括号空格、lucky-canves→lucky-canvas）
+- SEO：keywords 中文逗号 → 英文逗号
+
+### 环境注意
+- 本机系统环境变量残留死代理 `127.0.0.1:33210`（代理软件未开时），会拖慢 npm/浏览器外链请求；npm 操作需临时置空 `HTTP_PROXY/HTTPS_PROXY`
+
 ## [2026-10-27] 首页卡片封面框锁定 16:9
 
 ### 变更

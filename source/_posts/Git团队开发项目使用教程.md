@@ -4,7 +4,7 @@ date: 2026-03-21 23:00
 description: 详细介绍Git在团队合作开发中的使用方法，包括个人仓库管理和团队项目协作流程
 categories: [git]
 tags: [git基础教程, 团队协作, 版本控制]
-cover: ../img/anime-tech-git-20260321.png
+cover: ../img/anime-tech-git-20260321.jpg
 ---
 
 # Git团队开发项目使用教程

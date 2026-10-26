@@ -4,7 +4,7 @@ date: 2025-10-14 19:00
 description: 从零开始的HTML完整入门指南，包含基础语法、常用标签详解和实战示例
 categories: [前端,HTML]
 tags: [前端基础,HTML,零基础教程]
-cover: ../img/anime-tech-html-20251014.png
+cover: ../img/anime-tech-html-20251014.jpg
 ---
 # <span style="color:pink; font-family:Arial;text-align:center">🌟HTML基础语法速通指南</span>
 

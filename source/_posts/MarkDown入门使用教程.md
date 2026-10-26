@@ -4,7 +4,7 @@ date: 2025-10-12 16:50
 description: 从零到入门Mark的使用教程
 categories: [MarkDown]
 tags: [笔记,MarkDown, 零基础教程]
-cover: ../img/anime-tech-markdown-20251012.png
+cover: ../img/anime-tech-markdown-20251012.jpg
 
 ---
 # <span style="color:pink; font-family:Arial;text-align:center">MarkDown入门使用教程</span>

@@ -4,7 +4,7 @@ date: 2026-04-19 19:00
 description: 从零开始的Linux完整入门指南，包含基础语法、常用标签详解和实战示例
 categories: [Linux]
 tags: [Linux,零基础教程]
-cover: ../img/anime-tech-linux-20260419.png
+cover: ../img/anime-tech-linux-20260419.jpg
 ---
 # Linux快速入门
 

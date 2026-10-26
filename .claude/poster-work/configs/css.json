@@ -1,0 +1,37 @@
+{
+  "bg": "css-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · STYLING",
+  "tech_lead": "",
+  "tech_rest": "CSS",
+  "title": "CSS 快速入门",
+  "slogan": "给网页穿上衣服，选择器到盒模型一次讲清",
+  "chips": ["CSS", "选择器", "盒模型", "伪类", "优先级"],
+  "cards": [
+    { "i": "🎨", "h": "三种写法", "p": "行内、内部、外部样式表，优先级从高到低" },
+    { "i": "🎯", "h": "选择器", "p": "标签、类、id、通配符，还有后代和伪类" },
+    { "i": "📦", "h": "盒模型", "p": "padding、border、margin 要分清" },
+    { "i": "⭐", "h": "三大特性", "p": "继承、层叠、优先级，权重四位一组别进位" }
+  ],
+  "code_file": "style.css",
+  "code": [
+    "<span class=\"c\">/* 通配符：清除默认边距 */</span>",
+    "* { <span class=\"k\">margin</span>: 0; <span class=\"k\">padding</span>: 0; }",
+    "<span class=\"c\">/* 类选择器：日常最常用的那种 */</span>",
+    ".pink { <span class=\"k\">color</span>: pink; <span class=\"k\">font-size</span>: 20px; }",
+    "<span class=\"c\">/* 链接伪类：鼠标经过变红 */</span>",
+    "a:hover { <span class=\"k\">color</span>: #ff0f23; }",
+    "<span class=\"c\">/* 首行缩进两个字，行高 1.5 倍 */</span>",
+    "p { <span class=\"k\">text-indent</span>: 2em; <span class=\"k\">line-height</span>: 1.5; }"
+  ],
+  "why_title": "为什么学 CSS",
+  "why": [
+    "网页的皮肤与衣服",
+    "选择器是样式的入口",
+    "盒模型撑起所有布局",
+    "优先级搞懂不再打架"
+  ],
+  "bar_name": "CSS",
+  "bar_sub": "层叠样式表",
+  "bar_items": ["选择器", "字体样式", "文本布局", "盒模型", "伪类", "优先级"]
+}

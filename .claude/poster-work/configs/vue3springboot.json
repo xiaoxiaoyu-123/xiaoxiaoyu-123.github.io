@@ -1,0 +1,35 @@
+{
+  "bg": "bases-seedream/vue3-springboot-5-0-pro-260628-1.png",
+  "badge_main": "★ 全栈实战",
+  "badge_sub": "FULL-STACK · VUE3 × SPRING BOOT",
+  "tech_lead": "AI",
+  "tech_rest": " 全栈助手",
+  "title": "Vue3 + SpringBoot 全栈项目实战",
+  "slogan": "从 Vite 建项目到前后端联调，跑通一个完整的 AI 应用",
+  "chips": ["Vue3", "Vite", "SpringBoot", "MySQL", "Axios", "AI 助手"],
+  "cards": [
+    { "i": "🛠️", "h": "项目搭建", "p": "Vite 创建 Vue3 项目，SpringBoot 起后端服务" },
+    { "i": "🎨", "h": "前端页面", "p": "组合式 API + 组件化，聊天界面搭起来" },
+    { "i": "🔌", "h": "后端接口", "p": "RESTful API 设计，MySQL 存取对话数据" },
+    { "i": "🔗", "h": "前后端联调", "p": "Axios 请求封装，跨域配置与调试" }
+  ],
+  "code_file": "day1_setup.sh",
+  "code": [
+    "<span class=\"c\"># Day1：项目搭建</span>",
+    "pnpm create vite@latest ai-vue -- --template vue",
+    "spring init -d web,mysql,jpa ai-backend",
+    "",
+    "<span class=\"c\"># 前后端各自跑起来</span>",
+    "pnpm dev               <span class=\"c\"># localhost:5173</span>",
+    "mvn spring-boot:run    <span class=\"c\"># localhost:8080</span>"
+  ],
+  "why_title": "为什么做这个项目",
+  "why": [
+    "把 Vue3 和 SpringBoot 串成完整链路",
+    "AI 能力落地的第一个实战",
+    "记录踩坑，给同样在学的人参考"
+  ],
+  "bar_name": "VUE3 × SPRINGBOOT",
+  "bar_sub": "全栈项目实战",
+  "bar_items": ["建项目", "页面开发", "接口设计", "数据库", "联调", "部署"]
+}

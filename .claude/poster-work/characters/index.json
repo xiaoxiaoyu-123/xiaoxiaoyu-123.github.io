@@ -1,0 +1,145 @@
+{
+  "count": 20,
+  "characters": [
+    {
+      "en": "asahi-shio",
+      "name": "有川汐 / Asahi Shio（双鱼座）",
+      "palette_primary": "soft pink and pastel blue",
+      "suit_for": "前端 / CSS / 设计 / 生活随笔（粉色系）",
+      "ip": false
+    },
+    {
+      "en": "aries",
+      "name": "艾丽丝 / Aries（白羊座）",
+      "palette_primary": "warm coral red and cream",
+      "suit_for": "热血鼓励、入门动员、运动向内容（暖橙红）",
+      "ip": false
+    },
+    {
+      "en": "libra",
+      "name": "天秤诗澜 / Libra（天秤座）",
+      "palette_primary": "lavender pink and soft grey",
+      "suit_for": "设计审美、对比评测、优雅主题（粉紫灰）",
+      "ip": false
+    },
+    {
+      "en": "cancer",
+      "name": "海汐 / Cancer（巨蟹座）",
+      "palette_primary": "moonlight white and pale blue",
+      "suit_for": "治愈随笔、情感文章、睡前向内容（月白蓝）",
+      "ip": false
+    },
+    {
+      "en": "leo",
+      "name": "莉欧 / Leo（狮子座）",
+      "palette_primary": "warm gold and deep red",
+      "suit_for": "Linux / 部署 / 系统类（暖色系）",
+      "ip": false
+    },
+    {
+      "en": "gemini",
+      "name": "岚染 / Weyoung（双子座）",
+      "palette_primary": "sky blue and pale yellow",
+      "suit_for": "轻松闲聊、工具分享、对比类文章（蓝黄）",
+      "ip": false
+    },
+    {
+      "en": "sagittarius",
+      "name": "星野惠乃 / Hoshino Sena（射手座）",
+      "palette_primary": "warm brown and deep red",
+      "suit_for": "旅行见闻、探索新工具、成长记录（棕金）",
+      "ip": false
+    },
+    {
+      "en": "aquarius",
+      "name": "艾瑞丝·Aria / Aquarius（水瓶座）",
+      "palette_primary": "ice blue and white",
+      "suit_for": "前沿技术、新概念科普、理性评测（冰蓝白）",
+      "ip": false
+    },
+    {
+      "en": "virgo",
+      "name": "禾澄 / Wojuang（处女座）",
+      "palette_primary": "sage green and beige",
+      "suit_for": "整理控、方法论、清单类文章（米绿灰）",
+      "ip": false
+    },
+    {
+      "en": "taurus",
+      "name": "暖禾 / Nosane（金牛座）",
+      "palette_primary": "milk-tea brown and cream",
+      "suit_for": "生活方式、笔记软件、慢节奏教程（奶咖绿）",
+      "ip": false
+    },
+    {
+      "en": "scorpio",
+      "name": "塞珊娜 / Selera（天蝎座）",
+      "palette_primary": "black and deep purple",
+      "suit_for": "深度技术、进阶硬核、逆向思维内容（黑紫）",
+      "ip": false
+    },
+    {
+      "en": "arikawa-hime",
+      "name": "有川姬 / Arikawa Hime",
+      "palette_primary": "pink and red",
+      "suit_for": "入门推荐、C 语言类主题（粉红）",
+      "ip": false
+    },
+    {
+      "en": "komazawa-noi",
+      "name": "驹泽乃依 / Komazawa Noi",
+      "palette_primary": "black and pink",
+      "suit_for": "高性能、硬核进阶主题（黑粉）",
+      "ip": false
+    },
+    {
+      "en": "sakuraba-emma",
+      "name": "樱羽艾玛 / Sakuraba Emma",
+      "palette_primary": "black and sakura pink",
+      "suit_for": "优雅现代、跨平台主题（黑白粉）",
+      "ip": false
+    },
+    {
+      "en": "osawa-mahiro",
+      "name": "绪山真寻 / Osawa Mahiro",
+      "palette_primary": "pastel pink and sky blue",
+      "suit_for": "安全可靠、友好入门主题（粉蓝）",
+      "ip": false
+    },
+    {
+      "en": "venti",
+      "name": "温迪 / Venti",
+      "palette_primary": "teal green and white",
+      "suit_for": "音乐/创意类主题",
+      "ip": true
+    },
+    {
+      "en": "hatsune-miku",
+      "name": "初音未来 / Hatsune Miku",
+      "palette_primary": "teal and grey",
+      "suit_for": "JS / 创意编程类主题",
+      "ip": true
+    },
+    {
+      "en": "hirasawa-yui",
+      "name": "平泽唯 / Hirasawa Yui",
+      "palette_primary": "navy blue and warm brown",
+      "suit_for": "Web 开发 / 轻松入门主题",
+      "ip": true
+    },
+    {
+      "en": "astolfo",
+      "name": "阿斯托尔福 / Astolfo",
+      "palette_primary": "pink and deep red",
+      "suit_for": "企业级 / 严肃技术主题的反差萌",
+      "ip": true
+    },
+    {
+      "en": "yukinoshita-yukino",
+      "name": "雪之下雪乃 / Yukinoshita Yukino",
+      "palette_primary": "pale blue and white",
+      "suit_for": "科学计算 / 学术向主题",
+      "ip": true
+    }
+  ]
+}

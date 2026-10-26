@@ -1,0 +1,37 @@
+{
+  "bg": "git-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · GIT FLOW",
+  "tech_lead": "",
+  "tech_rest": "GIT",
+  "title": "Git 团队开发教程",
+  "slogan": "从个人仓库到团队协作，把分支流程走一遍",
+  "chips": ["Git", "分支", "暂存区", "远程仓库", "团队协作"],
+  "cards": [
+    { "i": "📦", "h": "个人仓库", "p": "add、commit、push 三步管好自己的代码" },
+    { "i": "🌿", "h": "功能分支", "p": "checkout -b 开分支，开发不碰主分支" },
+    { "i": "🔄", "h": "同步代码", "p": "开工前先 pull，提交前再 pull 一次防冲突" },
+    { "i": "🕘", "h": "日志回滚", "p": "git log 看历史，哈希值切回旧版本" }
+  ],
+  "code_file": "team_workflow.sh",
+  "code": [
+    "<span class=\"c\"># 1. 开工前先同步最新代码</span>",
+    "<span class=\"k\">git</span> pull origin main",
+    "<span class=\"c\"># 2. 创建并切换到功能分支</span>",
+    "<span class=\"k\">git</span> checkout -b feature/功能名称",
+    "<span class=\"c\"># 3. 提交并推送自己的分支</span>",
+    "<span class=\"k\">git</span> add . &amp;&amp; <span class=\"k\">git</span> commit -m \"功能描述\"",
+    "<span class=\"c\"># 4. 管理员合并回主分支</span>",
+    "<span class=\"k\">git</span> checkout main &amp;&amp; <span class=\"k\">git</span> merge feature/功能名称"
+  ],
+  "why_title": "为什么用 Git",
+  "why": [
+    "团队协作的通用语言",
+    "分支隔离，互不干扰",
+    "pull 在先，冲突更少",
+    "改动有记录，随时可回滚"
+  ],
+  "bar_name": "GIT",
+  "bar_sub": "分布式版本控制",
+  "bar_items": ["仓库", "分支", "提交", "合并", "回滚", "远程协作"]
+}

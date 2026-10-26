@@ -1,0 +1,37 @@
+{
+  "bg": "html-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · FRONTEND",
+  "tech_lead": "",
+  "tech_rest": "HTML",
+  "title": "HTML 基础语法速通",
+  "slogan": "把网页骨架拆成标签，新手一看就懂",
+  "chips": ["HTML", "标签", "表单", "语义化", "网页骨架"],
+  "cards": [
+    { "i": "🧱", "h": "文档结构", "p": "DOCTYPE、head、body 搭出页面骨架" },
+    { "i": "🏷️", "h": "常用标签", "p": "标题、段落、链接、图片、列表、表格全有" },
+    { "i": "📝", "h": "表单控件", "p": "input、radio、select 注册表单实战" },
+    { "i": "✅", "h": "最佳实践", "p": "用有意义的标签，双引号、缩进、闭合到位" }
+  ],
+  "code_file": "index.html",
+  "code": [
+    "<span class=\"c\">&lt;!-- 基本文档结构 --&gt;</span>",
+    "<span class=\"k\">&lt;!DOCTYPE html&gt;</span>",
+    "&lt;html&gt; &lt;head&gt;&lt;title&gt;页面标题&lt;/title&gt;&lt;/head&gt;",
+    "&lt;body&gt;",
+    "  &lt;h1&gt;我的第一个标题&lt;/h1&gt;",
+    "  &lt;p&gt;我的第一个段落。&lt;/p&gt;",
+    "&lt;/body&gt; &lt;/html&gt;",
+    "<span class=\"k\">&lt;input</span> type=\"text\" placeholder=\"请输入您的真实姓名\"&gt;"
+  ],
+  "why_title": "为什么学 HTML",
+  "why": [
+    "所有网页的骨架",
+    "标签式语法，上手极快",
+    "前端学习的第一站",
+    "为 CSS 与 JS 打基础"
+  ],
+  "bar_name": "HTML",
+  "bar_sub": "超文本标记语言",
+  "bar_items": ["文本标签", "链接图片", "列表", "表格", "表单", "语义化"]
+}

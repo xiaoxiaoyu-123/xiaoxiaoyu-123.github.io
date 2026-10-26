@@ -1,0 +1,36 @@
+{
+  "bg": "markdown-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · MARKUP",
+  "tech_lead": "MARK",
+  "tech_rest": "DOWN",
+  "title": "Markdown 快速入门",
+  "slogan": "从零到入门，用纯文本写出会排版的文档",
+  "chips": ["标记语言", "纯文本写作", "标题与列表", "表格与链接", "博客排版"],
+  "cards": [
+    { "i": "✍️", "h": "极简语法", "p": "一个 # 就是一级标题，符号即格式，上手零成本" },
+    { "i": "📋", "h": "列表表格", "p": "有序无序与任务清单，一张表格排好结构化内容" },
+    { "i": "🔗", "h": "链接图片", "p": "一键传送门加图片语法，图文混排随手就来" },
+    { "i": "🌐", "h": "多端发布", "p": "同一份文档发博客、导出 PDF、转成 Word" }
+  ],
+  "code_file": "markdown.md",
+  "code": [
+    "<span class=\"c\"># 一个 # 代表一级标题，###### 代表六级</span>",
+    "<span class=\"k\">##</span> 二级标题   <span class=\"k\">###</span> 三级标题",
+    "<span class=\"k\">**</span>加粗<span class=\"k\">**</span>   <span class=\"k\">*</span>斜体<span class=\"k\">*</span>   <span class=\"k\">***</span>又斜又粗<span class=\"k\">***</span>",
+    "<span class=\"k\">-</span> 无序列表   <span class=\"k\">1.</span> 有序列表   <span class=\"k\">-</span> [x] 任务完成",
+    "| 姓名 | 年龄 | 兴趣爱好 |",
+    "<span class=\"c\">| :---: | :---: | :------: |   ← 表格分隔线</span>",
+    "<span class=\"k\">[</span>@自定义内容<span class=\"k\">]（</span>网页地址<span class=\"k\">）</span>"
+  ],
+  "why_title": "核心要点",
+  "why": [
+    "极简语法，专注内容本身",
+    "一次编写，多端发布",
+    "纯文本，任何编辑器可写",
+    "GitHub 与博客原生支持"
+  ],
+  "bar_name": "MARKDOWN",
+  "bar_sub": "轻量标记语言",
+  "bar_items": ["博客写作", "学习笔记", "PDF", "Word", "多端发布"]
+}

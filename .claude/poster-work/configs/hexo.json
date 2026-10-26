@@ -1,0 +1,37 @@
+{
+  "bg": "hexo-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · STATIC",
+  "tech_lead": "HEX",
+  "tech_rest": "O",
+  "title": "Hexo 博客搭建全记录",
+  "slogan": "从零到一，搭起属于自己的静态博客",
+  "chips": ["Hexo", "蝴蝶主题", "GitHub", "纯文本", "静态博客"],
+  "cards": [
+    { "i": "⚡️", "h": "极速生成", "p": "基于 Node.js，上千篇文章也能秒级生成" },
+    { "i": "🎨", "h": "主题丰富", "p": "Butterfly、NexT 主题美观且可深度定制" },
+    { "i": "🚀", "h": "一键部署", "p": "原生支持 Git，一条命令即可部署上线" },
+    { "i": "📚", "h": "无后端", "p": "纯 Markdown 写作，专注内容不管渲染" }
+  ],
+  "code_file": "deploy.sh",
+  "code": [
+    "<span class=\"k\">npm</span> install -g hexo-cli",
+    "<span class=\"k\">hexo</span> init my-blog &amp;&amp; <span class=\"k\">cd</span> my-blog",
+    "<span class=\"k\">npm</span> install",
+    "<span class=\"c\"># 本地预览：清理缓存并启动服务</span>",
+    "<span class=\"k\">hexo</span> clean &amp;&amp; <span class=\"k\">hexo</span> s",
+    "<span class=\"c\"># 生成静态文件并部署到 GitHub Pages</span>",
+    "<span class=\"k\">hexo</span> g &amp;&amp; <span class=\"k\">hexo</span> d",
+    "<span class=\"s\">✅</span> 部署完成 → https://&lt;用户名&gt;.github.io"
+  ],
+  "why_title": "为什么用 Hexo",
+  "why": [
+    "基于 Node.js，秒级生成",
+    "主题生态丰富，中文文档完善",
+    "纯文本写作，无后端负担",
+    "GitHub 免费托管博客"
+  ],
+  "bar_name": "HEXO",
+  "bar_sub": "静态博客框架",
+  "bar_items": ["静态博客", "蝴蝶主题", "NexT", "Pages", "CDN", "SEO"]
+}

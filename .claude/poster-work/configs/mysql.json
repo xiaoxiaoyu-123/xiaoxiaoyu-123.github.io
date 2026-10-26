@@ -1,0 +1,37 @@
+{
+  "bg": "mysql-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · DATABASE",
+  "tech_lead": "MY",
+  "tech_rest": "SQL",
+  "title": "MySQL 基础语法速通",
+  "slogan": "从 DDL 到事务，一条条 SQL 跟着敲就懂",
+  "chips": ["MySQL", "SQL", "DDL/DML", "多表查询", "事务"],
+  "cards": [
+    { "i": "📚", "h": "四类 SQL", "p": "DDL 建表、DML 改数据、DQL 查询" },
+    { "i": "🔍", "h": "查询主力", "p": "条件、分组、排序、分页，一条链路查完" },
+    { "i": "🧩", "h": "常用函数", "p": "concat、case when、日期函数随手就来" },
+    { "i": "🔗", "h": "多表与事务", "p": "内外连接、子查询，事务 ACID 全讲透" }
+  ],
+  "code_file": "mysql_quick_start.sql",
+  "code": [
+    "<span class=\"c\"># 建库建表（DDL）</span>",
+    "<span class=\"k\">create database</span> if not exists database_test_first;",
+    "<span class=\"k\">insert into</span> employee(name, age) <span class=\"k\">values</span> ('小文', 18);",
+    "",
+    "<span class=\"c\"># 查数据（DQL）：分组统计</span>",
+    "<span class=\"k\">select</span> gender, <span class=\"k\">count</span>(*) <span class=\"k\">from</span> emp <span class=\"k\">group by</span> gender;",
+    "<span class=\"c\"># 事务：要么全成功，要么全回滚</span>",
+    "<span class=\"k\">start transaction</span>;   <span class=\"s\">commit</span>; / <span class=\"k\">rollback</span>;"
+  ],
+  "why_title": "为什么用 MySQL",
+  "why": [
+    "后端开发的数据地基",
+    "四类 SQL 一次理清",
+    "查询、分组、排序全覆盖",
+    "update 别忘写 where"
+  ],
+  "bar_name": "MYSQL",
+  "bar_sub": "关系型数据库",
+  "bar_items": ["建表", "增删改", "查询", "分组聚合", "多表连接", "事务"]
+}

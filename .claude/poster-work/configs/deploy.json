@@ -1,0 +1,36 @@
+{
+  "bg": "deploy-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · DEPLOY",
+  "tech_lead": "FULL",
+  "tech_rest": "STACK",
+  "title": "项目前后端部署全过程",
+  "slogan": "前端 pnpm，后端 Maven，一次跑通全栈",
+  "chips": ["pnpm", "Node.js", "Maven", "Java", "部署运行"],
+  "cards": [
+    { "i": "🟢", "h": "前端环境", "p": "安装 Node.js 与 Trae，导入前端项目" },
+    { "i": "📦", "h": "前端依赖", "p": "先全局装 pnpm，再 pnpm install" },
+    { "i": "☕", "h": "后端环境", "p": "配置 JDK 与 Maven 环境变量" },
+    { "i": "🚀", "h": "启动服务", "p": "前端 pnpm run dev，后端 mvn 启动" }
+  ],
+  "code_file": "fullstack.sh",
+  "code": [
+    "<span class=\"c\"># 前端：全局安装 pnpm 并安装依赖</span>",
+    "<span class=\"k\">npm</span> install -g pnpm",
+    "<span class=\"k\">pnpm</span> install",
+    "<span class=\"k\">pnpm</span> run dev      <span class=\"s\">➜ http://localhost:5173</span>",
+    "<span class=\"c\"># 后端：验证 Maven，清理并安装依赖</span>",
+    "<span class=\"k\">mvn</span> clean install",
+    "<span class=\"k\">mvn</span> spring-boot:run   <span class=\"s\">➜ Started Application</span>"
+  ],
+  "why_title": "核心要点",
+  "why": [
+    "前后端分离，各自独立启动",
+    "前端 pnpm，后端 Maven",
+    "Maven 构建并启动后端",
+    "环境变量配好即可一次跑通"
+  ],
+  "bar_name": "FULLSTACK",
+  "bar_sub": "全栈项目部署",
+  "bar_items": ["pnpm", "Vite", "Java", "Maven", "JDK", "IDEA"]
+}

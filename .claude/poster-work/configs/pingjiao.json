@@ -1,0 +1,37 @@
+{
+  "bg": "pingjiao-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · SCRIPT",
+  "tech_lead": "JAVA",
+  "tech_rest": "SCRIPT",
+  "title": "GUET 评教脚本分享",
+  "slogan": "粘一段 JS 到控制台，几十秒搞定评教",
+  "chips": ["JS 脚本", "DOM 操作", "浏览器控制台", "自动化", "效率工具"],
+  "cards": [
+    { "i": "🖱️", "h": "自动点选", "p": "遍历所有选项按钮并依次点击，无需手动操作" },
+    { "i": "🔢", "h": "自动打分", "p": "教师评教默认 9~10 分，教材评教统一 8 分" },
+    { "i": "✍️", "h": "自动填评语", "p": "批量写入课程评价与教师印象并提交" },
+    { "i": "🚀", "h": "自动提交", "p": "点匿名提交按钮，几十秒结束一学期评教" }
+  ],
+  "code_file": "pingjiao.js",
+  "code": [
+    "<span class=\"c\">// F12 打开控制台，粘贴脚本后回车即可自动评教</span>",
+    "<span class=\"k\">var</span> optionBtn = document.getElementsByClassName(",
+    "    <span class=\"s\">\"el-input__inner\"</span>);",
+    "<span class=\"k\">for</span> (<span class=\"k\">var</span> i = 0; i &lt; optionBtn.length; i += 1) {",
+    "    optionBtn[i].click();        <span class=\"c\">// 自动点选所有选项</span>",
+    "}",
+    "<span class=\"k\">const</span> items = targetDoc.querySelectorAll(<span class=\"s\">'.check-box'</span>);",
+    "<span class=\"s\">✓</span> 全部选 8 分 → 自动提交，几十秒搞定"
+  ],
+  "why_title": "为什么写脚本",
+  "why": [
+    "十几道题一题一题点太折磨",
+    "一键选分、填评语、提交",
+    "教师 9~10 分，教材 8 分",
+    "几十秒结束一学期评教"
+  ],
+  "bar_name": "JAVASCRIPT",
+  "bar_sub": "浏览器自动化",
+  "bar_items": ["控制台", "DOM", "自动化", "效率工具", "评教系统"]
+}

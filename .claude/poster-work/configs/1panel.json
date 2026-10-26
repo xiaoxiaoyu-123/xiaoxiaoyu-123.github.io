@@ -1,0 +1,36 @@
+{
+  "bg": "1panel-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · LINUX OPS",
+  "tech_lead": "1",
+  "tech_rest": "PANEL",
+  "title": "1Panel 配置上服务器",
+  "slogan": "用一段 Shell 脚本，把服务器运维搬进浏览器",
+  "chips": ["1Panel", "Linux", "Shell", "Docker", "运维面板"],
+  "cards": [
+    { "i": "⚡", "h": "一键安装", "p": "官方脚本自动部署 1Panel，Docker 环境一并就绪" },
+    { "i": "⚙️", "h": "交互式配置", "p": "面板端口、安全入口、账号密码逐步引导" },
+    { "i": "🖥️", "h": "Web 可视化", "p": "浏览器登录即可管理，告别纯命令行运维" },
+    { "i": "🛡️", "h": "长期维护", "p": "安全加固 · 环境部署 · 网站搭建 · 日常巡检" }
+  ],
+  "code_file": "quick_start.sh",
+  "code": [
+    "<span class=\"c\"># 一键安装：脚本会自动部署 Docker 环境</span>",
+    "<span class=\"k\">curl</span> -sSL https://resource.fit2cloud.com/1panel/package/\\",
+    "  quick_start.sh -o quick_start.sh &amp;&amp; <span class=\"k\">bash</span> quick_start.sh",
+    "",
+    "<span class=\"s\">✔</span> Docker   已安装",
+    "<span class=\"s\">✔</span> 1Panel   运行中",
+    "<span class=\"k\">➜</span> 面板地址  http://&lt;IP&gt;:&lt;端口&gt;"
+  ],
+  "why_title": "为什么用 1Panel",
+  "why": [
+    "开源免费，社区活跃迭代快",
+    "自动部署 Docker，环境开箱即用",
+    "用面板替代繁琐的命令行运维",
+    "一台服务器，一个 Web 入口管到底"
+  ],
+  "bar_name": "1PANEL",
+  "bar_sub": "服务器运维面板",
+  "bar_items": ["应用商店", "防火墙", "计划任务", "监控告警", "日志审计", "网站管理"]
+}

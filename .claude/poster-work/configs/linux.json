@@ -1,0 +1,37 @@
+{
+  "bg": "linux-clean.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · LINUX",
+  "tech_lead": "",
+  "tech_rest": "LINUX",
+  "title": "Linux 快速入门",
+  "slogan": "从装系统到敲命令，一篇搞定 Linux 日常",
+  "chips": ["Linux", "Ubuntu", "Shell", "apt", "服务器运维"],
+  "cards": [
+    { "i": "⚡", "h": "装虚拟机", "p": "VMware 里装好 Ubuntu 虚拟机" },
+    { "i": "🔌", "h": "远程连接", "p": "Xshell 用 SSH 连 22 端口管服务器" },
+    { "i": "🧰", "h": "系统管理", "p": "ufw 关防火墙、改主机名、apt 装软件" },
+    { "i": "📁", "h": "文件操作", "p": "pwd、cd、ls、mkdir 等文件操作命令" }
+  ],
+  "code_file": "linux_basics.sh",
+  "code": [
+    "<span class=\"c\"># 关闭防火墙并确认状态</span>",
+    "<span class=\"k\">sudo</span> ufw disable",
+    "<span class=\"s\">Status: inactive</span>",
+    "",
+    "<span class=\"c\"># 修改主机名</span>",
+    "<span class=\"k\">sudo</span> hostnamectl set-hostname 新主机名",
+    "<span class=\"c\"># 更新软件源并安装软件</span>",
+    "<span class=\"k\">sudo</span> apt update &amp;&amp; <span class=\"k\">sudo</span> apt install 软件名"
+  ],
+  "why_title": "为什么学 Linux",
+  "why": [
+    "服务器运维必备的技能",
+    "免费开源，虚拟机就能练",
+    "命令行效率远高于图形界面",
+    "apt 一条命令装卸软件"
+  ],
+  "bar_name": "LINUX",
+  "bar_sub": "服务器操作系统",
+  "bar_items": ["文件管理", "用户权限", "软件安装", "进程管理", "网络配置", "Shell"]
+}

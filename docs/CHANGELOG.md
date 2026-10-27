@@ -15,6 +15,13 @@
 3. **MetingJS 的 api 属性必须含 `:server/:type/:id/:r` 占位符**，裸地址 = 请求无参数 URL = 静默空数据
 4. **injahow 对 VIP/受限歌曲只返回歌名歌手**（url/lrc/封面为空），APlayer 加载失败自动跳歌；公共实例高频调用会触发限流——长期方案是自建 Meting API（injahow/meting-api 或 xizeyoupan/Meting-api，Docker 极轻）
 
+## [2026-10-28] 移除大屏歌词模式，音乐页回归简洁播放器
+
+### 变更
+- 按用户反馈移除大屏歌词模式（按钮/沉浸层/自定义歌词墙全部撤下），音乐页回归纯 APlayer+MetingJS 播放器
+- 保留两项真实修复：**APlayer/Meting 脚本前置**（加载时序 bug）与 **api 占位符模板**（空数据 bug）——这两项与播放器能否稳定渲染直接相关
+- 大屏模式代码在 git 历史（6eef820/a98da54/7b89006）中可随时找回；歌词数据链（网易云官方 lrc → LRCLIB）的实现经验已沉淀于本文件上方条目
+
 ## [2026-10-28] 音乐页上线 APlayer 播放器（网易云歌单实时同步）
 
 ### 新增

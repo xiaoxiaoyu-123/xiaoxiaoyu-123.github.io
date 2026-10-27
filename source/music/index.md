@@ -98,6 +98,36 @@ top_img: ../img/Weather-Children13.jpg
   width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
 }
 #music-player.theater #music-theater-close:hover { background: rgba(255,255,255,.18); }
+/* 播放/暂停按钮：固定在唱片正中心 */
+#music-player.theater .aplayer-pic .aplayer-play,
+#music-player.theater .aplayer-pic .aplayer-pause {
+  position: absolute !important;
+  top: 50% !important; left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  width: 64px !important; height: 64px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, .32) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .45) !important;
+  opacity: 1 !important;
+  display: flex !important; align-items: center; justify-content: center;
+}
+#music-player.theater .aplayer-pic .aplayer-play svg,
+#music-player.theater .aplayer-pic .aplayer-pause svg {
+  position: static !important; margin: 0 !important;
+}
+#music-player.theater .aplayer-pic .aplayer-play:hover,
+#music-player.theater .aplayer-pic .aplayer-pause:hover {
+  background: rgba(0, 0, 0, .5) !important;
+}
+/* 歌名居中放大 */
+#music-player.theater .aplayer-music { text-align: center; margin: 4px 0 2px; }
+#music-player.theater .aplayer-title { font-size: 26px !important; font-weight: 800 !important; color: #fff !important; }
+#music-player.theater .aplayer-author { font-size: 14px !important; color: rgba(255,255,255,.6) !important; }
+/* 去掉 APlayer 自带的白色渐隐伪元素（暗色下会变成灰条） */
+#music-player.theater .aplayer-lrc::before,
+#music-player.theater .aplayer-lrc::after { display: none !important; }
+#music-player.theater .aplayer-lrc p { color: rgba(255,255,255,.62) !important; }
 </style>
 
 <script>

@@ -2,6 +2,13 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] Giscus 评论区上线
+
+### 新增
+- 主题 `comments.use: Giscus`：repo `xiaoxiaoyu-123/xiaoxiaoyu-123.github.io`、repo_id `R_kgDOP_riHQ`、General 类别 id `DIC_kwDOP_riHc4DJubq`（经 giscus 官方 API 查询确认）
+- 配置项：中文界面（data-lang: zh-CN）、reactions 开启、懒加载（滚到评论区才加载）、明暗主题自动切换
+- 验证：文章页 giscus-wrap 容器与全部参数在位；`comments: false` 的关于页正确不渲染评论
+
 ## [2026-10-27] 看板娘更换：miku Live2d → 开源鲸鱼娘（dsh-whale-musume）
 
 ### 变更

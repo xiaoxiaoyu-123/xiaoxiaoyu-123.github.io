@@ -15,6 +15,20 @@
 3. **MetingJS 的 api 属性必须含 `:server/:type/:id/:r` 占位符**，裸地址 = 请求无参数 URL = 静默空数据
 4. **injahow 对 VIP/受限歌曲只返回歌名歌手**（url/lrc/封面为空），APlayer 加载失败自动跳歌；公共实例高频调用会触发限流——长期方案是自建 Meting API（injahow/meting-api 或 xizeyoupan/Meting-api，Docker 极轻）
 
+## [2026-10-28] Pages 站点因仓库转私有被删除——重新启用记录
+
+### 事件
+- 用户将仓库转为私有：GitHub **直接注销了 Pages 站点**（API /pages 返回 404）；转回公开后 Pages **不会自动恢复**
+- 本地触发空提交重新部署：Actions 构建成功、main 分支已更新为最新站点产物（Actions 通道一切正常）
+
+### 修复
+- 用户在 Settings → Pages 重新选「Deploy from a branch」+ main / (root) 保存，即恢复发布
+
+### 教训（重要）
+1. **GitHub Pages 页面永远是公开的**：私有仓库（付费版）的 Pages 任何人也访问得到；免费账户私有仓库直接禁用 Pages
+2. **正确下线方式**是 Settings → Pages 取消发布，**绝不是把仓库转私有**（会删除整个 Pages 站点）
+3. 转回公开后需重新启用 Pages 并触发一次构建（推任意提交，Actions 自动完成发布）
+
 ## [2026-10-28] 修复导航栏搜索「点了没反应」+ 首页外链彻底清零
 
 ### 根因

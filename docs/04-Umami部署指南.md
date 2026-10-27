@@ -50,6 +50,17 @@
 
 AI 会写入主题 `umami_analytics` 配置（serverURL / website_id），并**下线 busuanzi**（访问量改由 Umami 统计）。
 
+## 常见报错
+
+### `invalid port in upstream "http://127.0.0.1:3002"`
+
+反向代理保存时报 nginx `[emerg] invalid port in upstream`。原因：代理地址带了 `http://` 协议头，而 nginx 在 upstream/server 解析时无法接受协议头——它把 `http:` 里的冒号当成端口分隔符，端口变成 `//127.0.0.1:3002` → 非数字 → 报错。
+
+**解决**：代理地址字段只填纯 `host:port`（如 `127.0.0.1:3000`），不要带 `http://`。
+同时确认端口与 Umami 实际映射端口一致（1Panel → 应用 → 已安装 → umami 查看端口映射），否则代理通了也会 502。
+
+若字段强制带协议，则手动改 `/www/sites/<域名>/proxy/root.conf`：在 `upstream { server ...; }` 块内写 `server 127.0.0.1:3000;`（无协议头），在 `location` 内的 `proxy_pass` 写 `proxy_pass http://127.0.0.1:3000;`（有协议头）。
+
 ## 接入后验证
 
 - 博客页面源码里出现 `umami` 脚本标签

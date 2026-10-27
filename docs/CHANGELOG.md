@@ -2,6 +2,19 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-28] 音乐页大屏歌词模式（对齐网易云体验）
+
+### 新增
+- 「🎬 大屏歌词模式」按钮：全屏暗色沉浸层——大唱片封面（播放时旋转）、滚动歌词墙、控制条；Esc/✕ 退出
+- **自定义歌词墙引擎**（绕开 APlayer 写死的 16px 滚动步长）：自行解析 LRC、按行高 40px 平滑滚动、当前句白色高亮
+- 歌词数据三级链：音源自带 lrc → **网易云官方歌词**（injahow `type=lrc`，歌曲 ID 从 url 字段提取）→ **LRCLIB** 开源歌词库（CORS 开放、带时间轴）→ 静态兜底；带 8 秒失败退避重试 + 按歌缓存
+
+### 踩坑记录（本节全是真坑）
+1. **APlayer/Meting 脚本必须放在 meting-js 元素之前**：Meting 升级元素时若 APlayer 未就位，连接回调直接放弃且永不重试（表现：播放器随机消失）
+2. **APlayer 歌词滚动步长写死 16px**：外部改歌词行高会让滚动对不上时间轴——要么遵循 16px，要么自建滚动引擎
+3. **MetingJS 的 api 属性必须含 `:server/:type/:id/:r` 占位符**，裸地址 = 请求无参数 URL = 静默空数据
+4. **injahow 对 VIP/受限歌曲只返回歌名歌手**（url/lrc/封面为空），APlayer 加载失败自动跳歌；公共实例高频调用会触发限流——长期方案是自建 Meting API（injahow/meting-api 或 xizeyoupan/Meting-api，Docker 极轻）
+
 ## [2026-10-28] 音乐页上线 APlayer 播放器（网易云歌单实时同步）
 
 ### 新增

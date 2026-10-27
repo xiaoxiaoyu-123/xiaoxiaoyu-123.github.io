@@ -13,7 +13,7 @@ top_img: ../img/Weather-Children13.jpg
 <script src="/aplayer/APlayer.min.js"></script>
 <script src="/aplayer/Meting.min.js"></script>
 
-<div id="music-player"><meting-js api="https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r" server="netease" type="playlist" id="18532675254" theme="#ff7c9c" loop="all" order="random" preload="auto" list-max-height="400px"></meting-js></div>
+<div id="music-player"><meting-js api="https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r" server="netease" type="playlist" id="18532675254" theme="#ff7c9c" loop="all" order="random" preload="auto" list-max-height="400px"></meting-js><div id="music-lrc"><div id="music-lrc-contents"></div></div></div>
 
 <div id="music-tools"><button id="music-theater-btn" type="button">🎬 大屏歌词模式</button></div>
 
@@ -23,7 +23,8 @@ top_img: ../img/Weather-Children13.jpg
 
 <style>
 /* ---------- 普通模式 ---------- */
-#music-player { margin: 18px 0 6px; }
+#music-player { margin: 18px 0 6px; position: relative; }
+#music-lrc { display: none; }
 #music-tools { text-align: center; margin: 6px 0 4px; }
 #music-theater-btn {
   background: linear-gradient(135deg, #ff7c9c, #ff5f8f);
@@ -71,26 +72,28 @@ top_img: ../img/Weather-Children13.jpg
   animation: music-disc-spin 16s linear infinite;
 }
 @keyframes music-disc-spin { to { transform: rotate(360deg); } }
-/* 歌词墙：默认隐藏的 30px 歌词条在大屏模式展开 */
-#music-player.theater .aplayer-lrc {
-  display: block !important;
-  position: relative !important; bottom: auto !important; left: auto !important; right: auto !important;
-  width: min(620px, 90vw) !important;
-  height: 240px !important; margin: 4px 0 2px !important;
-  text-align: center; overflow: hidden;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
-  mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
-  pointer-events: none;
-}
-#music-player.theater .aplayer-lrc p {
-  font-size: 17px !important; color: rgba(255,255,255,.5) !important;
-  line-height: 34px !important; height: 34px !important;
-  text-shadow: none !important; opacity: 1 !important;
-}
-#music-player.theater .aplayer-lrc p.aplayer-lrc-current {
-  color: #fff !important; font-weight: 700; font-size: 19px !important;
-}
+/* 隐藏 APlayer 自带歌词（其滚动步长写死 16px，改用下方自定义歌词墙） */
+#music-player.theater .aplayer-lrc { display: none !important; }
 #music-player.theater .aplayer-list { display: none !important; }
+/* 自定义歌词墙 */
+#music-player.theater #music-lrc {
+  display: block;
+  width: min(640px, 90vw); height: 264px; overflow: hidden;
+  text-align: center;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+#music-lrc-contents { transition: transform .35s ease-out; }
+#music-lrc-contents p {
+  font-size: 17px; color: rgba(255,255,255,.5);
+  line-height: 40px; height: 40px; margin: 0;
+  transition: color .3s ease, font-size .3s ease;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#music-lrc-contents p.current {
+  color: #fff; font-weight: 700; font-size: 19px;
+  text-shadow: 0 0 18px rgba(255, 124, 156, .45);
+}
 #music-player.theater #music-theater-close {
   display: block; position: absolute; top: 20px; right: 28px;
   background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.25);
@@ -98,36 +101,6 @@ top_img: ../img/Weather-Children13.jpg
   width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
 }
 #music-player.theater #music-theater-close:hover { background: rgba(255,255,255,.18); }
-/* 播放/暂停按钮：固定在唱片正中心 */
-#music-player.theater .aplayer-pic .aplayer-play,
-#music-player.theater .aplayer-pic .aplayer-pause {
-  position: absolute !important;
-  top: 50% !important; left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  margin: 0 !important;
-  width: 64px !important; height: 64px !important;
-  border-radius: 50% !important;
-  background: rgba(0, 0, 0, .32) !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .45) !important;
-  opacity: 1 !important;
-  display: flex !important; align-items: center; justify-content: center;
-}
-#music-player.theater .aplayer-pic .aplayer-play svg,
-#music-player.theater .aplayer-pic .aplayer-pause svg {
-  position: static !important; margin: 0 !important;
-}
-#music-player.theater .aplayer-pic .aplayer-play:hover,
-#music-player.theater .aplayer-pic .aplayer-pause:hover {
-  background: rgba(0, 0, 0, .5) !important;
-}
-/* 歌名居中放大 */
-#music-player.theater .aplayer-music { text-align: center; margin: 4px 0 2px; }
-#music-player.theater .aplayer-title { font-size: 26px !important; font-weight: 800 !important; color: #fff !important; }
-#music-player.theater .aplayer-author { font-size: 14px !important; color: rgba(255,255,255,.6) !important; }
-/* 去掉 APlayer 自带的白色渐隐伪元素（暗色下会变成灰条） */
-#music-player.theater .aplayer-lrc::before,
-#music-player.theater .aplayer-lrc::after { display: none !important; }
-#music-player.theater .aplayer-lrc p { color: rgba(255,255,255,.62) !important; }
 </style>
 
 <script>
@@ -150,5 +123,116 @@ top_img: ../img/Weather-Children13.jpg
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
   const btn = document.getElementById('music-theater-btn');
   if (btn) btn.addEventListener('click', open);
+
+  /* ---------- 自定义歌词墙：数据源 = 歌单自带 lrc → LRCLIB 同步歌词 → 静态兜底 ---------- */
+  const lrcBox = document.getElementById('music-lrc');
+  const lrcContent = document.getElementById('music-lrc-contents');
+  const LINE_H = 40;
+  let lrcLines = [], curLine = -1, curSongKey = null;
+  const lrcCache = {};
+  let lastFailKey = null, lastFailTime = 0;
+
+  function getAplayer() {
+    const mjs = document.querySelector('meting-js');
+    return mjs && mjs.aplayer ? mjs.aplayer : null;
+  }
+  function parseLrc(text) {
+    const out = [];
+    (text || '').split('\n').forEach((line) => {
+      const m = line.match(/\[(\d{1,2}):(\d{1,2})(?:[.:](\d{1,3}))?\](.*)$/);
+      if (m) {
+        out.push({ t: (+m[1]) * 60 + (+m[2]) + (+('0.' + (m[3] || '0'))), text: m[4].trim() });
+      } else if (line.trim()) {
+        out.push({ t: out.length ? out[out.length - 1].t : 0, text: line.trim().replace(/^\[[^\]]*\]/, '').trim() });
+      }
+    });
+    return out.sort((a, b) => a.t - b.t);
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  async function loadLrc() {
+    const p = getAplayer();
+    if (!p || !p.options || !p.options.audio) return;
+    const au = p.options.audio[p.index] || {};
+    const key = p.index + '|' + (au.name || '');
+    if (key === curSongKey) return;
+    // 加载失败后 8 秒退避，避免频繁重试；到点自动重拉
+    if (key === lastFailKey && Date.now() - lastFailTime < 8000) return;
+    curSongKey = key;
+    lrcLines = [];
+    curLine = -1;
+    lrcContent.innerHTML = '<p class="current">歌词加载中…</p>';
+    lrcContent.style.transform = 'translateY(0)';
+    const hasTs = (s) => /\[\d{1,2}:\d{1,2}/.test(s || '');
+    let synced = [], plain = '';
+    // ① 音源自带带时间轴的 lrc 直接用
+    if (hasTs(au.lrc)) synced = parseLrc(au.lrc);
+    // ② 网易云官方歌词（injahow 代理 type=lrc，歌曲 ID 从 url 字段提取）
+    const idm = (au.url || '').match(/[?&]id=(\d+)/);
+    if (!synced.length && idm) {
+      try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 6000);
+        const r = await fetch('https://api.injahow.cn/meting/?server=netease&type=lrc&id=' + idm[1], { signal: ctrl.signal });
+        clearTimeout(timer);
+        if (r.ok) {
+          const text = await r.text();
+          if (hasTs(text)) synced = parseLrc(text);
+          else plain = text;
+        } else { lastFailKey = key; lastFailTime = Date.now(); curSongKey = null; return; }
+      } catch (e) {
+        lastFailKey = key; lastFailTime = Date.now(); curSongKey = null; return;
+      }
+    }
+    // ③ LRCLIB 开源歌词库（带时间轴）
+    if (!synced.length && au.name) {
+      try {
+        const cacheKey = au.name + '|' + (au.artist || '');
+        let cached = lrcCache[cacheKey];
+        if (cached === undefined) {
+          const q = new URLSearchParams({ track_name: au.name, artist_name: au.artist || '' });
+          const ctrl = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 6000);
+          const r = await fetch('https://lrclib.net/api/get?' + q.toString(), { signal: ctrl.signal });
+          clearTimeout(timer);
+          cached = r.ok ? await r.json() : null;
+          lrcCache[cacheKey] = cached;
+        }
+        if (cached && cached.syncedLyrics) synced = parseLrc(cached.syncedLyrics);
+        else if (cached && cached.plainLyrics) plain = cached.plainLyrics;
+      } catch (e) { /* 网络失败静默降级 */ }
+    }
+    if (!synced.length && !plain) {
+      lrcContent.innerHTML = '<p class="current">暂无歌词，请好好听歌 🎧</p>';
+      return;
+    }
+    if (synced.length) {
+      // ④ 时间轴歌词正常建墙
+      lrcLines = synced;
+      lrcContent.innerHTML = lrcLines.map((l) => '<p>' + (escapeHtml(l.text) || '&nbsp;') + '</p>').join('');
+      curLine = -1;
+      return;
+    }
+    // ⑤ 静态纯文本歌词（无时间轴，不滚动）
+    lrcLines = plain.split('\n').filter((l) => l.trim()).map((l) => ({ t: -1, text: l.trim() }));
+    lrcContent.innerHTML = lrcLines.map((l) => '<p>' + (escapeHtml(l.text) || '&nbsp;') + '</p>').join('');
+  }
+  function syncLrc() {
+    if (!wrap.classList.contains('theater')) return;
+    loadLrc();
+    const p = getAplayer();
+    if (!p || !lrcLines.length || lrcLines[0].t < 0) return;
+    const t = p.audio ? p.audio.currentTime : 0;
+    let idx = 0;
+    for (let i = 0; i < lrcLines.length; i++) {
+      if (lrcLines[i].t <= t + 0.3) idx = i;
+    }
+    if (idx === curLine) return;
+    curLine = idx;
+    lrcContent.style.transform = 'translateY(' + (-idx * LINE_H) + 'px)';
+    [...lrcContent.children].forEach((c, i) => c.classList.toggle('current', i === idx));
+  }
+  setInterval(syncLrc, 200);
 })();
 </script>

@@ -1,7 +1,7 @@
 ---
 title: "💻 给电脑重装win11系统"
 date: 2026-08-25 07:01:35
-categories: [电脑技巧]
+categories: [工具效率]
 tags: [Windows11, 重装系统, 系统安装, 避坑指南]
 description: 手把手教你重装 Windows 11，记录分区报错、强制联网、键盘无法输入等常见卡点的解决方法，附完整问题速查表。
 cover: ../img/Miku01.jpg

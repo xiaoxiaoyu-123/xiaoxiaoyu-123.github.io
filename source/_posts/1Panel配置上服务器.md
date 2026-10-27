@@ -2,8 +2,8 @@
 title: "1Panel配置上服务器"
 date: 2026-04-24 21:00:00
 description: 从零开始的使用shell脚本给服务器配置上1Panel完整入门指南，包含基础语法、常用标签详解和实战示例
-categories: [Linux,shell脚本,1Panel]
-tags: [Linux,1Panel,零基础指南]
+categories: [部署运维]
+tags: [Linux, 1Panel, 零基础指南, shell脚本]
 cover: ../img/anime-tech-1panel-20260424.jpg
 ---
 # 使用shell脚本给服务器配置上1Panel

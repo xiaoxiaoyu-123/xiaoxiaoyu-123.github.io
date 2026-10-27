@@ -2,8 +2,8 @@
 title: "📖 MarkDown入门使用教程"
 date: 2025-10-12 16:50
 description: 从零到入门Mark的使用教程
-categories: [MarkDown]
-tags: [笔记,MarkDown, 零基础教程]
+categories: [工具效率]
+tags: [笔记, MarkDown, 零基础教程]
 cover: ../img/anime-tech-markdown-20251012.jpg
 
 ---

@@ -2,8 +2,8 @@
 title: "AI全栈心理健康助手项目"
 date: 2026-10-19 19:00
 description: 
-categories: [Vue3,SpringBoot]
-tags: [Vue3,SpringBoot]
+categories: [项目实战]
+tags: [Vue3, SpringBoot]
 cover: ../img/anime-tech-vue3springboot-20261019.jpg
 ---
 # 

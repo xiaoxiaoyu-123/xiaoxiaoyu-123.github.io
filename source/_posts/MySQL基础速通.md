@@ -2,7 +2,7 @@
 title: "📖 MySQL 基础语法速通：SQL 从零到入门的保姆级笔记"
 date: 2026-08-12 16:50
 description: 一篇从零开始的 MySQL SQL 速通笔记，覆盖 DDL、DML、DQL、DCL、常用函数、约束、多表查询与事务，每条语句都带注释和语法说明，适合初学者照着敲。
-categories: [MySQL]
+categories: [后端数据库]
 tags: [MySQL, 笔记, 零基础教程]
 cover: ../img/anime-tech-mysql-20260812.jpg
 ---

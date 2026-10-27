@@ -1,8 +1,8 @@
 ---
 title: "📝 我的Hexo博客搭建之旅：从零到一的全记录"
 date: 2025-10-11 13:30:00
-categories: [博客搭建]
-tags: [Hexo, GitHub,Butterfly主题]
+categories: [部署运维]
+tags: [Hexo, GitHub, Butterfly主题, 博客搭建]
 description: 详细记录使用Hexo+Butterfly主题搭建个人博客的完整过程、遇到的问题及解决方案
 cover: ../img/anime-tech-hexo-20251011.jpg
 

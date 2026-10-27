@@ -2,6 +2,18 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-28] 音乐页上线 APlayer 播放器（网易云歌单实时同步）
+
+### 新增
+- `source/aplayer/`：APlayer 1.10.1 + MetingJS 2.0 本地化（76KB，无 CDN 依赖）
+- `source/music/index.md`：嵌入网易云歌单 `18532675254`（用户提供的公开歌单），实时同步——网易云里加减歌，博客自动跟随
+- 播放器配置：玫红主题色、随机循环、歌单可展开
+
+### 踩坑记录（重要）
+1. **MetingJS 的 api 属性必须带占位符**（`:server/:type/:id/:r`），填裸地址会请求出无参数 URL，返回空数据静默失败——这是「元素已定义但播放器不渲染」的真凶
+2. **公共 Meting 实例选择**：i-meto 官方实例走用户代理工具会超时（疑似屏蔽海外出口）；qjqq/wuenci/178.is 均已失效；**injahow（api.injahow.cn）直连+代理双路 200，选定**
+3. npm 上没有 `metingjs` 包，Meting.min.js 从 npm 包 `meting@2.0.1` 的 dist 提取
+
 ## [2026-10-27] 分类大收敛：26 → 7 个大类，技术栈全部下沉为标签
 
 ### 变更（25 篇文章 front-matter）

@@ -59,7 +59,28 @@ AI 会写入主题 `umami_analytics` 配置（serverURL / website_id），并**�
 **解决**：代理地址字段只填纯 `host:port`（如 `127.0.0.1:3000`），不要带 `http://`。
 同时确认端口与 Umami 实际映射端口一致（1Panel → 应用 → 已安装 → umami 查看端口映射），否则代理通了也会 502。
 
-若字段强制带协议，则手动改 `/www/sites/<域名>/proxy/root.conf`：在 `upstream { server ...; }` 块内写 `server 127.0.0.1:3000;`（无协议头），在 `location` 内的 `proxy_pass` 写 `proxy_pass http://127.0.0.1:3000;`（有协议头）。
+**不要填服务器公网 IP**：反向代理与 Umami 在同一台机器上，上游必须是 `127.0.0.1:端口`；填公网 IP 会走「发夹式」绕行，常直接失败。
+
+若字段强制带协议或仍报错，手动改 `/www/sites/<域名>/proxy/root.conf`：
+
+- 文件内有 `upstream { ... }` 块 → `server 127.0.0.1:3000;`（**无**协议头）
+- 只有 `location` + `proxy_pass` → `proxy_pass http://127.0.0.1:3000;`（**有**协议头），推荐整段：
+
+```nginx
+#REWRITE-END
+location ^~ / {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+}
+```
+
+保存后在该站点点「重载」。若改了仍报同样错误，删除地址**手动重新输入**，排除复制粘贴带入的不可见字符。改前先 `curl -I http://127.0.0.1:3000` 确认服务本身正常。
 
 ## 接入后验证
 

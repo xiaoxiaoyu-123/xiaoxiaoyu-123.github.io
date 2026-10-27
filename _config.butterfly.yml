@@ -791,17 +791,20 @@ microsoft_clarity:
 
 # https://umami.is/
 umami_analytics:
-  enable: false
-  # For self-hosted setups, configure the hostname of the Umami instance
+  enable: true
+  # 留空 = 使用 Umami Cloud（脚本 https://cloud.umami.is/script.js，API https://api.umami.is/v1）
   serverURL:
   script_name: script.js
-  website_id:
+  website_id: 215130f2-7efc-4218-b160-8df1a92d1906
   option:
+    # 只统计正式域名，避免本地预览(localhost)污染数据
+    data-domains: xiaoxiaoyu-123.github.io
   UV_PV:
+    # 站内数字展示需 Umami API 密钥（会在前端暴露），暂不全站展示，去 Umami 后台看
     site_uv: false
     site_pv: false
     page_pv: false
-    # Umami Cloud (API key) / self-hosted Umami (token)
+    # 如需站内展示访问量：在 Umami Cloud → 设置 → API 密钥 生成后填入下方 token
     token:
 
 # https://www.googletagmanager.com/

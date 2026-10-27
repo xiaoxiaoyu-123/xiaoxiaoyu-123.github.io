@@ -11,6 +11,12 @@ user-invocable: true
 
 # Hexo 博客部署助手
 
+> **⚡ 2026-10-27 起主发布通道已更换为 GitHub Actions**：push `source` 分支即自动构建发布
+> （workflow 见 `.github/workflows/deploy.yml`，本地主分支已改名 `source`）。
+> 用户说「发布」时优先执行：`git add -A && git commit && git push`（推 source 分支，push 即发布）。
+> 下方的手动 `hexo deploy` 流程仅作为 Actions 故障时的备用方案。
+> ⚠️ 本机直连 GitHub 经常不通，推送前先确认代理工具已开启（系统环境变量指向 127.0.0.1:33210）。
+
 把 `source/` 里的内容发布到公网。核心原则：**只有你明确说「发布」，才会真的推到线上。**
 
 ## 为什么必须分两步

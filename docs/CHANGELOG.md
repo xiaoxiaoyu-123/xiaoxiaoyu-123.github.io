@@ -2,6 +2,29 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 🚀 首次自动部署成功——重构成果全量上线
+
+- push `source` → Actions 构建 → Pages 部署，全链路 success
+- 线上验证通过：本地搜索索引、鲸鱼娘看板娘、Umami 统计、文章页 Giscus、玫红主色、12 篇新封面、16:9 卡片、最新文章《AI全栈心理健康助手项目》
+- 本机网络注意：GitHub 直连不通，git 已配置 github.com 专用代理（`http.https://github.com.proxy=127.0.0.1:33210`），**推送前需开启代理工具**
+
+## [2026-10-27] GitHub Actions 自动部署配置完成
+
+### 新增
+- `.github/workflows/deploy.yml`：push `source` 分支 → Node 20 + npm ci + hexo generate → peaceiris/actions-gh-pages 推 main 分支
+- 使用内置 `GITHUB_TOKEN`（permissions: contents: write），**无需在 GitHub 配置任何 Secret/Deploy Key**
+- Pages 保持「main 分支 / root」构建方式不变，内置 token 的推送会正常触发 Pages 构建
+- 本地主分支 `main` 改名为 `source`（源码分支），远程 `origin` 已配置
+
+### 新的发布方式
+```
+git add -A && git commit -m "..." && git push
+```
+push 即发布；任何电脑无需本地 Hexo 环境即可更新博客。旧的手动 `hexo deploy` 保留为备用通道。
+
+### 待办
+- ⚠️ 首次 `git push -u origin source` 因本机当前无法直连 GitHub（代理工具未开）暂未执行；开代理后推送即触发首次自动部署
+
 ## [2026-10-27] 统计接入 Umami Cloud（免服务器方案）
 
 ### 背景

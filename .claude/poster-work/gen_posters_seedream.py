@@ -40,6 +40,7 @@ POST_MAP = {
     "deploy":        ("taurus",        "anime-tech-deploy-20260325.jpg"),
     "frontend-run":  ("cancer",        "anime-tech-frontend-20260321.jpg"),
     "vue3springboot": ("osawa-mahiro", "anime-tech-vue3springboot-20261019.jpg"),
+    "blog-refactor":  ("aquarius",     "anime-tech-blogrefactor-20261027.jpg"),
 }
 
 PROMPT_TMPL = """WIDE 16:9 LANDSCAPE anime technology recommendation poster for a Chinese programming blog cover.

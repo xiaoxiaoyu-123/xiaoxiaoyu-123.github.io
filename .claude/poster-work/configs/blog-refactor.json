@@ -1,0 +1,34 @@
+{
+  "bg": "bases-seedream/poster-blog-refactor.png",
+  "badge_main": "★ 焕新上线",
+  "badge_sub": "BLOG REFACTOR · HEXO",
+  "tech_lead": "Hexo",
+  "tech_rest": " 大重构",
+  "title": "Hexo 博客大重构",
+  "slogan": "从 33MB 图片到 push 即发布，一次彻底的翻新",
+  "chips": ["Hexo", "Butterfly", "GitHub Actions", "Seedream"],
+  "cards": [
+    { "i": "🧹", "h": "地基治理", "p": "图片 33MB→15MB，git 纳管，失效引用清零" },
+    { "i": "🎨", "h": "封面流水线", "p": "角色垫图 + 整张海报一次生成，15 秒一张" },
+    { "i": "🧩", "h": "功能三件套", "p": "本地搜索、Giscus 评论、Umami 统计" },
+    { "i": "🚀", "h": "push 即发布", "p": "GitHub Actions 云端构建，告别手动部署" }
+  ],
+  "code_file": "deploy.yml",
+  "code": [
+    "<span class=\"c\"># 新的发布方式</span>",
+    "git add -A && git commit -m \"新文章\"",
+    "git push   <span class=\"c\"># ← push 即发布，完事</span>",
+    "",
+    "<span class=\"c\"># 剩下的交给 GitHub Actions</span>",
+    "npm ci && hexo generate"
+  ],
+  "why_title": "为什么重构",
+  "why": [
+    "最新文章忘了部署，线上停在 9 月",
+    "封面一张 1.8MB，访客下载到怀疑人生",
+    "项目居然不是 git 仓库，没有后悔药"
+  ],
+  "bar_name": "BLOG REFACTOR",
+  "bar_sub": "一年一修，越修越香",
+  "bar_items": ["图片瘦身", "角色库", "搜索", "评论", "统计", "自动化"]
+}

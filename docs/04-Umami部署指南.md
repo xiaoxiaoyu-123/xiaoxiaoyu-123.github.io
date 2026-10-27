@@ -80,7 +80,30 @@ location ^~ / {
 }
 ```
 
-保存后在该站点点「重载」。若改了仍报同样错误，删除地址**手动重新输入**，排除复制粘贴带入的不可见字符。改前先 `curl -I http://127.0.0.1:3000` 确认服务本身正常。
+**用终端直接写文件最保险**（避免编辑器/粘贴带入不可见字符）：
+
+```bash
+# 先查宿主机实际端口（compose 里 ${PANEL_APP_PORT_HTTP}:3000 的左边那个）
+docker ps --format '{{.Names}}	{{.Ports}}' | grep -i umami
+# 验证服务本身
+curl -I http://127.0.0.1:3000
+
+cat > /www/sites/umami.xiaoxiaoyu123.xyz/proxy/root.conf <<'EOF'
+#REWRITE-END
+location ^~ / {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+}
+EOF
+```
+
+把 3000 换成 `docker ps` 查到的宿主机端口。保存后在该站点点「重载」。若改了仍报同样错误，删除地址**手动重新输入**，排除复制粘贴带入的不可见字符。改前先 `curl -I http://127.0.0.1:3000` 确认服务本身正常。
 
 ## 接入后验证
 

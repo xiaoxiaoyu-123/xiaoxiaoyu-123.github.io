@@ -15,6 +15,18 @@
 3. **MetingJS 的 api 属性必须含 `:server/:type/:id/:r` 占位符**，裸地址 = 请求无参数 URL = 静默空数据
 4. **injahow 对 VIP/受限歌曲只返回歌名歌手**（url/lrc/封面为空），APlayer 加载失败自动跳歌；公共实例高频调用会触发限流——长期方案是自建 Meting API（injahow/meting-api 或 xizeyoupan/Meting-api，Docker 极轻）
 
+## [2026-10-28] 修复导航栏搜索「点了没反应」+ 首页外链彻底清零
+
+### 根因
+- 主题把搜索按钮的点击绑定挂在 `window load` 事件上，而页面还有最后一个外链脚本（jsdelivr 的 typed.js）——网络不通/代理异常时 load 事件迟迟不触发，**点击绑定时有时无**，用户点搜索没反应
+
+### 修复
+- typed.js 本地化：npm 包 `typed.js@2.0.12`（lib/typed.js，浏览器加载时自动挂 `window.Typed`）复制到 `source/js/typed.js`，打字机脚本的动态加载地址从 jsdelivr 改为 `/js/typed.js`
+- 至此**首页外链脚本数量为 0**：全部资源（主题、播放器、看板娘、打字机）完全本地服务，load 事件即时触发，搜索绑定即时生效，页面加载不再受外网影响
+
+### 验证
+- IAB 实测：点击导航栏「搜索」→ 弹窗打开 → 输入 Linux → 3 条结果带关键词高亮（《Linux快速入门》《1Panel配置上服务器》《我的Hexo博客搭载之旅》）
+
 ## [2026-10-28] 移除大屏歌词模式，音乐页回归简洁播放器
 
 ### 变更

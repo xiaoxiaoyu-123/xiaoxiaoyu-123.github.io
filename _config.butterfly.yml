@@ -228,10 +228,10 @@ inject:
               header.appendChild(typedEl);
             }
             
-            // 动态加载typed.js
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12';
-            script.onload = function() {
+	            // 动态加载typed.js（已本地化）
+	            const script = document.createElement('script');
+	            script.src = '/js/typed.js';
+	            script.onload = function() {
               new Typed('#custom-subtitle', {
                 strings: [
                   '✨ 欢迎来到小🐟的技术博客',

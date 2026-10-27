@@ -1,4 +1,49 @@
-# Umami 统计部署指南（1Panel）
+# 统计方案（三选一）
+
+> 2026-10-27 更新：服务器为 2C2G 且已有多个容器，**放弃在服务器自托管 Umami**（Umami + PostgreSQL 约需 500~700MB 内存）。改为以下免服务器方案。
+
+## 方案对比
+
+| 方案 | 是否开源 | 服务器 | 免费额度 | 主题支持 | 推荐度 |
+|---|---|---|---|---|---|
+| **Umami Cloud** | 是（GitHub: umami-software/umami） | ❌ 不需要 | 10 万事件/月、1 站点、留存 6 个月 | ✅ 主题原生 `umami_analytics` | ⭐ 首选 |
+| **GoatCounter 托管版** | 是（GitHub: arp242/goatcounter） | ❌ 不需要 | 个人站点免费（捐赠维持，无硬性套餐） | ❌ 需 inject 自定义脚本 | ⭐ 备选 |
+| Cloudflare Web Analytics | ❌ 闭源 | ❌ 不需要 | 免费 | 主题原生支持 | 备选 |
+
+## 方案 A：Umami Cloud（推荐）
+
+1. 打开 https://umami.is → Sign up（可用 GitHub 账号登录）→ 选免费 Hobby 计划
+2. 添加网站：名称「小🐟博客」，域名 `xiaoxiaoyu-123.github.io`
+3. 复制 **Website ID**（UUID）
+4. 交给 AI 写入主题：
+
+```yaml
+umami_analytics:
+  enable: true
+  serverURL: https://cloud.umami.is
+  script_name: script.js
+  website_id: <Website ID>
+  option:
+```
+
+## 方案 B：GoatCounter（完全免费、无配额）
+
+1. https://www.goatcounter.com/signup 注册子域（如 `xiaoxiaoyu.goatcounter.com`）
+2. 主题 inject.head 加入（把子域换成你的）：
+
+```html
+<script data-goatcounter="https://xiaoxiaoyu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+```
+
+3. 注意：GoatCounter 不提供站内访问量数字展示，侧栏 UV/PV 需保留 busuanzi 或隐藏
+
+## 服务器清理
+
+本地 Umami 与 PostgreSQL 可卸载释放内存：1Panel → 应用 → umami → 卸载；1Panel → 数据库 → PostgreSQL → 卸载（确认无其他应用使用后）。
+
+---
+
+# 附：自托管 Umami 部署指南（已不采用，留档）
 
 > 目标：把博客访问统计从 busuanzi 换到自托管 Umami。完成后把 **https 访问地址** 和 **Website ID** 发给 AI 接入主题。
 

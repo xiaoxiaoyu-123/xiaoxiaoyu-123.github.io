@@ -2,6 +2,18 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-10-27] 统计接入 Umami Cloud（免服务器方案）
+
+### 背景
+- 服务器 2C2G 且已跑多个容器，自托管 Umami + PostgreSQL 内存不足（安装失败），改用官方云托管
+
+### 变更
+- 主题启用 `umami_analytics`：`serverURL` 留空走 Umami Cloud（`https://cloud.umami.is/script.js`），website_id `215130f2-7efc-4218-b160-8df1a92d1906`
+- `data-domains: xiaoxiaoyu-123.github.io`：只统计正式域名，本地预览不污染数据
+- 站内 UV/PV 数字暂不展示（需要 API 密钥且会暴露在前端）；busuanzi 暂时保留用于页面数字展示
+- 验证：生成页面包含脚本地址、website_id、域名白名单、手动 track；Umami Cloud 脚本 HTTP 200
+- 服务器侧可卸载自托管的 umami 与 PostgreSQL 释放内存（待用户操作）
+
 ## [2026-10-27] Giscus 评论区上线
 
 ### 新增

@@ -6,6 +6,8 @@ categories: [项目实战]
 tags: [Vue3, SpringBoot]
 cover: ../img/anime-tech-vue3springboot-20261019.jpg
 ---
+
+{% note info %}🚧 项目开发中：这个全栈项目还在持续开发，内容会随进度不断更新，先把踩坑过程记下来～{% endnote %}
 # 
 此项目是
 ## Day1

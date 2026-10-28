@@ -7,6 +7,22 @@ title: '小🐟博客'
 subtitle: '这是一条潜水的🐟儿'
 description: '小余的博客，欢迎访问'
 keywords: 博客,小余,技术,前端,HTML,CSS,JavaScript,Vue3
+
+# SEO：站点地图与 RSS 订阅
+sitemap:
+  path:
+    - sitemap.xml
+    - sitemap.txt
+  rel: false
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: true
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
 author: 小余
 language: zh-CN
 timezone: ''

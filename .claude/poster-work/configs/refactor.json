@@ -1,0 +1,65 @@
+{
+  "bg": "bases-seedream/refactor-5-0-pro-260628-2.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · SITE REFACTOR",
+  "tech_lead": "NEXT",
+  "tech_rest": ".JS",
+  "title": "基地官网重构记录",
+  "slogan": "两天时间，把跑了六年的 Docusaurus 旧站重写成 Next.js",
+  "chips": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind",
+    "three.js",
+    "Waline"
+  ],
+  "cards": [
+    {
+      "i": "🎛️",
+      "h": "3D 首页",
+      "p": "二十个 three.js 场景候选，最终选定浑天仪「时间算法」"
+    },
+    {
+      "i": "📦",
+      "h": "内容即数据",
+      "p": "成员、荣誉、部门全抽成 JSON，改内容不用碰代码"
+    },
+    {
+      "i": "🔗",
+      "h": "资源整合",
+      "p": "FTP 资料库编目原生页 + OJ 校园网中转页"
+    },
+    {
+      "i": "💬",
+      "h": "评论迁移",
+      "p": "22 条历史留言全保真搬到自托管 Waline"
+    }
+  ],
+  "code_file": "deploy.sh",
+  "code": [
+    "<span class=\"c\"># 静态导出：11 个页面全部预渲染</span>",
+    "<span class=\"k\">pnpm</span> build      <span class=\"s\">✓</span> Compiled in 2.5s",
+    "<span class=\"k\">pnpm</span> lint       <span class=\"s\">✓</span> 0 error",
+    "<span class=\"k\">git</span> push       <span class=\"s\">✓</span> CI: lint + build",
+    "",
+    "<span class=\"c\"># out/ 就是整个网站</span>",
+    "<span class=\"k\">➜</span> 16MB  ·  首屏 JS 108KB  ·  HTTPS"
+  ],
+  "why_title": "为什么值得看",
+  "why": [
+    "旧站技术债：antd v4 停维、假 strict、双锁文件",
+    "内容与事实脱节：四大部门早已并成三大",
+    "3D 特效做分级质量，低端机自动降档",
+    "配套维护手册与踩坑记录，下一届能接手"
+  ],
+  "bar_name": "NEXT.JS",
+  "bar_sub": "官网重构 · 静态站",
+  "bar_items": [
+    "App Router",
+    "Static Export",
+    "Tailwind",
+    "three.js",
+    "Waline",
+    "1Panel"
+  ]
+}

@@ -1,0 +1,508 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>🔧 半年狂崩之谜：基地服务器 OOM 抢修实录 | 小🐟博客</title><meta name="author" content="每天都很困😴"><meta name="copyright" content="每天都很困😴"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xiaoxiaoyu-123.github.io/img/anime-tech-oom-20261015.jpg">
+<meta property="article:published_time" content="2026-09-13T22:30:00.000Z">
+<meta property="article:modified_time" content="2026-11-01T09:38:28.753Z">
+<meta property="article:author" content="每天都很困😴">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="排查实录">
+<meta property="article:tag" content="OOM">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="systemctl">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoxiaoyu-123.github.io/img/anime-tech-oom-20261015.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "🔧 半年狂崩之谜：基地服务器 OOM 抢修实录",
+  "url": "https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/",
+  "image": "https://xiaoxiaoyu-123.github.io/img/anime-tech-oom-20261015.jpg",
+  "datePublished": "2026-09-13T22:30:00.000Z",
+  "dateModified": "2026-11-01T09:38:28.753Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "每天都很困😴",
+      "url": "https://xiaoxiaoyu-123.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css?v=6.0.33" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1f1a20')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.12.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '🔧 半年狂崩之谜：基地服务器 OOM 抢修实录',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/assets/dsh-whale-moe.css"><style>
+  .custom-subtitle {
+    font-size: 1.3rem;
+    color: pink;
+    margin-top: 10px;
+    min-height: 30px;
+    text-align: center;
+  }
+</style>
+<style>
+  /* 首页卡片封面框锁定 16:9，与海报同比例，整张图完整显示不裁切（桌面加宽到 47%，移动端全宽） */
+  #recent-posts .recent-post-item .post_cover {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    align-self: center;
+    overflow: hidden;
+  }
+  #recent-posts .recent-post-item .post_cover img.post-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media screen and (min-width: 900px) {
+    #recent-posts .recent-post-item .post_cover {
+      flex: 0 0 47%;
+    }
+  }
+  /* 暗色模式：粉色背景换成暗玫瑰底色，避免夜间刺眼 */
+  [data-theme="dark"] body,
+  [data-theme="dark"] #web_bg {
+    background: #1f1a20 !important;
+  }
+  [data-theme="dark"] .recent-post-item,
+  [data-theme="dark"] .card-widget {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .45) !important;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="小🐟博客" type="application/atom+xml">
+</head><body><div id="web_bg" style="background: pink;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/../img/anime-tech-oom-20261015.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">小🐟博客</span></a><a class="nav-page-title" href="/"><span class="site-name">🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-09-13T22:30:00.000Z" title="发表于 2026-09-13 22:30:00">2026-09-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-01T09:38:28.753Z" title="更新于 2026-11-01 09:38:28">2026-11-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/%E8%BF%90%E7%BB%B4/">运维</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="🔧-半年狂崩之谜：基地服务器-OOM-抢修实录"><a href="#🔧-半年狂崩之谜：基地服务器-OOM-抢修实录" class="headerlink" title="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录"></a>🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</h1><h2 id="前言：又崩了"><a href="#前言：又崩了" class="headerlink" title="前言：又崩了"></a>前言：又崩了</h2><p>先交代一下背景。基地有台服务器，<strong>12 核 24G 内存</strong>，上面跑着 1Panel 面板 + 两个 Docker 容器（MySQL 和 vsftpd），基地的 FTP 和各种资料都在上面。它只能在校内网访问，平时没什么人动它。</p>
+<p>然后这半年来，它隔三差五就<strong>整个假死</strong>——SSH 连不上、网站打不开，唯一的解决办法是跑去机房<strong>断电重启</strong>。持续了半年，一直没人管。</p>
+<p>这次实在忍不了了，我约了个时间跑去机房，决心把它查个水落石出。</p>
+<h2 id="🕵️-现场取证：唯一的数据中心"><a href="#🕵️-现场取证：唯一的数据中心" class="headerlink" title="🕵️ 现场取证：唯一的数据中心"></a>🕵️ 现场取证：唯一的数据中心</h2><p>排查的第一步就撞了个软钉子。</p>
+<p>按正常套路，内存出问题应该先看内核日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg -T | grep -iE <span class="string">&quot;out of memory|killed process&quot;</span> | <span class="built_in">tail</span> -40</span><br></pre></td></tr></table></figure>
+
+<p>结果——<strong>什么都没有</strong>。因为服务器这半年重启了太多次，内核日志在重启后就没了。❌</p>
+<p>不过转机在机房那台接在服务器上的<strong>显示器</strong>上：屏幕上还留着大量滚动日志，全是这一句：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Out of memory: Killed process xxx (unattended-upgr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>单个进程占了约 23.9 GB 内存</strong>（服务器总共才 24 GB），时间跨度正好是上次连续运行 65 天的最后阶段。凶手第一次露出了马脚：<code>unattended-upgrades</code>——Ubuntu 的<strong>系统自动更新服务</strong>。</p>
+<h2 id="🧠-根因链条：一个好心的服务怎么搞崩服务器"><a href="#🧠-根因链条：一个好心的服务怎么搞崩服务器" class="headerlink" title="🧠 根因链条：一个好心的服务怎么搞崩服务器"></a>🧠 根因链条：一个好心的服务怎么搞崩服务器</h2><p>光看到凶手的名字还不够，得搞清楚它为什么吃内存。接着翻它的日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -50 /var/log/unattended-upgrades/unattended-upgrades.log</span><br></pre></td></tr></table></figure>
+
+<p>看到的现象很诡异：这个服务<strong>一天被启动 4~5 次</strong>（正常一两次就够了），而且每一次都只写到”初始化”阶段就戛然而止，后面”下载、安装”等内容一行都没有。</p>
+<p>再翻 apt 的历史账本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -20 /var/log/apt/history.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件是空的。</strong> 也就是说，这半年来没有一次升级真正完成过。登录时系统一直提示”268 个软件包可升级（含 132 个安全更新）”，全部积压着。</p>
+<p>到这里根因链条就完整了：</p>
+<blockquote>
+<p>积压的待升级包越滚越多 → 自动更新服务每次启动都在”计算要升级哪些包”这一步陷入<strong>超长计算</strong> → 内存持续膨胀直到吃满 24G → 内核 OOM Killer 把它杀掉 → 系统又自动把它拉起来 → <strong>再次膨胀</strong> → 循环，每 4~20 小时一轮 → 整机假死 → 断电重启 → 无限循环</p>
+</blockquote>
+<p>一个本意是”保护服务器安全”的服务，最后变成了搞崩服务器的凶手。<strong>讽刺但真实。</strong></p>
+<h2 id="🔧-修复：三处根除-三项加固"><a href="#🔧-修复：三处根除-三项加固" class="headerlink" title="🔧 修复：三处根除 + 三项加固"></a>🔧 修复：三处根除 + 三项加固</h2><h3 id="根除：把自动更新彻底关掉"><a href="#根除：把自动更新彻底关掉" class="headerlink" title="根除：把自动更新彻底关掉"></a>根除：把自动更新彻底关掉</h3><p>服务本体、触发定时器、apt 配置，<strong>三处全部关闭</strong>，防止它以任何方式复活：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 停掉并禁用服务本体</span></span><br><span class="line">systemctl <span class="built_in">disable</span> --now unattended-upgrades.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 禁掉两个触发定时器</span></span><br><span class="line">systemctl <span class="built_in">disable</span> --now apt-daily.timer apt-daily-upgrade.timer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. apt 配置里显式关闭（双保险）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;APT::Periodic::Unattended-Upgrade &quot;0&quot;;&#x27;</span> &gt; /etc/apt/apt.conf.d/20auto-upgrades</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 这里踩了两个小坑：一是 service&#x2F;timer 名字要写全，写错只会静默失败；二是改完要用 <code>apt-config dump | grep Unattended</code> 验证配置真的生效了，眼见为实。</p>
+</blockquote>
+<h3 id="加固一：swap-扩容-2G-→-8G"><a href="#加固一：swap-扩容-2G-→-8G" class="headerlink" title="加固一：swap 扩容 2G → 8G"></a>加固一：swap 扩容 2G → 8G</h3><p>内存再被吃满时，8G 的交换空间能给系统留出<strong>安全关机和响应命令</strong>的余地，而不是直接假死：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">swapoff /swapfile</span><br><span class="line">fallocate -l 8G /swapfile &amp;&amp; <span class="built_in">chmod</span> 600 /swapfile</span><br><span class="line">mkswap /swapfile &amp;&amp; swapon /swapfile</span><br><span class="line">free -h   <span class="comment"># 确认生效</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="加固二：日志持久化"><a href="#加固二：日志持久化" class="headerlink" title="加固二：日志持久化"></a>加固二：日志持久化</h3><p>之前内核日志重启就丢，排查全靠机房显示器。把 journald 开启持久化，以后<strong>出事有据可查</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /var/log/journal</span><br><span class="line">systemctl restart systemd-journald</span><br></pre></td></tr></table></figure>
+
+<h3 id="加固三：给-MySQL-容器设内存上限"><a href="#加固三：给-MySQL-容器设内存上限" class="headerlink" title="加固三：给 MySQL 容器设内存上限"></a>加固三：给 MySQL 容器设内存上限</h3><p>防止任何容器重演”吃满全部内存”的历史，在 1Panel 里给它限制了 8G。</p>
+<h2 id="📋-复盘总结"><a href="#📋-复盘总结" class="headerlink" title="📋 复盘总结"></a>📋 复盘总结</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>处理前</th>
+<th>处理后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动更新服务</td>
+<td>每 4~20 小时膨胀到 24G 被杀</td>
+<td>三处彻底关闭</td>
+</tr>
+<tr>
+<td>交换空间</td>
+<td>2 GB</td>
+<td>8 GB</td>
+</tr>
+<tr>
+<td>系统日志</td>
+<td>重启即丢</td>
+<td>持久化保存</td>
+</tr>
+<tr>
+<td>排查证据</td>
+<td>只剩机房显示器</td>
+<td>随时可查</td>
+</tr>
+</tbody></table>
+<p>三条教训，每条都是这次用半年崩溃换来的：</p>
+<ol>
+<li><strong>服务器崩溃后别急着重启</strong>——重启会销毁现场，先拍下日志（这次全靠机房显示器没关 🙏）</li>
+<li><strong>“自动”的东西也可能是故障源</strong>——自动更新、自动清理，出问题时都要列入嫌疑人名单</li>
+<li><strong>软件包长期不更新也是隐患</strong>——积压本身就会让某些服务的计算量失控</li>
+</ol>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>修完之后观察了一周多，内存平稳、没有异常重启，总算能睡个安稳觉了。</p>
+<p>不过这次排查中我还顺手做了一个决定——清理宿主机上一个”半配置状态”的 MySQL 软件包，当时的判断是”业务数据库都跑在 Docker 容器里，宿主机这个应该没用”。</p>
+<p><strong>这个判断后来结结实实地打了我的脸</strong>——基地的 OJ 系统数据库恰好就在宿主机 MySQL 里。欲知后事如何，且看下篇《基地OJ系统复活》😂</p>
+<p>我们下一篇博客见！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io">每天都很困😴</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/">https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xiaoxiaoyu-123.github.io" target="_blank">小🐟博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/">排查实录</a><a class="post-meta__tags" href="/tags/OOM/">OOM</a><a class="post-meta__tags" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><a class="post-meta__tags" href="/tags/systemctl/">systemctl</a></div><div class="post-share"><div class="social-share" data-image="/../img/anime-tech-oom-20261015.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"><img class="cover" src="/../img/anime-tech-ftp-sort-20261015.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post" loading='lazy'><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</div></div><div class="info-2"><div class="info-item-1">基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑</div></div></div></a><a class="pagination-related" href="/2026/08/25/%E7%BB%99%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85win11%E7%B3%BB%E7%BB%9F/" title="💻 给电脑重装win11系统"><img class="cover" src="/../img/Miku01.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post" loading='lazy'><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">💻 给电脑重装win11系统</div></div><div class="info-2"><div class="info-item-1">手把手教你重装 Windows 11，记录分区报错、强制联网、键盘无法输入等常见卡点的解决方法，附完整问题速查表。</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC"><img class="cover" src="/../img/anime-tech-oj-revival-20261015.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-09-28</div><div class="info-item-2">🚀 OJ 复活：从 HTTP 500 到第一个 AC</div></div><div class="info-2"><div class="info-item-1">基地 OJ 半年没人管彻底瘫痪：HTTP 500、页面卡 30 秒、首页花屏、密码失传。从误删数据库到离线装回，一次把老系统全救回来的完整实录</div></div></div></a><a class="pagination-related" href="/2026/04/24/1Panel%E9%85%8D%E7%BD%AE%E4%B8%8A%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="1Panel配置上服务器"><img class="cover" src="/../img/anime-tech-1panel-20260424.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-24</div><div class="info-item-2">1Panel配置上服务器</div></div><div class="info-2"><div class="info-item-1">从零开始的使用shell脚本给服务器配置上1Panel完整入门指南，包含基础语法、常用标签详解和实战示例</div></div></div></a><a class="pagination-related" href="/2026/04/19/Linux%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="Linux快速入门"><img class="cover" src="/../img/anime-tech-linux-20260419.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-19</div><div class="info-item-2">Linux快速入门</div></div><div class="info-2"><div class="info-item-1">从零开始的 Linux 完整入门指南，包含环境安装、远程连接、系统管理和常用命令详解，附实战示例</div></div></div></a><a class="pagination-related" href="/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"><img class="cover" src="/../img/anime-tech-ftp-sort-20261015.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-09-22</div><div class="info-item-2">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</div></div><div class="info-2"><div class="info-item-1">基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="author-info-name">每天都很困😴</div><div class="author-info-description">一条潜水的🐟儿</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xiaoxiaoyu-123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xiaoxiaoyu-123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2933652936@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://xiaoxiaoyu-123.github.io" target="_blank" title="博客"><i class="fa-solid fa-heart"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到小🐟的博客，记录前端学习与生活碎碎念～</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%94%A7-%E5%8D%8A%E5%B9%B4%E7%8B%82%E5%B4%A9%E4%B9%8B%E8%B0%9C%EF%BC%9A%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8-OOM-%E6%8A%A2%E4%BF%AE%E5%AE%9E%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%8F%88%E5%B4%A9%E4%BA%86"><span class="toc-number">1.1.</span> <span class="toc-text">前言：又崩了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%95%B5%EF%B8%8F-%E7%8E%B0%E5%9C%BA%E5%8F%96%E8%AF%81%EF%BC%9A%E5%94%AF%E4%B8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83"><span class="toc-number">1.2.</span> <span class="toc-text">🕵️ 现场取证：唯一的数据中心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-%E6%A0%B9%E5%9B%A0%E9%93%BE%E6%9D%A1%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E5%BF%83%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%80%8E%E4%B9%88%E6%90%9E%E5%B4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">🧠 根因链条：一个好心的服务怎么搞崩服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%B8%89%E5%A4%84%E6%A0%B9%E9%99%A4-%E4%B8%89%E9%A1%B9%E5%8A%A0%E5%9B%BA"><span class="toc-number">1.4.</span> <span class="toc-text">🔧 修复：三处根除 + 三项加固</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E9%99%A4%EF%BC%9A%E6%8A%8A%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%BD%BB%E5%BA%95%E5%85%B3%E6%8E%89"><span class="toc-number">1.4.1.</span> <span class="toc-text">根除：把自动更新彻底关掉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%9B%BA%E4%B8%80%EF%BC%9Aswap-%E6%89%A9%E5%AE%B9-2G-%E2%86%92-8G"><span class="toc-number">1.4.2.</span> <span class="toc-text">加固一：swap 扩容 2G → 8G</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%9B%BA%E4%BA%8C%EF%BC%9A%E6%97%A5%E5%BF%97%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.4.3.</span> <span class="toc-text">加固二：日志持久化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%9B%BA%E4%B8%89%EF%BC%9A%E7%BB%99-MySQL-%E5%AE%B9%E5%99%A8%E8%AE%BE%E5%86%85%E5%AD%98%E4%B8%8A%E9%99%90"><span class="toc-number">1.4.4.</span> <span class="toc-text">加固三：给 MySQL 容器设内存上限</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">📋 复盘总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">1.6.</span> <span class="toc-text">写在最后</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/10/27/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%A7%E9%87%8D%E6%9E%84/" title="✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布"><img src="/../img/anime-tech-blogrefactor-20261027.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/10/27/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%A7%E9%87%8D%E6%9E%84/" title="✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布">✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布</a><time datetime="2026-10-27T22:00:00.000Z" title="发表于 2026-10-27 22:00:00">2026-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/27/%E5%9F%BA%E5%9C%B0%E5%AE%98%E7%BD%91%E9%87%8D%E6%9E%84%E8%AE%B0%E5%BD%95/" title="📝 基地官网重构记录：从 Docusaurus 到 Next.js"><img src="/../img/anime-tech-refactor-20261027.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="📝 基地官网重构记录：从 Docusaurus 到 Next.js"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/10/27/%E5%9F%BA%E5%9C%B0%E5%AE%98%E7%BD%91%E9%87%8D%E6%9E%84%E8%AE%B0%E5%BD%95/" title="📝 基地官网重构记录：从 Docusaurus 到 Next.js">📝 基地官网重构记录：从 Docusaurus 到 Next.js</a><time datetime="2026-10-27T22:00:00.000Z" title="发表于 2026-10-27 22:00:00">2026-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/19/vue3+SpringBoot%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/" title="AI全栈心理健康助手项目"><img src="/../img/anime-tech-vue3springboot-20261019.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AI全栈心理健康助手项目"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/10/19/vue3+SpringBoot%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/" title="AI全栈心理健康助手项目">AI全栈心理健康助手项目</a><time datetime="2026-10-19T19:00:00.000Z" title="发表于 2026-10-19 19:00:00">2026-10-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC"><img src="/../img/anime-tech-oj-revival-20261015.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="🚀 OJ 复活：从 HTTP 500 到第一个 AC"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC">🚀 OJ 复活：从 HTTP 500 到第一个 AC</a><time datetime="2026-09-28T21:30:00.000Z" title="发表于 2026-09-28 21:30:00">2026-09-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"><img src="/../img/anime-tech-ftp-sort-20261015.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</a><time datetime="2026-09-22T21:00:00.000Z" title="发表于 2026-09-22 21:00:00">2026-09-22</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/../img/anime-tech-oom-20261015.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 每天都很困😴</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js?v=6.0.33"></script><script src="/pluginsSrc/instant.page/instantpage.js?v=5.2.0" type="module"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"data-lang":"zh-CN","data-reactions-enabled":1,"data-strict":0}
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'xiaoxiaoyu-123/xiaoxiaoyu-123.github.io',
+      'data-repo-id': 'R_kgDOP_riHQ',
+      'data-category-id': 'DIC_kwDOP_riHc4DJubq',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !true) {
+    if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script>
+  // 等待页面加载完成
+  document.addEventListener('DOMContentLoaded', function() {
+    // 找到标题区域
+    const header = document.querySelector('.header-wrapper') || 
+                  document.querySelector('.site-header') ||
+                  document.querySelector('header');
+    
+    if (header) {
+      // 创建打字效果容器
+      const typedEl = document.createElement('div');
+      typedEl.className = 'custom-subtitle';
+      typedEl.id = 'custom-subtitle';
+      
+      // 插入到标题下方
+      const title = header.querySelector('h1') || header.querySelector('.site-title');
+      if (title) {
+        title.parentNode.insertBefore(typedEl, title.nextSibling);
+      } else {
+        header.appendChild(typedEl);
+      }
+      
+        // 动态加载typed.js（已本地化）
+        const script = document.createElement('script');
+        script.src = '/js/typed.js';
+        script.onload = function() {
+        new Typed('#custom-subtitle', {
+          strings: [
+            '✨ 欢迎来到小🐟的技术博客',
+            '📚 分享前端学习经验',
+            '🎨 探索设计与创意',
+            '🚀 持续学习，不断进步'
+          ],
+          typeSpeed: 100,
+          backSpeed: 50,
+          loop: true,
+          showCursor: true,
+          cursorChar: '|'
+        });
+      };
+      document.head.appendChild(script);
+    }
+  });
+</script>
+
+# 鲸鱼娘桌宠（dsh-whale-musume，MIT 协议：github.com/Sutera-Diffusus/dsh-whale-musume）
+# 资源自托管在 /assets/，状态机+表现层自动启动；原 miku Live2d 已下线（git 历史可回滚）
+<script src="/assets/whale-moe-core.js"></script>
+<script src="/assets/dsh-whale-moe.js"></script>
+<script>(() => {
+  const option = {"data-domains":"xiaoxiaoyu-123.github.io"}
+  const config = {"site_uv":false,"site_pv":false,"page_pv":false,"token":null}
+
+  const runTrack = () => {
+    if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+      umami.track(props => ({ ...props, url: window.location.pathname, title: GLOBAL_CONFIG_SITE.title }))
+    } else {
+      console.warn('Umami Analytics: umami.track is not available')
+    }
+  }
+
+  const loadUmamiJS = () => {
+    btf.getScript('https://cloud.umami.is/script.js', {
+      'data-website-id': '215130f2-7efc-4218-b160-8df1a92d1906',
+      'data-auto-track': 'false',
+      ...option
+    }).then(() => {
+      runTrack()
+    }).catch(error => {
+      console.error('Umami Analytics: Error loading script', error)
+    })
+  }
+
+  const getData = async (isPost) => {
+    try {
+      const now = Date.now()
+      const keyUrl = isPost ? `&url=${window.location.pathname}` : ''
+      const headerList = { 'Accept': 'application/json' }
+
+      if (false) {
+        headerList['Authorization'] = `Bearer ${config.token}`
+      } else {
+        headerList['x-umami-api-key'] = config.token
+      }
+
+      const res = await fetch(`https://api.umami.is/v1/websites/215130f2-7efc-4218-b160-8df1a92d1906/stats?startAt=0000000000&endAt=${now}${keyUrl}`, {
+        method: "GET",
+        headers: headerList
+      })
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
+
+      return await res.json()
+    } catch (error) {
+      console.error('Umami Analytics: Failed to fetch data', error)
+      throw error
+    }
+  }
+
+  const insertData = async () => {
+    try {
+      if (GLOBAL_CONFIG_SITE.pageType === 'post' && config.page_pv) {
+        const pagePV = document.getElementById('umamiPV')
+        if (pagePV) {
+          const data = await getData(true)
+          if (data && data.pageviews && typeof data.pageviews.value !== 'undefined') {
+            pagePV.textContent = data.pageviews.value
+          } else {
+            console.warn('Umami Analytics: Invalid page view data received')
+          }
+        }
+      }
+
+      if (config.site_uv || config.site_pv) {
+        const data = await getData(false)
+
+        if (config.site_uv) {
+          const siteUV = document.getElementById('umami-site-uv')
+          if (siteUV && data && data.visitors && typeof data.visitors.value !== 'undefined') {
+            siteUV.textContent = data.visitors.value
+          } else if (siteUV) {
+            console.warn('Umami Analytics: Invalid site UV data received')
+          }
+        }
+
+        if (config.site_pv) {
+          const sitePV = document.getElementById('umami-site-pv')
+          if (sitePV && data && data.pageviews && typeof data.pageviews.value !== 'undefined') {
+            sitePV.textContent = data.pageviews.value
+          } else if (sitePV) {
+            console.warn('Umami Analytics: Invalid site PV data received')
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Umami Analytics: Failed to insert data', error)
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', runTrack, 'umami_analytics_run_track')
+  btf.addGlobalFn('pjaxComplete', insertData, 'umami_analytics_insert')
+
+
+  loadUmamiJS()
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', insertData)
+  } else {
+    setTimeout(insertData, 100)
+  }
+})()</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="想找点什么？" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>

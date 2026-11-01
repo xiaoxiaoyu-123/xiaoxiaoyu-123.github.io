@@ -1,0 +1,510 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>🗂️ 11,455 份文件大搬家：基地 FTP 整理实录 | 小🐟博客</title><meta name="author" content="每天都很困😴"><meta name="copyright" content="每天都很困😴"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xiaoxiaoyu-123.github.io/img/anime-tech-ftp-sort-20261015.jpg">
+<meta property="article:published_time" content="2026-09-22T21:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-01T09:38:28.753Z">
+<meta property="article:author" content="每天都很困😴">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Shell">
+<meta property="article:tag" content="文件管理">
+<meta property="article:tag" content="批量改名">
+<meta property="article:tag" content="整理实录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoxiaoyu-123.github.io/img/anime-tech-ftp-sort-20261015.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "🗂️ 11,455 份文件大搬家：基地 FTP 整理实录",
+  "url": "https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/",
+  "image": "https://xiaoxiaoyu-123.github.io/img/anime-tech-ftp-sort-20261015.jpg",
+  "datePublished": "2026-09-22T21:00:00.000Z",
+  "dateModified": "2026-11-01T09:38:28.753Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "每天都很困😴",
+      "url": "https://xiaoxiaoyu-123.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=7.1.0"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css?v=6.0.33" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1f1a20')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.12.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '🗂️ 11,455 份文件大搬家：基地 FTP 整理实录',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/assets/dsh-whale-moe.css"><style>
+  .custom-subtitle {
+    font-size: 1.3rem;
+    color: pink;
+    margin-top: 10px;
+    min-height: 30px;
+    text-align: center;
+  }
+</style>
+<style>
+  /* 首页卡片封面框锁定 16:9，与海报同比例，整张图完整显示不裁切（桌面加宽到 47%，移动端全宽） */
+  #recent-posts .recent-post-item .post_cover {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    align-self: center;
+    overflow: hidden;
+  }
+  #recent-posts .recent-post-item .post_cover img.post-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media screen and (min-width: 900px) {
+    #recent-posts .recent-post-item .post_cover {
+      flex: 0 0 47%;
+    }
+  }
+  /* 暗色模式：粉色背景换成暗玫瑰底色，避免夜间刺眼 */
+  [data-theme="dark"] body,
+  [data-theme="dark"] #web_bg {
+    background: #1f1a20 !important;
+  }
+  [data-theme="dark"] .recent-post-item,
+  [data-theme="dark"] .card-widget {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .45) !important;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="小🐟博客" type="application/atom+xml">
+</head><body><div id="web_bg" style="background: pink;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/../img/anime-tech-ftp-sort-20261015.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">小🐟博客</span></a><a class="nav-page-title" href="/"><span class="site-name">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-09-22T21:00:00.000Z" title="发表于 2026-09-22 21:00:00">2026-09-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-01T09:38:28.753Z" title="更新于 2026-11-01 09:38:28">2026-11-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/%E8%BF%90%E7%BB%B4/">运维</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="🗂️-11-455-份文件大搬家：基地-FTP-整理实录"><a href="#🗂️-11-455-份文件大搬家：基地-FTP-整理实录" class="headerlink" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"></a>🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</h1><h2 id="前言：三年没人管的-FTP"><a href="#前言：三年没人管的-FTP" class="headerlink" title="前言：三年没人管的 FTP"></a>前言：三年没人管的 FTP</h2><p>上篇把服务器修好后（还没看的可以翻上一篇 🔧），我趁热打铁，把目光投向了它上面跑的<strong>基地 FTP</strong>——一个存了从 2007 年到现在、历届学长学姐传承下来的资料库。</p>
+<p>打开一看：</p>
+<ul>
+<li><strong>1535 个文件名是乱码</strong>，网页端和资源管理器都打不开</li>
+<li>一个代码项目贡献了 <strong>4,466 个文件夹</strong>（node_modules + .git 直接传上去了）</li>
+<li>课程资料分成「一专业复习资料」「复习资料&#x2F;一专二专三专」<strong>好几套并存</strong>，谁也不知道哪份是全的</li>
+<li>学生信息表、账号密码文件<strong>散落在共享目录里</strong>，人手一份的成员密码人人可见</li>
+</ul>
+<p>这些资料从 2007 年传承到现在，已经三代人了。<strong>再不整理，下一届接手的人只会更崩溃。</strong></p>
+<h2 id="📏-整理三铁律（先立规矩再动手）"><a href="#📏-整理三铁律（先立规矩再动手）" class="headerlink" title="📏 整理三铁律（先立规矩再动手）"></a>📏 整理三铁律（先立规矩再动手）</h2><p>动 11,000 多个文件之前，先给自己立了三条铁律：</p>
+<ol>
+<li><strong>只移动、不删除</strong>——删除项先移到暂存区，确认无误再清</li>
+<li><strong>每个批次结束重扫核对</strong>——文件数必须守恒，一个都不能少</li>
+<li><strong>所有命令整段可粘贴、先预演再执行</strong>——能复现的操作才叫操作</li>
+</ol>
+<h2 id="🕳️-踩坑记录（本篇灵魂）"><a href="#🕳️-踩坑记录（本篇灵魂）" class="headerlink" title="🕳️ 踩坑记录（本篇灵魂）"></a>🕳️ 踩坑记录（本篇灵魂）</h2><h3 id="坑一：sed-一把梭，1535-个文件全成「未命名」"><a href="#坑一：sed-一把梭，1535-个文件全成「未命名」" class="headerlink" title="坑一：sed 一把梭，1535 个文件全成「未命名」"></a>坑一：sed 一把梭，1535 个文件全成「未命名」</h3><p>最开始处理乱码文件名，我想当然地用 sed 一把梭。结果中文这种<strong>多字节字符</strong>在 sed 的字符类里根本不支持，跑完之后——<strong>1535 个文件全部变成了「未命名」</strong>。</p>
+<p>当场血压拉满 😇。好在预演机制还在：先备份了全量清单，回滚重来。</p>
+<p>最终方案是<strong>纯 bash 逐字节判断</strong>：利用「乱码标记的位置就是原始扩展名的点」这个规律，定位到点、拼回文件名。重写后 1535 个文件<strong>零失败全部修复</strong>。</p>
+<h3 id="坑二：参数展开死循环"><a href="#坑二：参数展开死循环" class="headerlink" title="坑二：参数展开死循环"></a>坑二：参数展开死循环</h3><p>清理文件名尾部的非法字符时，我写了这样的 bash 参数展开：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base=<span class="string">&quot;<span class="variable">$&#123;base%[）)]&#125;</span>&gt;]&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果在某些输入上它<strong>永远匹配不到结尾</strong>，base 字符串反而越长越长，脚本死循环。最后改成<strong>逐字符判断 + 60 次迭代保险丝</strong>，到次数强制跳出。</p>
+<h3 id="坑三：子-shell-里更新计数，静默丢失"><a href="#坑三：子-shell-里更新计数，静默丢失" class="headerlink" title="坑三：子 shell 里更新计数，静默丢失"></a>坑三：子 shell 里更新计数，静默丢失</h3><p>修复函数里统计「已处理数量」，我直接用 <code>$(fix_one ...)</code> 拿返回值——但 <code>$()</code> 会开一个<strong>子 shell</strong>，里面更新的计数变量根本带不出来。表现为：明明改了 800 个文件，计数器还是 0。</p>
+<p>改成函数内直接更新<strong>全局变量</strong>、不用命令替换，计数立刻正常。这种坑不踩一次真的很难记住。</p>
+<h3 id="坑四：扩展名被「修」丢了"><a href="#坑四：扩展名被「修」丢了" class="headerlink" title="坑四：扩展名被「修」丢了"></a>坑四：扩展名被「修」丢了</h3><p>有一批 <code>.ipynb</code> 文件，修复完文件名对了、<strong>扩展名没了</strong>。原因是我把乱码点当成了分隔符整个去掉。最后的解法是利用乱码标记的位置<strong>反推原始扩展名</strong>，这才算真正修完整。</p>
+<h2 id="🗂️-整理成果"><a href="#🗂️-整理成果" class="headerlink" title="🗂️ 整理成果"></a>🗂️ 整理成果</h2><p>踩完四个坑，坏文件名全部修复。接着分五个批次把整个库推倒重排：</p>
+<table>
+<thead>
+<tr>
+<th>批次</th>
+<th>内容</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>批次 0</td>
+<td>1535 个坏文件名批量修复 + 51 个垃圾清理</td>
+<td>零失败</td>
+</tr>
+<tr>
+<td>批次 1</td>
+<td>顶层小尾巴归位、05 考研升学建骨架</td>
+<td>根目录清空</td>
+</tr>
+<tr>
+<td>批次 2</td>
+<td>毕业传承：答辩视频按年份 + 95 本书分类</td>
+<td>书籍全归位</td>
+</tr>
+<tr>
+<td>批次 3</td>
+<td>竞赛区：五大赛事统一「六件套」结构</td>
+<td>根层零散件清零</td>
+</tr>
+<tr>
+<td>批次 4</td>
+<td>部门档案：统一「七件套」+ 基地历史年份制</td>
+<td>三个部门结构一致</td>
+</tr>
+<tr>
+<td>收尾</td>
+<td>密码文件外迁、顶层收敛为 <strong>00~07 八分区</strong></td>
+<td>文档全部重写</td>
+</tr>
+</tbody></table>
+<p>整理后的顶层结构（强迫症狂喜）：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ftp_seven/</span><br><span class="line">├── 00-使用规范/      ├── 04毕业传承/</span><br><span class="line">├── 01课程学习/      ├── 05考研升学/</span><br><span class="line">├── 02竞赛资料/      ├── 06软件与工具/</span><br><span class="line">├── 03部门档案/      └── 07设备与运维/</span><br></pre></td></tr></table></figure>
+
+<p>最终 <strong>11,455 份文件 &#x2F; 2,397 个文件夹 &#x2F; 132.7 GB</strong>，每个批次重扫核对、<strong>文件数守恒，零数据丢失</strong>。</p>
+<h2 id="🛡️-隐私治理"><a href="#🛡️-隐私治理" class="headerlink" title="🛡️ 隐私治理"></a>🛡️ 隐私治理</h2><p>整理过程中还做了一次<strong>内容级隐私扫描</strong>：学生信息表、历年通讯录移出了成员可见区；散落的 6 个密码&#x2F;账号文件统一抽到管理员专用目录。FTP 的成员账号也顺手改成了<strong>只读</strong>——下载随便下，上传删除只有管理员能做。</p>
+<h2 id="🎁-给下一届的遗产"><a href="#🎁-给下一届的遗产" class="headerlink" title="🎁 给下一届的遗产"></a>🎁 给下一届的遗产</h2><p>这次整理最大的成果不是「变干净了」，而是<strong>沉淀了可复用的工具和规矩</strong>：</p>
+<ul>
+<li><code>fixnames3.sh</code> —— 坏文件名批量修复脚本，先预演再 apply</li>
+<li>上传须知 —— 一页纸写清「放哪、怎么命名、什么不许传」</li>
+<li>每学年重扫一次生成导航文档，结构变化一目了然</li>
+</ul>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>整个整理断断续续花了几天，改脚本改到深夜的时候确实有点上头——但看到 1535 个打不开的文件全部复活、三年乱账变成八个整整齐齐的分区，值了。</p>
+<p>其实整理 FTP 和整理代码仓库是一回事：<strong>混乱不可怕，可怕的是没有规矩</strong>。规矩立下了，剩下的就是执行。</p>
+<p>如果你也有一个年久失修的共享盘，希望这篇的四个坑和三条铁律能帮到你 💬</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io">每天都很困😴</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/">https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xiaoxiaoyu-123.github.io" target="_blank">小🐟博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/Shell/">Shell</a><a class="post-meta__tags" href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">文件管理</a><a class="post-meta__tags" href="/tags/%E6%89%B9%E9%87%8F%E6%94%B9%E5%90%8D/">批量改名</a><a class="post-meta__tags" href="/tags/%E6%95%B4%E7%90%86%E5%AE%9E%E5%BD%95/">整理实录</a></div><div class="post-share"><div class="social-share" data-image="/../img/anime-tech-ftp-sort-20261015.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.6" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.6" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC"><img class="cover" src="/../img/anime-tech-oj-revival-20261015.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post" loading='lazy'><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">🚀 OJ 复活：从 HTTP 500 到第一个 AC</div></div><div class="info-2"><div class="info-item-1">基地 OJ 半年没人管彻底瘫痪：HTTP 500、页面卡 30 秒、首页花屏、密码失传。从误删数据库到离线装回，一次把老系统全救回来的完整实录</div></div></div></a><a class="pagination-related" href="/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/" title="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录"><img class="cover" src="/../img/anime-tech-oom-20261015.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post" loading='lazy'><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</div></div><div class="info-2"><div class="info-item-1">基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/04/24/1Panel%E9%85%8D%E7%BD%AE%E4%B8%8A%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="1Panel配置上服务器"><img class="cover" src="/../img/anime-tech-1panel-20260424.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-24</div><div class="info-item-2">1Panel配置上服务器</div></div><div class="info-2"><div class="info-item-1">从零开始的使用shell脚本给服务器配置上1Panel完整入门指南，包含基础语法、常用标签详解和实战示例</div></div></div></a><a class="pagination-related" href="/2026/04/19/Linux%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="Linux快速入门"><img class="cover" src="/../img/anime-tech-linux-20260419.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-19</div><div class="info-item-2">Linux快速入门</div></div><div class="info-2"><div class="info-item-1">从零开始的 Linux 完整入门指南，包含环境安装、远程连接、系统管理和常用命令详解，附实战示例</div></div></div></a><a class="pagination-related" href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC"><img class="cover" src="/../img/anime-tech-oj-revival-20261015.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-09-28</div><div class="info-item-2">🚀 OJ 复活：从 HTTP 500 到第一个 AC</div></div><div class="info-2"><div class="info-item-1">基地 OJ 半年没人管彻底瘫痪：HTTP 500、页面卡 30 秒、首页花屏、密码失传。从误删数据库到离线装回，一次把老系统全救回来的完整实录</div></div></div></a><a class="pagination-related" href="/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/" title="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录"><img class="cover" src="/../img/anime-tech-oom-20261015.jpg" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-09-13</div><div class="info-item-2">🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</div></div><div class="info-2"><div class="info-item-1">基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/tx01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="author-info-name">每天都很困😴</div><div class="author-info-description">一条潜水的🐟儿</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xiaoxiaoyu-123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xiaoxiaoyu-123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2933652936@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://xiaoxiaoyu-123.github.io" target="_blank" title="博客"><i class="fa-solid fa-heart"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到小🐟的博客，记录前端学习与生活碎碎念～</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%97%82%EF%B8%8F-11-455-%E4%BB%BD%E6%96%87%E4%BB%B6%E5%A4%A7%E6%90%AC%E5%AE%B6%EF%BC%9A%E5%9F%BA%E5%9C%B0-FTP-%E6%95%B4%E7%90%86%E5%AE%9E%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E4%B8%89%E5%B9%B4%E6%B2%A1%E4%BA%BA%E7%AE%A1%E7%9A%84-FTP"><span class="toc-number">1.1.</span> <span class="toc-text">前言：三年没人管的 FTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8F-%E6%95%B4%E7%90%86%E4%B8%89%E9%93%81%E5%BE%8B%EF%BC%88%E5%85%88%E7%AB%8B%E8%A7%84%E7%9F%A9%E5%86%8D%E5%8A%A8%E6%89%8B%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">📏 整理三铁律（先立规矩再动手）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%95%B3%EF%B8%8F-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AC%E7%AF%87%E7%81%B5%E9%AD%82%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">🕳️ 踩坑记录（本篇灵魂）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%B8%80%EF%BC%9Ased-%E4%B8%80%E6%8A%8A%E6%A2%AD%EF%BC%8C1535-%E4%B8%AA%E6%96%87%E4%BB%B6%E5%85%A8%E6%88%90%E3%80%8C%E6%9C%AA%E5%91%BD%E5%90%8D%E3%80%8D"><span class="toc-number">1.3.1.</span> <span class="toc-text">坑一：sed 一把梭，1535 个文件全成「未命名」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%BA%8C%EF%BC%9A%E5%8F%82%E6%95%B0%E5%B1%95%E5%BC%80%E6%AD%BB%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.3.2.</span> <span class="toc-text">坑二：参数展开死循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%B8%89%EF%BC%9A%E5%AD%90-shell-%E9%87%8C%E6%9B%B4%E6%96%B0%E8%AE%A1%E6%95%B0%EF%BC%8C%E9%9D%99%E9%BB%98%E4%B8%A2%E5%A4%B1"><span class="toc-number">1.3.3.</span> <span class="toc-text">坑三：子 shell 里更新计数，静默丢失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E5%9B%9B%EF%BC%9A%E6%89%A9%E5%B1%95%E5%90%8D%E8%A2%AB%E3%80%8C%E4%BF%AE%E3%80%8D%E4%B8%A2%E4%BA%86"><span class="toc-number">1.3.4.</span> <span class="toc-text">坑四：扩展名被「修」丢了</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%97%82%EF%B8%8F-%E6%95%B4%E7%90%86%E6%88%90%E6%9E%9C"><span class="toc-number">1.4.</span> <span class="toc-text">🗂️ 整理成果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A1%EF%B8%8F-%E9%9A%90%E7%A7%81%E6%B2%BB%E7%90%86"><span class="toc-number">1.5.</span> <span class="toc-text">🛡️ 隐私治理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%81-%E7%BB%99%E4%B8%8B%E4%B8%80%E5%B1%8A%E7%9A%84%E9%81%97%E4%BA%A7"><span class="toc-number">1.6.</span> <span class="toc-text">🎁 给下一届的遗产</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">1.7.</span> <span class="toc-text">写在最后</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/10/27/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%A7%E9%87%8D%E6%9E%84/" title="✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布"><img src="/../img/anime-tech-blogrefactor-20261027.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/10/27/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%A7%E9%87%8D%E6%9E%84/" title="✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布">✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布</a><time datetime="2026-10-27T22:00:00.000Z" title="发表于 2026-10-27 22:00:00">2026-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/27/%E5%9F%BA%E5%9C%B0%E5%AE%98%E7%BD%91%E9%87%8D%E6%9E%84%E8%AE%B0%E5%BD%95/" title="📝 基地官网重构记录：从 Docusaurus 到 Next.js"><img src="/../img/anime-tech-refactor-20261027.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="📝 基地官网重构记录：从 Docusaurus 到 Next.js"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/10/27/%E5%9F%BA%E5%9C%B0%E5%AE%98%E7%BD%91%E9%87%8D%E6%9E%84%E8%AE%B0%E5%BD%95/" title="📝 基地官网重构记录：从 Docusaurus 到 Next.js">📝 基地官网重构记录：从 Docusaurus 到 Next.js</a><time datetime="2026-10-27T22:00:00.000Z" title="发表于 2026-10-27 22:00:00">2026-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/19/vue3+SpringBoot%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/" title="AI全栈心理健康助手项目"><img src="/../img/anime-tech-vue3springboot-20261019.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AI全栈心理健康助手项目"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/10/19/vue3+SpringBoot%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/" title="AI全栈心理健康助手项目">AI全栈心理健康助手项目</a><time datetime="2026-10-19T19:00:00.000Z" title="发表于 2026-10-19 19:00:00">2026-10-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC"><img src="/../img/anime-tech-oj-revival-20261015.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="🚀 OJ 复活：从 HTTP 500 到第一个 AC"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC">🚀 OJ 复活：从 HTTP 500 到第一个 AC</a><time datetime="2026-09-28T21:30:00.000Z" title="发表于 2026-09-28 21:30:00">2026-09-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"><img src="/../img/anime-tech-ftp-sort-20261015.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E5%A4%A7%E6%95%B4%E7%90%86/" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</a><time datetime="2026-09-22T21:00:00.000Z" title="发表于 2026-09-22 21:00:00">2026-09-22</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/../img/anime-tech-ftp-sort-20261015.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 每天都很困😴</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js?v=6.0.33"></script><script src="/pluginsSrc/instant.page/instantpage.js?v=5.2.0" type="module"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"data-lang":"zh-CN","data-reactions-enabled":1,"data-strict":0}
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'xiaoxiaoyu-123/xiaoxiaoyu-123.github.io',
+      'data-repo-id': 'R_kgDOP_riHQ',
+      'data-category-id': 'DIC_kwDOP_riHc4DJubq',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !true) {
+    if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script>
+  // 等待页面加载完成
+  document.addEventListener('DOMContentLoaded', function() {
+    // 找到标题区域
+    const header = document.querySelector('.header-wrapper') || 
+                  document.querySelector('.site-header') ||
+                  document.querySelector('header');
+    
+    if (header) {
+      // 创建打字效果容器
+      const typedEl = document.createElement('div');
+      typedEl.className = 'custom-subtitle';
+      typedEl.id = 'custom-subtitle';
+      
+      // 插入到标题下方
+      const title = header.querySelector('h1') || header.querySelector('.site-title');
+      if (title) {
+        title.parentNode.insertBefore(typedEl, title.nextSibling);
+      } else {
+        header.appendChild(typedEl);
+      }
+      
+        // 动态加载typed.js（已本地化）
+        const script = document.createElement('script');
+        script.src = '/js/typed.js';
+        script.onload = function() {
+        new Typed('#custom-subtitle', {
+          strings: [
+            '✨ 欢迎来到小🐟的技术博客',
+            '📚 分享前端学习经验',
+            '🎨 探索设计与创意',
+            '🚀 持续学习，不断进步'
+          ],
+          typeSpeed: 100,
+          backSpeed: 50,
+          loop: true,
+          showCursor: true,
+          cursorChar: '|'
+        });
+      };
+      document.head.appendChild(script);
+    }
+  });
+</script>
+
+# 鲸鱼娘桌宠（dsh-whale-musume，MIT 协议：github.com/Sutera-Diffusus/dsh-whale-musume）
+# 资源自托管在 /assets/，状态机+表现层自动启动；原 miku Live2d 已下线（git 历史可回滚）
+<script src="/assets/whale-moe-core.js"></script>
+<script src="/assets/dsh-whale-moe.js"></script>
+<script>(() => {
+  const option = {"data-domains":"xiaoxiaoyu-123.github.io"}
+  const config = {"site_uv":false,"site_pv":false,"page_pv":false,"token":null}
+
+  const runTrack = () => {
+    if (typeof umami !== 'undefined' && typeof umami.track === 'function') {
+      umami.track(props => ({ ...props, url: window.location.pathname, title: GLOBAL_CONFIG_SITE.title }))
+    } else {
+      console.warn('Umami Analytics: umami.track is not available')
+    }
+  }
+
+  const loadUmamiJS = () => {
+    btf.getScript('https://cloud.umami.is/script.js', {
+      'data-website-id': '215130f2-7efc-4218-b160-8df1a92d1906',
+      'data-auto-track': 'false',
+      ...option
+    }).then(() => {
+      runTrack()
+    }).catch(error => {
+      console.error('Umami Analytics: Error loading script', error)
+    })
+  }
+
+  const getData = async (isPost) => {
+    try {
+      const now = Date.now()
+      const keyUrl = isPost ? `&url=${window.location.pathname}` : ''
+      const headerList = { 'Accept': 'application/json' }
+
+      if (false) {
+        headerList['Authorization'] = `Bearer ${config.token}`
+      } else {
+        headerList['x-umami-api-key'] = config.token
+      }
+
+      const res = await fetch(`https://api.umami.is/v1/websites/215130f2-7efc-4218-b160-8df1a92d1906/stats?startAt=0000000000&endAt=${now}${keyUrl}`, {
+        method: "GET",
+        headers: headerList
+      })
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
+
+      return await res.json()
+    } catch (error) {
+      console.error('Umami Analytics: Failed to fetch data', error)
+      throw error
+    }
+  }
+
+  const insertData = async () => {
+    try {
+      if (GLOBAL_CONFIG_SITE.pageType === 'post' && config.page_pv) {
+        const pagePV = document.getElementById('umamiPV')
+        if (pagePV) {
+          const data = await getData(true)
+          if (data && data.pageviews && typeof data.pageviews.value !== 'undefined') {
+            pagePV.textContent = data.pageviews.value
+          } else {
+            console.warn('Umami Analytics: Invalid page view data received')
+          }
+        }
+      }
+
+      if (config.site_uv || config.site_pv) {
+        const data = await getData(false)
+
+        if (config.site_uv) {
+          const siteUV = document.getElementById('umami-site-uv')
+          if (siteUV && data && data.visitors && typeof data.visitors.value !== 'undefined') {
+            siteUV.textContent = data.visitors.value
+          } else if (siteUV) {
+            console.warn('Umami Analytics: Invalid site UV data received')
+          }
+        }
+
+        if (config.site_pv) {
+          const sitePV = document.getElementById('umami-site-pv')
+          if (sitePV && data && data.pageviews && typeof data.pageviews.value !== 'undefined') {
+            sitePV.textContent = data.pageviews.value
+          } else if (sitePV) {
+            console.warn('Umami Analytics: Invalid site PV data received')
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Umami Analytics: Failed to insert data', error)
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', runTrack, 'umami_analytics_run_track')
+  btf.addGlobalFn('pjaxComplete', insertData, 'umami_analytics_insert')
+
+
+  loadUmamiJS()
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', insertData)
+  } else {
+    setTimeout(insertData, 100)
+  }
+})()</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="想找点什么？" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>

@@ -1,0 +1,64 @@
+{
+  "bg": "bases-seedream/oj-revival-5-0-flash-260915-1.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · DEBUG LOG",
+  "tech_lead": "500",
+  "tech_rest": "→ AC",
+  "title": "基地 OJ 复活实录",
+  "slogan": "从 HTTP 500 到第一个 AC，隔了半年",
+  "chips": [
+    "HUSTOJ",
+    "MySQL",
+    "dpkg",
+    "离线安装",
+    "排查实录"
+  ],
+  "cards": [
+    {
+      "i": "💥",
+      "h": "数据库复活",
+      "p": "离线 dpkg 装回 MySQL，数据零丢失"
+    },
+    {
+      "i": "🐌",
+      "h": "30 秒卡顿",
+      "p": "壁纸功能偷偷联网，超时拖慢全站"
+    },
+    {
+      "i": "🎨",
+      "h": "花屏修复",
+      "p": "必应 HTML 污染背景样式，一键关闭"
+    },
+    {
+      "i": "🔑",
+      "h": "密码重置",
+      "p": "逆向 pwGen 算法，重写管理员哈希"
+    }
+  ],
+  "code_file": "oj_rescue.sh",
+  "code": [
+    "<span class=\"c\"># 数据库复活：离线 dpkg 装回</span>",
+    "<span class=\"k\">dpkg</span> -i mysql-server-8.0_*.deb",
+    "<span class=\"k\">systemctl</span> start mysql",
+    "<span class=\"s\">✔</span> problems  221",
+    "<span class=\"s\">✔</span> users     429",
+    "<span class=\"k\">➜</span> 判题结果  绿色「正确」= AC"
+  ],
+  "why_title": "复盘教训",
+  "why": [
+    "动服务器前先查依赖：容器/端口/进程",
+    "改配置先备份，出事能一键还原",
+    "凡「偷偷联网」的功能一律关掉",
+    "开机自启必须显式 enable 验证"
+  ],
+  "bar_name": "OJ RESCUE",
+  "bar_sub": "HUSTOJ 复活实录",
+  "bar_items": [
+    "dpkg",
+    "MySQL",
+    "HUSTOJ",
+    "php.ini",
+    "memcached",
+    "judged"
+  ]
+}

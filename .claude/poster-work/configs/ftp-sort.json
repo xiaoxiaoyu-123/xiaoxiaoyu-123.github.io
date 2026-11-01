@@ -1,0 +1,64 @@
+{
+  "bg": "bases-seedream/ftp-sort-5-0-flash-260915-2.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · FILE OPS",
+  "tech_lead": "11,455",
+  "tech_rest": "FILES",
+  "title": "基地 FTP 大整理",
+  "slogan": "1535 个乱码文件名，五个批次，零数据丢失",
+  "chips": [
+    "Linux",
+    "Shell",
+    "批量改名",
+    "文件管理",
+    "整理实录"
+  ],
+  "cards": [
+    {
+      "i": "🧹",
+      "h": "坏名修复",
+      "p": "1535 个非法字节文件名全部洗白"
+    },
+    {
+      "i": "🗂️",
+      "h": "结构重组",
+      "p": "顶层收敛为 00~07 八大分区"
+    },
+    {
+      "i": "🔍",
+      "h": "全量核对",
+      "p": "每批次文件数守恒，零数据丢失"
+    },
+    {
+      "i": "🛡️",
+      "h": "隐私外迁",
+      "p": "密码与名单类文件移出共享区"
+    }
+  ],
+  "code_file": "fixnames3.sh",
+  "code": [
+    "<span class=\"c\"># 全量扫描：目录与文件清单</span>",
+    "<span class=\"k\">find</span> /home/ftp -type f -printf <span class=\"s\">\"%s\t%p\n\"</span>",
+    "<span class=\"c\"># 预演通过后，真正执行改名</span>",
+    "<span class=\"k\">bash</span> fixnames3.sh apply",
+    "<span class=\"s\">✔</span> 1535 个文件名全部修复",
+    "<span class=\"s\">✔</span> 文件数守恒 11,455 份"
+  ],
+  "why_title": "整理三铁律",
+  "why": [
+    "只移动、不删除，删除项先进暂存区",
+    "每批次重扫核对，文件数守恒",
+    "所有命令整段可粘贴、可复现",
+    "隐私文件第一时间移出共享区"
+  ],
+  "bar_name": "FILE OPS",
+  "bar_sub": "大批量文件整理",
+  "bar_items": [
+    "find",
+    "bash",
+    "批量改名",
+    "文件数守恒",
+    "分区规划",
+    "导航文档"
+  ]
+}

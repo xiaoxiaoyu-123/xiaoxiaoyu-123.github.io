@@ -1,0 +1,64 @@
+{
+  "bg": "bases-seedream/oom-5-0-flash-260915-2.png",
+  "badge_main": "★ 本期推荐",
+  "badge_sub": "TECH NOTE · LINUX OPS",
+  "tech_lead": "OOM",
+  "tech_rest": "KILLER",
+  "title": "服务器半年狂崩之谜",
+  "slogan": "一个失控的自动更新服务，吃光了 24G 内存",
+  "chips": [
+    "Linux",
+    "OOM",
+    "systemctl",
+    "swap",
+    "排查实录"
+  ],
+  "cards": [
+    {
+      "i": "🔍",
+      "h": "现场取证",
+      "p": "dmesg · 容器日志 · apt 历史三路并查"
+    },
+    {
+      "i": "🧠",
+      "h": "根因定位",
+      "p": "自动更新服务内存膨胀至 23.9G"
+    },
+    {
+      "i": "🔧",
+      "h": "三处根除",
+      "p": "服务 · 定时器 · apt 配置一并关闭"
+    },
+    {
+      "i": "🛡️",
+      "h": "术后加固",
+      "p": "swap 8G · 日志持久化 · 容器限额"
+    }
+  ],
+  "code_file": "oom_fix.sh",
+  "code": [
+    "<span class=\"c\"># 揪出真凶：谁在吃内存</span>",
+    "<span class=\"k\">dmesg</span> -T | <span class=\"k\">grep</span> -iE \"out of memory\"",
+    "<span class=\"c\"># 三处根除自动更新服务</span>",
+    "<span class=\"k\">systemctl</span> disable --now unattended-upgrades.service",
+    "<span class=\"k\">systemctl</span> disable --now apt-daily.timer",
+    "<span class=\"s\">✔</span> swap 扩容 8G · 日志持久化"
+  ],
+  "why_title": "复盘教训",
+  "why": [
+    "崩溃后先保现场，内核日志是关键证据",
+    "「自动」的服务也可能是故障源",
+    "swap 是内存压力下的最后一道缓冲",
+    "持久化日志是排障的救命稻草"
+  ],
+  "bar_name": "LINUX OPS",
+  "bar_sub": "服务器运维实录",
+  "bar_items": [
+    "dmesg",
+    "systemctl",
+    "journalctl",
+    "swap",
+    "apt",
+    "Docker"
+  ]
+}

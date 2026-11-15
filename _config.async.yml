@@ -14,27 +14,27 @@ open_graph: true # 启用
 
 # User info | 用户信息
 user:
-  name: ThemeAsync # Nickname | 昵称
-  first_name: Theme # 名
-  last_name: Async # 姓
-  email: # email | 电子邮箱
-  domain: 站点域名 # Domain | 站点域名
-  avatar: /img/avatar.jpg # Avatar | 站点头像
-  describe: 网站简介。 # Describe | 网站简介
+  name: 每天都很困😴 # Nickname | 昵称
+  first_name: 每天都很困 # 名
+  last_name: # 姓
+  email: 2933652936@qq.com # email | 电子邮箱
+  domain: xiaoxiaoyu-123.github.io # Domain | 站点域名
+  avatar: /img/tx01.jpg # Avatar | 站点头像
+  describe: 一条潜水的🐟儿，记录技术学习与生活碎碎念。 # Describe | 网站简介
 
 # Individually configured friend link information | 友链说明配置
 links_info:
-  name: hexo-theme-async # Site title | 站点标题
-  url: https://hexo-theme-async.imalun.com # Site url | 站点地址
-  avatar: /img/avatar.jpg # Site avatar | 友链头像
-  describe: 简单又好用的主题插件。 # Describe | 友链介绍
+  name: 小🐟博客 # Site title | 站点标题
+  url: https://xiaoxiaoyu-123.github.io # Site url | 站点地址
+  avatar: /img/tx01.jpg # Site avatar | 友链头像
+  describe: 记录技术学习与生活碎碎念。 # Describe | 友链介绍
   rule_text: 暂不接受个人博客以外的友链申请，确保您的网站内容积极向上，文章至少30篇，原创70%以上，部署HTTPS。 # 友链规则
 
 # Site logo | 网站图标
 favicon:
-  logo: /img/favicon.svg # logo | 顶部 logo
-  icon16: /img/favicon.svg # icon 16*16
-  icon32: /img/favicon.svg # icon 32*32
+  logo: /img/favicon.png # logo | 顶部 logo
+  icon16: /img/favicon.png # icon 16*16
+  icon32: /img/favicon.png # icon 32*32
   apple_touch_icon: # Apple touch icon | iOS 添加到桌面时显示图标
   webmanifest: # Webmanifest | 应用程序清单文件
   visibilitychange: false # Enable toggle title display when leaving | 开启离开时切换标题显示
@@ -89,10 +89,20 @@ icons:
 
 # Top navigation menu | 导航栏  
 top_bars: # <object[]> {{"title:标题":"","url:地址":"","noswup:不使用 Pjax":false,"children:子菜单":[]}}
-  - title: menu.home
+  - title: 首页
     url: /
-  - title: menu.archives
+  - title: 归档
     url: /archives/
+  - title: 分类
+    url: /categories/
+  - title: 标签
+    url: /tags/
+  - title: 音乐
+    url: /music/
+  - title: 友链
+    url: /links/
+  - title: 关于
+    url: /about/
 
 # Banner settings | 横幅配置
 banner:
@@ -125,21 +135,23 @@ banner:
 
 # Sidebar settings | 侧栏
 sidebar:
-  typed_text_prefix: I`m # 打字动画固定前缀
+  typed_text_prefix: 我是 # 打字动画固定前缀
   typed_text: # 打字效果切换条目 <string[]>
+    - 每天都很困😴
+    - 一条潜水的🐟儿
   info: # 侧栏信息 <object[]> {{"key:名称":"","val:值":""}}
     - key: sidebar.residence
-      val: Mars
+      val: 中国
   social: # 社交图标 <object[]> {{"name:名称":"","icon:图标":"","url:地址":""}}
     - name: Github
       icon: fab fa-github
-      url: https://github.com
+      url: https://github.com/xiaoxiaoyu-123
 
 ## About page settings | 关于页
 about:
   insert: none #  插入规则  <[before,after,none]>
-  title: 如果一切都是镜花水月，那就让这万物走向终结。如果一切皆是命中注定，那就让这世界消失殆尽。 # 标题
-  introduction: 大家好，我是 <strong>Async</strong>，很高兴您能在浩瀚如烟的互联网世界里发现这个博客，更感谢您能够饶有兴致地浏览这个页面。建立这个 Blog 是出于兴趣爱好，我将在此分会分享一些学习笔记，可能还会分享少许图片、视频以及其他有趣东西的链接。 # 个人简单描述
+  title: 你好，我是每天都很困😴 # 标题
+  introduction: 一名前端学习者，热爱技术、骑行和写作。这里记录我的技术学习、项目实战和生活碎碎念，希望这些文字对你也有所帮助。 # 个人简单描述
   blog: <ul class="trm-list"><li>程序：Hexo </li><li>主题：Hexo-theme-async </li></ul>  # 博客信息 
   privacy: 本网站不会追踪访客行为，且不要求访客提供任何敏感信息（比如真实姓名、身份证号码、手机号等），因而也不存在任何隐私泄漏问题。访客参与评论，必须遵守法律法规和基本道德规范，文明礼貌。严禁发布任何有关淫秽、反动、暴力、博彩、恐吓、低俗的内容或违法信息，在尊重言论自由的同时请保持和平与理性。请勿对他人采取不友好的评论或其它过激行为。 # 隐私权说明
 
@@ -177,7 +189,7 @@ reward:
 
 # Article table of contents | 文章目录
 toc:
-  enable: false # 启用
+  enable: true # 启用
   list_number: true # 是否显示编号
   post_title: true # 是否可以在文章标题点击打开目录
   max_depth: 3 # 生成 TOC 的最大深度
@@ -202,7 +214,7 @@ creative_commons:
 # Customize the cover image | 封面图
 cover:
   default: /img/block.jpg # 封面默认显示的图片
-  type: img # 封面显示类型 <[img,date,random]>
+  type: date # 封面显示类型 <[img,date,random]>（极简：卡片不显示封面图）
 
 # The previous and the next article | 上下篇文章
 post_pagination:
@@ -265,7 +277,7 @@ sw: false # 启用
 # https://github.com/willin/hexo-wordcount
 # Post wordcount | 字数统计
 wordcount:
-  enable: false # enable | 开启
+  enable: true # enable | 开启
   count: true # count | 显示字数
   time: true # read time | 显示阅读时间
 
@@ -324,7 +336,7 @@ rightside:
 # Replace Broken Images | 破图时默认图片
 error_img:
   flink: /img/friend_404.gif # 友链头像破图时显示默认图片
-  post_page: /img/404.jpg # 文章破图时显示默认图片
+  post_page: /img/friend_404.gif # 文章破图时显示默认图片
 
 # Code highlighting configuration | 代码高亮配置
 highlight:
@@ -388,5 +400,5 @@ layout:
 # 404 config | 404 配置
 not_found:
   path: / # Return path | 返回路径
-  name: not_found.name # Button text 按钮显示文案
-  text: not_found.text # Tips | 提示文案
+  name: 回首页 # Button text 按钮显示文案
+  text: 页面去潜水了… # Tips | 提示文案

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>页面去潜水了… | 每天都很困😴</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: radial-gradient(130% 130% at 28% 18%, #43303f 0%, #191219 58%, #0d0a0f 100%);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .wrap { max-width: 640px; padding: 24px; }
+  .num {
+    font-size: clamp(72px, 16vw, 150px);
+    font-weight: 900;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #ff7c9c, #8fb7ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .desc { font-size: 17px; color: rgba(255,255,255,.72); margin: 14px 0 30px; }
+  .fish { font-size: 40px; display: inline-block; animation: swim 3s ease-in-out infinite; }
+  @keyframes swim { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-10px) rotate(6deg); } }
+  .btn {
+    display: inline-block; text-decoration: none;
+    background: linear-gradient(135deg, #ff7c9c, #ff5f8f);
+    color: #fff; font-size: 15px; font-weight: 600; letter-spacing: 1px;
+    padding: 12px 34px; border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(255, 124, 156, .35);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255, 124, 156, .5); }
+  .tips { margin-top: 22px; font-size: 13px; color: rgba(255,255,255,.4); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="num">404</div>
+    <div class="fish">🐟</div>
+    <p class="desc">页面去潜水了… 你要找的内容不在这里</p>
+    <a class="btn" href="/">回首页看看</a>
+    <p class="tips">也可以用导航栏的 🔍 搜索找到你想看的文章</p>
+  </div>
+</body>
+</html>

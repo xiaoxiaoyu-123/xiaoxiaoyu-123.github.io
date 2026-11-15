@@ -1,0 +1,8 @@
+- name: Hexo
+  url: https://hexo.io/zh-cn/
+  image: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+  desc: 快速、简单且强大的静态博客框架
+- name: Butterfly
+  url: https://butterfly.js.org/
+  image: https://butterfly.js.org/img/favicon.png
+  desc: 博客此前使用的主题，陪伴了整个花哨时期

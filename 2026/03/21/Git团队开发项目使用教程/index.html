@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xiaoxiaoyu-123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="详细介绍Git在团队合作开发中的使用方法，包括个人仓库管理和团队项目协作流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git团队开发项目使用教程">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/03/21/Git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="详细介绍Git在团队合作开发中的使用方法，包括个人仓库管理和团队项目协作流程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-21T23:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-15T13:37:21.041Z">
+<meta property="article:author" content="每天都很困😴">
+<meta property="article:tag" content="git基础教程">
+<meta property="article:tag" content="团队协作">
+<meta property="article:tag" content="版本控制">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/03/21/Git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xiaoxiaoyu-123.github.io/2026/03/21/Git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/","path":"2026/03/21/Git团队开发项目使用教程/","title":"Git团队开发项目使用教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Git团队开发项目使用教程 | 小🐟博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" src="https://cloud.umami.is/script.js"></script>
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script src="/js/searchdb.js"></script><script defer src="https://cloud.umami.is/script.js" data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" data-domains="xiaoxiaoyu-123.github.io"></script><!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="小🐟博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+      <i class="fa fa-search fa-fw fa-lg"></i>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小🐟博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">这是一条潜水的🐟儿</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-音乐"><a href="/music/" rel="section">音乐</a></li><li class="menu-item menu-item-友链"><a href="/links/" rel="section">友链</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section">关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  
+  <template id="search-popup-template"><div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div></template>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">Git团队开发项目使用教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E4%BB%93%E5%BA%93%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">个人仓库使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F%E5%90%88%E4%BD%9C%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">团队合作开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%8C%E6%AD%A5%E6%9C%80%E6%96%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 同步最新代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 创建功能分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BC%80%E5%8F%91%E5%B9%B6%E5%90%8C%E6%AD%A5%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 开发并同步代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8F%90%E4%BA%A4%E5%B9%B6%E6%8E%A8%E9%80%81%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. 提交并推送代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF%EF%BC%88%E7%AE%A1%E7%90%86%E5%91%98%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="nav-number">1.3.5.</span> <span class="nav-text">5. 合并分支（管理员操作）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%8F%8A%E7%89%88%E6%9C%AC%E8%B7%B3%E8%BD%AC"><span class="nav-number">1.4.</span> <span class="nav-text">日志及版本跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="每天都很困😴"
+      src="/img/tx01.jpg">
+  <p class="site-author-name" itemprop="name">每天都很困😴</p>
+  <div class="site-description" itemprop="description">每天都很困的博客，欢迎访问</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoxiaoyu-123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoxiaoyu-123" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2933652936@qq.com" title="E-Mail → mailto:2933652936@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaoxiaoyu-123.github.io/2026/03/21/Git%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/tx01.jpg">
+      <meta itemprop="name" content="每天都很困😴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小🐟博客">
+      <meta itemprop="description" content="每天都很困的博客，欢迎访问">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Git团队开发项目使用教程 | 小🐟博客">
+      <meta itemprop="description" content="详细介绍Git在团队合作开发中的使用方法，包括个人仓库管理和团队项目协作流程">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git团队开发项目使用教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-21 23:00:00" itemprop="dateCreated datePublished" datetime="2026-03-21T23:00:00+00:00">2026-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-15 13:37:21" itemprop="dateModified" datetime="2026-11-15T13:37:21+00:00">2026-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7%E6%95%88%E7%8E%87/" itemprop="url" rel="index"><span itemprop="name">工具效率</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">详细介绍Git在团队合作开发中的使用方法，包括个人仓库管理和团队项目协作流程</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Git团队开发项目使用教程"><a href="#Git团队开发项目使用教程" class="headerlink" title="Git团队开发项目使用教程"></a>Git团队开发项目使用教程</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇教程源于我第一次参与团队项目开发的经历。当时从学长那里接手基地项目，需要使用Git来管理团队代码，<br>过程中积累了一些实用经验。在此记录下来，希望能帮助其他初次接触Git团队协作的开发者。</p>
+<h2 id="个人仓库使用"><a href="#个人仓库使用" class="headerlink" title="个人仓库使用"></a>个人仓库使用</h2><p>每个开发人员通常会有自己的个人仓库，用于存储和管理个人代码。在创建并初始化仓库后，日常使用主要遵循以下三个基本步骤：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加所有修改到暂存区</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交更改并添加提交信息</span></span><br><span class="line">git commit -m <span class="string">&quot;提交信息&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送到远程仓库的main分支</span></span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<h2 id="团队合作开发流程"><a href="#团队合作开发流程" class="headerlink" title="团队合作开发流程"></a>团队合作开发流程</h2><p>当进行团队协作时，项目会有一个共享的中央仓库，所有团队成员共同维护。以下是完整的团队开发流程：</p>
+<h3 id="1-同步最新代码"><a href="#1-同步最新代码" class="headerlink" title="1. 同步最新代码"></a>1. 同步最新代码</h3><p>每次开始开发前，务必先获取远程仓库的最新代码，确保本地代码与团队同步：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建功能分支"><a href="#2-创建功能分支" class="headerlink" title="2. 创建功能分支"></a>2. 创建功能分支</h3><p>为了避免直接修改主分支，需要创建一个新的分支来开发功能:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并切换到新分支（分支名建议使用有意义的名称）</span></span><br><span class="line">git checkout -b feature/功能名称（分支名）</span><br></pre></td></tr></table></figure>
+<p>后续进行开发,如果需要切换回主分支，<br>使用 <code>git checkout main</code> 即可，切换回分支是<code>git checkout feature/功能名称（分支名）</code>。</p>
+<h3 id="3-开发并同步代码"><a href="#3-开发并同步代码" class="headerlink" title="3. 开发并同步代码"></a>3. 开发并同步代码</h3><p>在分支上进行开发，提交代码前再次同步最新的main分支代码，避免冲突：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-提交并推送代码"><a href="#4-提交并推送代码" class="headerlink" title="4. 提交并推送代码"></a>4. 提交并推送代码</h3><p>完成开发后，将代码提交到你的分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加修改</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交更改</span></span><br><span class="line">git commit -m <span class="string">&quot;功能描述&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送到远程分支</span></span><br><span class="line">git push origin feature/功能名称（分支名）</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-合并分支（管理员操作）"><a href="#5-合并分支（管理员操作）" class="headerlink" title="5. 合并分支（管理员操作）"></a>5. 合并分支（管理员操作）</h3><p>当功能开发完成并通过测试后，管理员将分支合并到main分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到main分支</span></span><br><span class="line">git checkout main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并功能分支</span></span><br><span class="line">git merge feature/功能名称（分支名）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送到远程main分支</span></span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+<h2 id="日志及版本跳转"><a href="#日志及版本跳转" class="headerlink" title="日志及版本跳转"></a>日志及版本跳转</h2><p>当你需要查看项目历史记录或回滚到特定版本时，可以使用以下Git操作：</p>
+<ul>
+<li>1.查看提交日志：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure></li>
+<li>2.查看指定版本的代码：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show 提交哈希值</span><br></pre></td></tr></table></figure></li>
+<li>3.跳转到指定版本：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 提交哈希值</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上流程，团队成员可以有序地协作开发，避免代码冲突，保证项目的稳定性和可维护性。Git的分支管理机制为团队开发提供了灵活而强大的支持，掌握这些基本操作将大大提高团队开发效率。</p>
+<p>希望这篇教程对大家有所帮助！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div id="giscus-wrap" style="margin-top: 40px;"></div>
+<script>
+  (function () {
+    if (!document.querySelector('.post-body')) return;
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.setAttribute('data-repo', 'xiaoxiaoyu-123/xiaoxiaoyu-123.github.io');
+    s.setAttribute('data-repo-id', 'R_kgDOP_riHQ');
+    s.setAttribute('data-category', 'General');
+    s.setAttribute('data-category-id', 'DIC_kwDOP_riHc4DJubq');
+    s.setAttribute('data-mapping', 'pathname');
+    s.setAttribute('data-reactions-enabled', '1');
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-lang', 'zh-CN');
+    s.setAttribute('data-theme', 'light');
+    s.crossOrigin = 'anonymous';
+    s.async = true;
+    document.getElementById('giscus-wrap').appendChild(s);
+  })();
+</script>
+
+          <div class="post-tags">
+              <a href="/tags/git%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="tag"># git基础教程</a>
+              <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag"># 团队协作</a>
+              <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag"># 版本控制</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/21/%E5%BF%AB%E9%80%9F%E8%BF%90%E8%A1%8C%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" rel="prev" title="📝快速运行前端项目">
+                  <i class="fa fa-angle-left"></i> 📝快速运行前端项目
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/25/%E9%A1%B9%E7%9B%AE%E5%89%8D%E5%90%8E%E7%AB%AF%E6%88%90%E5%8A%9F%E9%83%A8%E7%BD%B2%E7%9A%84%E8%BF%87%E7%A8%8B/" rel="next" title="项目前后端成功部署与运行的过程">
+                  项目前后端成功部署与运行的过程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">每天都很困😴</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

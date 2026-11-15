@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xiaoxiaoyu-123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="从零开始的 Linux 完整入门指南，包含环境安装、远程连接、系统管理和常用命令详解，附实战示例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux快速入门">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/04/15/Linux%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="从零开始的 Linux 完整入门指南，包含环境安装、远程连接、系统管理和常用命令详解，附实战示例">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-15T19:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-15T13:37:21.041Z">
+<meta property="article:author" content="每天都很困😴">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="零基础教程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/04/15/Linux%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xiaoxiaoyu-123.github.io/2026/04/15/Linux%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/","path":"2026/04/15/Linux快速入门/","title":"Linux快速入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux快速入门 | 小🐟博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" src="https://cloud.umami.is/script.js"></script>
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script src="/js/searchdb.js"></script><script defer src="https://cloud.umami.is/script.js" data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" data-domains="xiaoxiaoyu-123.github.io"></script><!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="小🐟博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+      <i class="fa fa-search fa-fw fa-lg"></i>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小🐟博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">这是一条潜水的🐟儿</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-音乐"><a href="/music/" rel="section">音乐</a></li><li class="menu-item menu-item-友链"><a href="/links/" rel="section">友链</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section">关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  
+  <template id="search-popup-template"><div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div></template>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">Linux快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85Linux"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安装Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-xshell%E5%92%8Cxftp"><span class="nav-number">1.3.</span> <span class="nav-text">3. xshell和xftp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">4. 系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%85%B3%E6%9C%BA%E9%87%8D%E5%90%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 关机重启操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 修改主机名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86-apt%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 软件管理_apt软件包管理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%93%8D%E4%BD%9C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">5. 操作使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%B8%B8%E7%94%A8%E5%B8%AE%E5%8A%A9"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 常用帮助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%9A%84%E6%9F%A5%E7%9C%8B%E5%92%8C%E5%88%87%E6%8D%A2"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 文件目录的查看和切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E5%8F%8A%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 创建目录及文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E5%88%A0%E9%99%A4%E7%A7%BB%E5%8A%A8%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4 删除移动目录文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.5 查看文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.6 搜索查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B"><span class="nav-number">1.5.7.</span> <span class="nav-text">5.7 压缩解压</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.</span> <span class="nav-text">6. 总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="每天都很困😴"
+      src="/img/tx01.jpg">
+  <p class="site-author-name" itemprop="name">每天都很困😴</p>
+  <div class="site-description" itemprop="description">每天都很困的博客，欢迎访问</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoxiaoyu-123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoxiaoyu-123" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2933652936@qq.com" title="E-Mail → mailto:2933652936@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaoxiaoyu-123.github.io/2026/04/15/Linux%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/tx01.jpg">
+      <meta itemprop="name" content="每天都很困😴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小🐟博客">
+      <meta itemprop="description" content="每天都很困的博客，欢迎访问">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux快速入门 | 小🐟博客">
+      <meta itemprop="description" content="从零开始的 Linux 完整入门指南，包含环境安装、远程连接、系统管理和常用命令详解，附实战示例">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux快速入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-15 19:00:00" itemprop="dateCreated datePublished" datetime="2026-04-15T19:00:00+00:00">2026-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-15 13:37:21" itemprop="dateModified" datetime="2026-11-15T13:37:21+00:00">2026-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%83%A8%E7%BD%B2%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">部署运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">从零开始的 Linux 完整入门指南，包含环境安装、远程连接、系统管理和常用命令详解，附实战示例</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Linux快速入门"><a href="#Linux快速入门" class="headerlink" title="Linux快速入门"></a>Linux快速入门</h1><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>此博客将介绍 Linux 的基础操作、常用命令详解和实战示例，帮助初学者快速入门 Linux，也是为自己记录下学习 Linux 的过程。</p>
+<p>我自己是从虚拟机开始摸索的，一路踩了不少坑，所以这篇会尽量把每一步都写细一点，你跟着敲就能跑起来 💪</p>
+<h2 id="2-安装Linux"><a href="#2-安装Linux" class="headerlink" title="2. 安装Linux"></a>2. 安装Linux</h2><ul>
+<li>2.1 首先，我们需要下载一个虚拟机软件，如VirtualBox、VMware等。这里推荐VMware，下载地址：<a target="_blank" rel="noopener" href="https://www.vmware.com/zh.cn/virtualization.html">VMware下载地址</a></li>
+<li>2.2 其次，我们需要下载一个Linux镜像文件，这里推荐下载Ubuntu 25.10版本。可通过清华大学镜像网站下载，地址为：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/">Ubuntu下载地址</a></li>
+<li>2.3 最后，我们需要在VMware中创建一个新的虚拟机，选择Ubuntu镜像文件，安装即可。</li>
+</ul>
+<blockquote>
+<p>💡 小提示：清华镜像站下载速度比官网快很多，建议优先用它～</p>
+</blockquote>
+<h2 id="3-xshell和xftp"><a href="#3-xshell和xftp" class="headerlink" title="3. xshell和xftp"></a>3. xshell和xftp</h2><p>xshell和xftp是两个常用的Linux客户端工具，用于连接和管理Linux服务器。</p>
+<ul>
+<li>3.1 首先，我们需要下载xshell和xftp。下载地址：<a target="_blank" rel="noopener" href="https://www.xshell.com/zh/xshell/">xshell和xftp下载地址</a></li>
+<li>3.2 安装完成后，先注册一个账号，登录后，我们需要在xshell中配置一个新的连接，连接类型选择SSH，主机地址输入虚拟机的IP地址，端口输入22，用户名输入自定义用户名，密码输入自定义密码。</li>
+<li>3.3 最后，我们需要在xshell中连接到虚拟机，即可开始使用Linux了。</li>
+<li>3.4 xftp的连接类似xshell，只是连接类型选择FTP，主机地址输入虚拟机的IP地址，端口输入21，用户名输入自定义用户名，密码输入自定义密码。</li>
+<li>3.5 最后，我们需要在xftp中连接到虚拟机，即可开始使用xftp了。</li>
+</ul>
+<h2 id="4-系统管理"><a href="#4-系统管理" class="headerlink" title="4. 系统管理"></a>4. 系统管理</h2><h3 id="4-1-关闭防火墙"><a href="#4-1-关闭防火墙" class="headerlink" title="4.1 关闭防火墙"></a>4.1 关闭防火墙</h3><ul>
+<li>4.1.1 在xshell中，输入以下命令关闭防火墙：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw <span class="built_in">disable</span></span><br></pre></td></tr></table></figure></li>
+<li>4.1.2 确认关闭防火墙，输入以下命令：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw status</span><br></pre></td></tr></table></figure></li>
+<li>4.1.3 如果防火墙已关闭，会显示以下信息：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Status: inactive</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>⚠️ 注意：关防火墙只建议在自己 learning 用的虚拟机里操作，正式服务器请按需放行端口，别一关了之～</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-2-关机重启操作"><a href="#4-2-关机重启操作" class="headerlink" title="4.2 关机重启操作"></a>4.2 关机重启操作</h3><ul>
+<li>4.2.1 在xshell中，输入以下命令关机：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> shutdown -h now</span><br></pre></td></tr></table></figure></li>
+<li>4.2.2 在xshell中，输入以下命令重启：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> reboot</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-3-修改主机名"><a href="#4-3-修改主机名" class="headerlink" title="4.3 修改主机名"></a>4.3 修改主机名</h3><ul>
+<li>4.3.1 在xshell中，输入以下命令修改主机名：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> hostnamectl set-hostname 新主机名</span><br></pre></td></tr></table></figure></li>
+<li>4.3.2 确认修改主机名，输入以下命令：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl status</span><br></pre></td></tr></table></figure></li>
+<li>4.3.3 如果主机名已修改，会显示以下信息：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hostname: 新主机名</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-4-软件管理-apt软件包管理器"><a href="#4-4-软件管理-apt软件包管理器" class="headerlink" title="4.4 软件管理_apt软件包管理器"></a>4.4 软件管理_apt软件包管理器</h3><ul>
+<li>4.4.1 在xshell中，输入以下命令更新软件源：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure></li>
+<li>4.4.2 在xshell中，输入以下命令安装软件：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install 软件名</span><br></pre></td></tr></table></figure></li>
+<li>4.4.3 在xshell中，输入以下命令卸载软件：   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt remove 软件名</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-操作使用"><a href="#5-操作使用" class="headerlink" title="5. 操作使用"></a>5. 操作使用</h2><h3 id="5-1-常用帮助"><a href="#5-1-常用帮助" class="headerlink" title="5.1 常用帮助"></a>5.1 常用帮助</h3><ul>
+<li>5.1.1 man——查看手册说明文档的方式<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man man  <span class="comment"># 查看man命令的说明文档</span></span><br><span class="line">man <span class="built_in">ls</span>   <span class="comment"># 查看 ls 命令的说明文档</span></span><br></pre></td></tr></table></figure></li>
+<li>5.1.2 help 获取 shell 内建命令的帮助信息<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">help</span> 命令名</span><br></pre></td></tr></table></figure></li>
+<li>5.1.3 常用快捷键<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctrl+c    <span class="comment"># 停止进程</span></span><br><span class="line">ctrl+l    <span class="comment"># 清屏</span></span><br><span class="line">ctrl+q    <span class="comment"># 退出</span></span><br><span class="line">tab键     <span class="comment"># 自动补全(提示)</span></span><br><span class="line">上下键     <span class="comment"># 查找执行过的命令</span></span><br><span class="line">ctrl+u    <span class="comment"># 清除当前敲的命令</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-2-文件目录的查看和切换"><a href="#5-2-文件目录的查看和切换" class="headerlink" title="5.2 文件目录的查看和切换"></a>5.2 文件目录的查看和切换</h3><ul>
+<li>5.2.1 pwd——显示当前工作目录的绝对路径<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>   <span class="comment"># 显示当前工作目录的绝对路径</span></span><br></pre></td></tr></table></figure></li>
+<li>5.2.2 cd——切换 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /  <span class="comment"># 进入根目录，cd可切换到绝对路径也可以相对路径</span></span><br></pre></td></tr></table></figure></li>
+<li>5.2.3 ls——查看当前目录下的文件夹 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span>    <span class="comment"># 查看当前目录下的文件夹</span></span><br><span class="line"><span class="built_in">ls</span> -l <span class="comment"># 查看当前目录下的文件夹和文件的详细信息</span></span><br></pre></td></tr></table></figure></li>
+<li>5.2.4 回到上一级路径 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..  <span class="comment"># 回到当前目录的上一级路径</span></span><br><span class="line"><span class="built_in">cd</span> -   <span class="comment"># 回到上一次所在路径</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-3-创建目录及文件"><a href="#5-3-创建目录及文件" class="headerlink" title="5.3 创建目录及文件"></a>5.3 创建目录及文件</h3><ul>
+<li>5.3.1 mkdir——创建一个新的目录<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> ...   <span class="comment"># ...为要创建的目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /.../...    <span class="comment"># 创建多层目录，可用命令行无限递归创建文件夹</span></span><br></pre></td></tr></table></figure></li>
+<li>5.3.2 touch——创建空文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> 文件名称 <span class="comment"># 基础语法</span></span><br></pre></td></tr></table></figure></li>
+<li>5.3.3 cp 复制文件或目录<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> <span class="built_in">source</span> dest   <span class="comment"># 复制 source 到 dest</span></span><br><span class="line"><span class="built_in">cp</span> -r <span class="built_in">source</span> dest <span class="comment"># 复制目录时记得加 -r 递归</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-4-删除移动目录文件"><a href="#5-4-删除移动目录文件" class="headerlink" title="5.4 删除移动目录文件"></a>5.4 删除移动目录文件</h3><ul>
+<li>5.4.1 rm——删除文件或目录<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> 文件名或目录名   <span class="comment"># 删除文件或目录</span></span><br><span class="line"><span class="built_in">rm</span> -r 目录名      <span class="comment"># 递归删除目录</span></span><br><span class="line"><span class="built_in">rm</span> -f 文件名      <span class="comment"># 强制删除文件</span></span><br><span class="line"><span class="built_in">rm</span> -v         <span class="comment"># 显示指令的详细执行过程</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>⚠️ 注意：<code>rm -rf</code> 属于「删库跑路」级命令，敲之前<strong>先看三遍路径</strong>，Linux 下没有回收站后悔药！</p>
+</blockquote>
+</li>
+<li>5.4.2 mv——移动文件或目录<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> <span class="built_in">source</span> dest    <span class="comment"># 将source移动到dest</span></span><br><span class="line"><span class="built_in">mv</span> ~/桌面/文件名 ~/回收站     <span class="comment"># 将文件移动到回收站</span></span><br><span class="line"><span class="built_in">mv</span> ~/桌面/文件名 ~/桌面/新文件名  <span class="comment"># 修改文件名称</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-5-查看文件"><a href="#5-5-查看文件" class="headerlink" title="5.5 查看文件"></a>5.5 查看文件</h3><ul>
+<li>5.5.1 cat——查看文件内容，从第一行开始显示<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> 文件名        <span class="comment"># 查看文件内容</span></span><br><span class="line"><span class="built_in">cat</span> -n 文件名     <span class="comment"># 显示所有行的行号，包括空行</span></span><br></pre></td></tr></table></figure></li>
+<li>5.5.2 more——分页查看大文件，空格翻页、q 退出<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more 文件名       <span class="comment"># 内容太长一屏放不下时用它</span></span><br></pre></td></tr></table></figure></li>
+<li>5.5.3 less——和 more 类似，但支持上下键回看（推荐）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less 文件名       <span class="comment"># 功能比 more 更强，看完按 q 退出</span></span><br></pre></td></tr></table></figure></li>
+<li>5.5.4 head &#x2F; tail——只看开头或结尾<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">head</span> -n 10 文件名   <span class="comment"># 只看前 10 行</span></span><br><span class="line"><span class="built_in">tail</span> -n 10 文件名   <span class="comment"># 只看后 10 行</span></span><br><span class="line"><span class="built_in">tail</span> -f 日志文件名   <span class="comment"># 实时追踪日志新增内容，运维必备</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-6-搜索查找"><a href="#5-6-搜索查找" class="headerlink" title="5.6 搜索查找"></a>5.6 搜索查找</h3><ul>
+<li>5.6.1 find——按名字或范围查找文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find /home -name <span class="string">&quot;*.txt&quot;</span>   <span class="comment"># 在 /home 下查找所有 .txt 文件</span></span><br><span class="line">find . -name <span class="string">&quot;关键字*&quot;</span>      <span class="comment"># 在当前目录模糊查找</span></span><br></pre></td></tr></table></figure></li>
+<li>5.6.2 grep——在文件内容里筛选关键字<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep 关键字 文件名          <span class="comment"># 在文件中查找包含关键字的行</span></span><br><span class="line">grep -n 关键字 文件名       <span class="comment"># 顺便显示行号</span></span><br><span class="line"><span class="built_in">cat</span> 文件名 | grep 关键字    <span class="comment"># 管道写法，效果一样</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-7-压缩解压"><a href="#5-7-压缩解压" class="headerlink" title="5.7 压缩解压"></a>5.7 压缩解压</h3><ul>
+<li>5.7.1 tar——打包与解压（最常用）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf 压缩包.tar.gz    <span class="comment"># 解压 .tar.gz 压缩包</span></span><br><span class="line">tar -zcvf 打包名.tar.gz 目录  <span class="comment"># 把目录打包压缩</span></span><br></pre></td></tr></table></figure></li>
+<li>5.7.2 zip &#x2F; unzip<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zip 压缩包.zip 文件名        <span class="comment"># 压缩成 zip</span></span><br><span class="line">unzip 压缩包.zip           <span class="comment"># 解压 zip</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><p>✅ 最后梳理一下入门路线：<strong>装好虚拟机 → 用 xshell 远程连接 → 学会系统管理的基础操作 → 把文件目录、查看、搜索、压缩这几组常用命令敲熟</strong>。</p>
+<p>Linux 入门没有捷径，就是多敲多练。刚开始记不住命令很正常，我到现在也还会忘，忘了就 <code>man</code> 一下，用着用着就熟了。</p>
+<p>希望这篇教程对你有所帮助！如果有写错的地方或者更好的命令推荐，欢迎在评论区留言交流～</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div id="giscus-wrap" style="margin-top: 40px;"></div>
+<script>
+  (function () {
+    if (!document.querySelector('.post-body')) return;
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.setAttribute('data-repo', 'xiaoxiaoyu-123/xiaoxiaoyu-123.github.io');
+    s.setAttribute('data-repo-id', 'R_kgDOP_riHQ');
+    s.setAttribute('data-category', 'General');
+    s.setAttribute('data-category-id', 'DIC_kwDOP_riHc4DJubq');
+    s.setAttribute('data-mapping', 'pathname');
+    s.setAttribute('data-reactions-enabled', '1');
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-lang', 'zh-CN');
+    s.setAttribute('data-theme', 'light');
+    s.crossOrigin = 'anonymous';
+    s.async = true;
+    document.getElementById('giscus-wrap').appendChild(s);
+  })();
+</script>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="tag"># 零基础教程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/05/%E5%BF%AB%E6%8D%B7%E6%B8%85%E7%90%86%E7%94%B5%E8%84%91C%E7%9B%98/" rel="prev" title="快捷清理电脑C盘">
+                  <i class="fa fa-angle-left"></i> 快捷清理电脑C盘
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/04/24/1Panel%E9%85%8D%E7%BD%AE%E4%B8%8A%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="1Panel配置上服务器">
+                  1Panel配置上服务器 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">每天都很困😴</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

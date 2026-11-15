@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xiaoxiaoyu-123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-13T22:30:00.000Z">
+<meta property="article:modified_time" content="2026-11-15T13:37:21.041Z">
+<meta property="article:author" content="每天都很困😴">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="排查实录">
+<meta property="article:tag" content="OOM">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="systemctl">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/","path":"2026/09/13/基地服务器OOM抢修/","title":"🔧 半年狂崩之谜：基地服务器 OOM 抢修实录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>🔧 半年狂崩之谜：基地服务器 OOM 抢修实录 | 小🐟博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" src="https://cloud.umami.is/script.js"></script>
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script src="/js/searchdb.js"></script><script defer src="https://cloud.umami.is/script.js" data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" data-domains="xiaoxiaoyu-123.github.io"></script><!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="小🐟博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+      <i class="fa fa-search fa-fw fa-lg"></i>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小🐟博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">这是一条潜水的🐟儿</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-音乐"><a href="/music/" rel="section">音乐</a></li><li class="menu-item menu-item-友链"><a href="/links/" rel="section">友链</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section">关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  
+  <template id="search-popup-template"><div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div></template>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%F0%9F%94%A7-%E5%8D%8A%E5%B9%B4%E7%8B%82%E5%B4%A9%E4%B9%8B%E8%B0%9C%EF%BC%9A%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8-OOM-%E6%8A%A2%E4%BF%AE%E5%AE%9E%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%8F%88%E5%B4%A9%E4%BA%86"><span class="nav-number">1.1.</span> <span class="nav-text">前言：又崩了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%95%B5%EF%B8%8F-%E7%8E%B0%E5%9C%BA%E5%8F%96%E8%AF%81%EF%BC%9A%E5%94%AF%E4%B8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.</span> <span class="nav-text">🕵️ 现场取证：唯一的数据中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A0-%E6%A0%B9%E5%9B%A0%E9%93%BE%E6%9D%A1%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E5%BF%83%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%80%8E%E4%B9%88%E6%90%9E%E5%B4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">🧠 根因链条：一个好心的服务怎么搞崩服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A7-%E4%BF%AE%E5%A4%8D%EF%BC%9A%E4%B8%89%E5%A4%84%E6%A0%B9%E9%99%A4-%E4%B8%89%E9%A1%B9%E5%8A%A0%E5%9B%BA"><span class="nav-number">1.4.</span> <span class="nav-text">🔧 修复：三处根除 + 三项加固</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E9%99%A4%EF%BC%9A%E6%8A%8A%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%BD%BB%E5%BA%95%E5%85%B3%E6%8E%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">根除：把自动更新彻底关掉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%9B%BA%E4%B8%80%EF%BC%9Aswap-%E6%89%A9%E5%AE%B9-2G-%E2%86%92-8G"><span class="nav-number">1.4.2.</span> <span class="nav-text">加固一：swap 扩容 2G → 8G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%9B%BA%E4%BA%8C%EF%BC%9A%E6%97%A5%E5%BF%97%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">1.4.3.</span> <span class="nav-text">加固二：日志持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%9B%BA%E4%B8%89%EF%BC%9A%E7%BB%99-MySQL-%E5%AE%B9%E5%99%A8%E8%AE%BE%E5%86%85%E5%AD%98%E4%B8%8A%E9%99%90"><span class="nav-number">1.4.4.</span> <span class="nav-text">加固三：给 MySQL 容器设内存上限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8B-%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">📋 复盘总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">1.6.</span> <span class="nav-text">写在最后</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="每天都很困😴"
+      src="/img/tx01.jpg">
+  <p class="site-author-name" itemprop="name">每天都很困😴</p>
+  <div class="site-description" itemprop="description">每天都很困的博客，欢迎访问</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoxiaoyu-123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoxiaoyu-123" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2933652936@qq.com" title="E-Mail → mailto:2933652936@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaoxiaoyu-123.github.io/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/tx01.jpg">
+      <meta itemprop="name" content="每天都很困😴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小🐟博客">
+      <meta itemprop="description" content="每天都很困的博客，欢迎访问">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录 | 小🐟博客">
+      <meta itemprop="description" content="基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          🔧 半年狂崩之谜：基地服务器 OOM 抢修实录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-13 22:30:00" itemprop="dateCreated datePublished" datetime="2026-09-13T22:30:00+00:00">2026-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-15 13:37:21" itemprop="dateModified" datetime="2026-11-15T13:37:21+00:00">2026-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务，三处根除加 swap 扩容的完整过程</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="🔧-半年狂崩之谜：基地服务器-OOM-抢修实录"><a href="#🔧-半年狂崩之谜：基地服务器-OOM-抢修实录" class="headerlink" title="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录"></a>🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</h1><h2 id="前言：又崩了"><a href="#前言：又崩了" class="headerlink" title="前言：又崩了"></a>前言：又崩了</h2><p>先交代一下背景。基地有台服务器，<strong>12 核 24G 内存</strong>，上面跑着 1Panel 面板 + 两个 Docker 容器（MySQL 和 vsftpd），基地的 FTP 和各种资料都在上面。它只能在校内网访问，平时没什么人动它。</p>
+<p>然后这半年来，它隔三差五就<strong>整个假死</strong>——SSH 连不上、网站打不开，唯一的解决办法是跑去机房<strong>断电重启</strong>。持续了半年，一直没人管。</p>
+<p>这次实在忍不了了，我约了个时间跑去机房，决心把它查个水落石出。</p>
+<h2 id="🕵️-现场取证：唯一的数据中心"><a href="#🕵️-现场取证：唯一的数据中心" class="headerlink" title="🕵️ 现场取证：唯一的数据中心"></a>🕵️ 现场取证：唯一的数据中心</h2><p>排查的第一步就撞了个软钉子。</p>
+<p>按正常套路，内存出问题应该先看内核日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg -T | grep -iE <span class="string">&quot;out of memory|killed process&quot;</span> | <span class="built_in">tail</span> -40</span><br></pre></td></tr></table></figure>
+
+<p>结果——<strong>什么都没有</strong>。因为服务器这半年重启了太多次，内核日志在重启后就没了。❌</p>
+<p>不过转机在机房那台接在服务器上的<strong>显示器</strong>上：屏幕上还留着大量滚动日志，全是这一句：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Out of memory: Killed process xxx (unattended-upgr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>单个进程占了约 23.9 GB 内存</strong>（服务器总共才 24 GB），时间跨度正好是上次连续运行 65 天的最后阶段。凶手第一次露出了马脚：<code>unattended-upgrades</code>——Ubuntu 的<strong>系统自动更新服务</strong>。</p>
+<h2 id="🧠-根因链条：一个好心的服务怎么搞崩服务器"><a href="#🧠-根因链条：一个好心的服务怎么搞崩服务器" class="headerlink" title="🧠 根因链条：一个好心的服务怎么搞崩服务器"></a>🧠 根因链条：一个好心的服务怎么搞崩服务器</h2><p>光看到凶手的名字还不够，得搞清楚它为什么吃内存。接着翻它的日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -50 /var/log/unattended-upgrades/unattended-upgrades.log</span><br></pre></td></tr></table></figure>
+
+<p>看到的现象很诡异：这个服务<strong>一天被启动 4~5 次</strong>（正常一两次就够了），而且每一次都只写到”初始化”阶段就戛然而止，后面”下载、安装”等内容一行都没有。</p>
+<p>再翻 apt 的历史账本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -20 /var/log/apt/history.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件是空的。</strong> 也就是说，这半年来没有一次升级真正完成过。登录时系统一直提示”268 个软件包可升级（含 132 个安全更新）”，全部积压着。</p>
+<p>到这里根因链条就完整了：</p>
+<blockquote>
+<p>积压的待升级包越滚越多 → 自动更新服务每次启动都在”计算要升级哪些包”这一步陷入<strong>超长计算</strong> → 内存持续膨胀直到吃满 24G → 内核 OOM Killer 把它杀掉 → 系统又自动把它拉起来 → <strong>再次膨胀</strong> → 循环，每 4~20 小时一轮 → 整机假死 → 断电重启 → 无限循环</p>
+</blockquote>
+<p>一个本意是”保护服务器安全”的服务，最后变成了搞崩服务器的凶手。<strong>讽刺但真实。</strong></p>
+<h2 id="🔧-修复：三处根除-三项加固"><a href="#🔧-修复：三处根除-三项加固" class="headerlink" title="🔧 修复：三处根除 + 三项加固"></a>🔧 修复：三处根除 + 三项加固</h2><h3 id="根除：把自动更新彻底关掉"><a href="#根除：把自动更新彻底关掉" class="headerlink" title="根除：把自动更新彻底关掉"></a>根除：把自动更新彻底关掉</h3><p>服务本体、触发定时器、apt 配置，<strong>三处全部关闭</strong>，防止它以任何方式复活：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 停掉并禁用服务本体</span></span><br><span class="line">systemctl <span class="built_in">disable</span> --now unattended-upgrades.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 禁掉两个触发定时器</span></span><br><span class="line">systemctl <span class="built_in">disable</span> --now apt-daily.timer apt-daily-upgrade.timer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. apt 配置里显式关闭（双保险）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;APT::Periodic::Unattended-Upgrade &quot;0&quot;;&#x27;</span> &gt; /etc/apt/apt.conf.d/20auto-upgrades</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 这里踩了两个小坑：一是 service&#x2F;timer 名字要写全，写错只会静默失败；二是改完要用 <code>apt-config dump | grep Unattended</code> 验证配置真的生效了，眼见为实。</p>
+</blockquote>
+<h3 id="加固一：swap-扩容-2G-→-8G"><a href="#加固一：swap-扩容-2G-→-8G" class="headerlink" title="加固一：swap 扩容 2G → 8G"></a>加固一：swap 扩容 2G → 8G</h3><p>内存再被吃满时，8G 的交换空间能给系统留出<strong>安全关机和响应命令</strong>的余地，而不是直接假死：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">swapoff /swapfile</span><br><span class="line">fallocate -l 8G /swapfile &amp;&amp; <span class="built_in">chmod</span> 600 /swapfile</span><br><span class="line">mkswap /swapfile &amp;&amp; swapon /swapfile</span><br><span class="line">free -h   <span class="comment"># 确认生效</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="加固二：日志持久化"><a href="#加固二：日志持久化" class="headerlink" title="加固二：日志持久化"></a>加固二：日志持久化</h3><p>之前内核日志重启就丢，排查全靠机房显示器。把 journald 开启持久化，以后<strong>出事有据可查</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /var/log/journal</span><br><span class="line">systemctl restart systemd-journald</span><br></pre></td></tr></table></figure>
+
+<h3 id="加固三：给-MySQL-容器设内存上限"><a href="#加固三：给-MySQL-容器设内存上限" class="headerlink" title="加固三：给 MySQL 容器设内存上限"></a>加固三：给 MySQL 容器设内存上限</h3><p>防止任何容器重演”吃满全部内存”的历史，在 1Panel 里给它限制了 8G。</p>
+<h2 id="📋-复盘总结"><a href="#📋-复盘总结" class="headerlink" title="📋 复盘总结"></a>📋 复盘总结</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>处理前</th>
+<th>处理后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动更新服务</td>
+<td>每 4~20 小时膨胀到 24G 被杀</td>
+<td>三处彻底关闭</td>
+</tr>
+<tr>
+<td>交换空间</td>
+<td>2 GB</td>
+<td>8 GB</td>
+</tr>
+<tr>
+<td>系统日志</td>
+<td>重启即丢</td>
+<td>持久化保存</td>
+</tr>
+<tr>
+<td>排查证据</td>
+<td>只剩机房显示器</td>
+<td>随时可查</td>
+</tr>
+</tbody></table>
+<p>三条教训，每条都是这次用半年崩溃换来的：</p>
+<ol>
+<li><strong>服务器崩溃后别急着重启</strong>——重启会销毁现场，先拍下日志（这次全靠机房显示器没关 🙏）</li>
+<li><strong>“自动”的东西也可能是故障源</strong>——自动更新、自动清理，出问题时都要列入嫌疑人名单</li>
+<li><strong>软件包长期不更新也是隐患</strong>——积压本身就会让某些服务的计算量失控</li>
+</ol>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>修完之后观察了一周多，内存平稳、没有异常重启，总算能睡个安稳觉了。</p>
+<p>不过这次排查中我还顺手做了一个决定——清理宿主机上一个”半配置状态”的 MySQL 软件包，当时的判断是”业务数据库都跑在 Docker 容器里，宿主机这个应该没用”。</p>
+<p><strong>这个判断后来结结实实地打了我的脸</strong>——基地的 OJ 系统数据库恰好就在宿主机 MySQL 里。欲知后事如何，且看下篇《基地OJ系统复活》😂</p>
+<p>我们下一篇博客见！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div id="giscus-wrap" style="margin-top: 40px;"></div>
+<script>
+  (function () {
+    if (!document.querySelector('.post-body')) return;
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.setAttribute('data-repo', 'xiaoxiaoyu-123/xiaoxiaoyu-123.github.io');
+    s.setAttribute('data-repo-id', 'R_kgDOP_riHQ');
+    s.setAttribute('data-category', 'General');
+    s.setAttribute('data-category-id', 'DIC_kwDOP_riHc4DJubq');
+    s.setAttribute('data-mapping', 'pathname');
+    s.setAttribute('data-reactions-enabled', '1');
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-lang', 'zh-CN');
+    s.setAttribute('data-theme', 'light');
+    s.crossOrigin = 'anonymous';
+    s.async = true;
+    document.getElementById('giscus-wrap').appendChild(s);
+  })();
+</script>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95/" rel="tag"># 排查实录</a>
+              <a href="/tags/OOM/" rel="tag"># OOM</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
+              <a href="/tags/systemctl/" rel="tag"># systemctl</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/20/%E6%A3%89%E8%8A%B1%E7%B3%96%E4%BB%8A%E5%A4%A9%E5%90%83%E5%95%A5/" rel="prev" title="✨ 棉花糖今天吃啥">
+                  <i class="fa fa-angle-left"></i> ✨ 棉花糖今天吃啥
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E6%95%B4%E7%90%86/" rel="next" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录">
+                  🗂️ 11,455 份文件大搬家：基地 FTP 整理实录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">每天都很困😴</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

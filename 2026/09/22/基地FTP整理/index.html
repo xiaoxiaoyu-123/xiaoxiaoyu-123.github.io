@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xiaoxiaoyu-123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录">
+<meta property="og:url" content="https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="小🐟博客">
+<meta property="og:description" content="基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-22T21:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-15T13:37:21.041Z">
+<meta property="article:author" content="每天都很困😴">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Shell">
+<meta property="article:tag" content="文件管理">
+<meta property="article:tag" content="批量改名">
+<meta property="article:tag" content="整理实录">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E6%95%B4%E7%90%86/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E6%95%B4%E7%90%86/","path":"2026/09/22/基地FTP整理/","title":"🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>🗂️ 11,455 份文件大搬家：基地 FTP 整理实录 | 小🐟博客</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" src="https://cloud.umami.is/script.js"></script>
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script src="/js/searchdb.js"></script><script defer src="https://cloud.umami.is/script.js" data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" data-domains="xiaoxiaoyu-123.github.io"></script><!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="小🐟博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+      <i class="fa fa-search fa-fw fa-lg"></i>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小🐟博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">这是一条潜水的🐟儿</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-音乐"><a href="/music/" rel="section">音乐</a></li><li class="menu-item menu-item-友链"><a href="/links/" rel="section">友链</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section">关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  
+  <template id="search-popup-template"><div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div></template>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%F0%9F%97%82%EF%B8%8F-11-455-%E4%BB%BD%E6%96%87%E4%BB%B6%E5%A4%A7%E6%90%AC%E5%AE%B6%EF%BC%9A%E5%9F%BA%E5%9C%B0-FTP-%E6%95%B4%E7%90%86%E5%AE%9E%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E4%B8%89%E5%B9%B4%E6%B2%A1%E4%BA%BA%E7%AE%A1%E7%9A%84-FTP"><span class="nav-number">1.1.</span> <span class="nav-text">前言：三年没人管的 FTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8F-%E6%95%B4%E7%90%86%E4%B8%89%E9%93%81%E5%BE%8B%EF%BC%88%E5%85%88%E7%AB%8B%E8%A7%84%E7%9F%A9%E5%86%8D%E5%8A%A8%E6%89%8B%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">📏 整理三铁律（先立规矩再动手）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%95%B3%EF%B8%8F-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AC%E7%AF%87%E7%81%B5%E9%AD%82%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">🕳️ 踩坑记录（本篇灵魂）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91%E4%B8%80%EF%BC%9Ased-%E4%B8%80%E6%8A%8A%E6%A2%AD%EF%BC%8C1535-%E4%B8%AA%E6%96%87%E4%BB%B6%E5%85%A8%E6%88%90%E3%80%8C%E6%9C%AA%E5%91%BD%E5%90%8D%E3%80%8D"><span class="nav-number">1.3.1.</span> <span class="nav-text">坑一：sed 一把梭，1535 个文件全成「未命名」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91%E4%BA%8C%EF%BC%9A%E5%8F%82%E6%95%B0%E5%B1%95%E5%BC%80%E6%AD%BB%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">坑二：参数展开死循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91%E4%B8%89%EF%BC%9A%E5%AD%90-shell-%E9%87%8C%E6%9B%B4%E6%96%B0%E8%AE%A1%E6%95%B0%EF%BC%8C%E9%9D%99%E9%BB%98%E4%B8%A2%E5%A4%B1"><span class="nav-number">1.3.3.</span> <span class="nav-text">坑三：子 shell 里更新计数，静默丢失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91%E5%9B%9B%EF%BC%9A%E6%89%A9%E5%B1%95%E5%90%8D%E8%A2%AB%E3%80%8C%E4%BF%AE%E3%80%8D%E4%B8%A2%E4%BA%86"><span class="nav-number">1.3.4.</span> <span class="nav-text">坑四：扩展名被「修」丢了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%97%82%EF%B8%8F-%E6%95%B4%E7%90%86%E6%88%90%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">🗂️ 整理成果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9B%A1%EF%B8%8F-%E9%9A%90%E7%A7%81%E6%B2%BB%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">🛡️ 隐私治理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%81-%E7%BB%99%E4%B8%8B%E4%B8%80%E5%B1%8A%E7%9A%84%E9%81%97%E4%BA%A7"><span class="nav-number">1.6.</span> <span class="nav-text">🎁 给下一届的遗产</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">1.7.</span> <span class="nav-text">写在最后</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="每天都很困😴"
+      src="/img/tx01.jpg">
+  <p class="site-author-name" itemprop="name">每天都很困😴</p>
+  <div class="site-description" itemprop="description">每天都很困的博客，欢迎访问</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoxiaoyu-123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoxiaoyu-123" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2933652936@qq.com" title="E-Mail → mailto:2933652936@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaoxiaoyu-123.github.io/2026/09/22/%E5%9F%BA%E5%9C%B0FTP%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/tx01.jpg">
+      <meta itemprop="name" content="每天都很困😴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小🐟博客">
+      <meta itemprop="description" content="每天都很困的博客，欢迎访问">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录 | 小🐟博客">
+      <meta itemprop="description" content="基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          🗂️ 11,455 份文件大搬家：基地 FTP 整理实录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-09-22 21:00:00" itemprop="dateCreated datePublished" datetime="2026-09-22T21:00:00+00:00">2026-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-15 13:37:21" itemprop="dateModified" datetime="2026-11-15T13:37:21+00:00">2026-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">基地 FTP 三年没人管大爆仓：1535 个乱码文件名、4466 个垃圾文件夹，五个批次整理成八大分区的完整实录，含批量改名的四个大坑</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="🗂️-11-455-份文件大搬家：基地-FTP-整理实录"><a href="#🗂️-11-455-份文件大搬家：基地-FTP-整理实录" class="headerlink" title="🗂️ 11,455 份文件大搬家：基地 FTP 整理实录"></a>🗂️ 11,455 份文件大搬家：基地 FTP 整理实录</h1><h2 id="前言：三年没人管的-FTP"><a href="#前言：三年没人管的-FTP" class="headerlink" title="前言：三年没人管的 FTP"></a>前言：三年没人管的 FTP</h2><p>上篇把服务器修好后（还没看的可以翻上一篇 🔧），我趁热打铁，把目光投向了它上面跑的<strong>基地 FTP</strong>——一个存了从 2007 年到现在、历届学长学姐传承下来的资料库。</p>
+<p>打开一看：</p>
+<ul>
+<li><strong>1535 个文件名是乱码</strong>，网页端和资源管理器都打不开</li>
+<li>一个代码项目贡献了 <strong>4,466 个文件夹</strong>（node_modules + .git 直接传上去了）</li>
+<li>课程资料分成「一专业复习资料」「复习资料&#x2F;一专二专三专」<strong>好几套并存</strong>，谁也不知道哪份是全的</li>
+<li>学生信息表、账号密码文件<strong>散落在共享目录里</strong>，人手一份的成员密码人人可见</li>
+</ul>
+<p>这些资料从 2007 年传承到现在，已经三代人了。<strong>再不整理，下一届接手的人只会更崩溃。</strong></p>
+<h2 id="📏-整理三铁律（先立规矩再动手）"><a href="#📏-整理三铁律（先立规矩再动手）" class="headerlink" title="📏 整理三铁律（先立规矩再动手）"></a>📏 整理三铁律（先立规矩再动手）</h2><p>动 11,000 多个文件之前，先给自己立了三条铁律：</p>
+<ol>
+<li><strong>只移动、不删除</strong>——删除项先移到暂存区，确认无误再清</li>
+<li><strong>每个批次结束重扫核对</strong>——文件数必须守恒，一个都不能少</li>
+<li><strong>所有命令整段可粘贴、先预演再执行</strong>——能复现的操作才叫操作</li>
+</ol>
+<h2 id="🕳️-踩坑记录（本篇灵魂）"><a href="#🕳️-踩坑记录（本篇灵魂）" class="headerlink" title="🕳️ 踩坑记录（本篇灵魂）"></a>🕳️ 踩坑记录（本篇灵魂）</h2><h3 id="坑一：sed-一把梭，1535-个文件全成「未命名」"><a href="#坑一：sed-一把梭，1535-个文件全成「未命名」" class="headerlink" title="坑一：sed 一把梭，1535 个文件全成「未命名」"></a>坑一：sed 一把梭，1535 个文件全成「未命名」</h3><p>最开始处理乱码文件名，我想当然地用 sed 一把梭。结果中文这种<strong>多字节字符</strong>在 sed 的字符类里根本不支持，跑完之后——<strong>1535 个文件全部变成了「未命名」</strong>。</p>
+<p>当场血压拉满 😇。好在预演机制还在：先备份了全量清单，回滚重来。</p>
+<p>最终方案是<strong>纯 bash 逐字节判断</strong>：利用「乱码标记的位置就是原始扩展名的点」这个规律，定位到点、拼回文件名。重写后 1535 个文件<strong>零失败全部修复</strong>。</p>
+<h3 id="坑二：参数展开死循环"><a href="#坑二：参数展开死循环" class="headerlink" title="坑二：参数展开死循环"></a>坑二：参数展开死循环</h3><p>清理文件名尾部的非法字符时，我写了这样的 bash 参数展开：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base=<span class="string">&quot;<span class="variable">$&#123;base%[）)]&#125;</span>&gt;]&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果在某些输入上它<strong>永远匹配不到结尾</strong>，base 字符串反而越长越长，脚本死循环。最后改成<strong>逐字符判断 + 60 次迭代保险丝</strong>，到次数强制跳出。</p>
+<h3 id="坑三：子-shell-里更新计数，静默丢失"><a href="#坑三：子-shell-里更新计数，静默丢失" class="headerlink" title="坑三：子 shell 里更新计数，静默丢失"></a>坑三：子 shell 里更新计数，静默丢失</h3><p>修复函数里统计「已处理数量」，我直接用 <code>$(fix_one ...)</code> 拿返回值——但 <code>$()</code> 会开一个<strong>子 shell</strong>，里面更新的计数变量根本带不出来。表现为：明明改了 800 个文件，计数器还是 0。</p>
+<p>改成函数内直接更新<strong>全局变量</strong>、不用命令替换，计数立刻正常。这种坑不踩一次真的很难记住。</p>
+<h3 id="坑四：扩展名被「修」丢了"><a href="#坑四：扩展名被「修」丢了" class="headerlink" title="坑四：扩展名被「修」丢了"></a>坑四：扩展名被「修」丢了</h3><p>有一批 <code>.ipynb</code> 文件，修复完文件名对了、<strong>扩展名没了</strong>。原因是我把乱码点当成了分隔符整个去掉。最后的解法是利用乱码标记的位置<strong>反推原始扩展名</strong>，这才算真正修完整。</p>
+<h2 id="🗂️-整理成果"><a href="#🗂️-整理成果" class="headerlink" title="🗂️ 整理成果"></a>🗂️ 整理成果</h2><p>踩完四个坑，坏文件名全部修复。接着分五个批次把整个库推倒重排：</p>
+<table>
+<thead>
+<tr>
+<th>批次</th>
+<th>内容</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>批次 0</td>
+<td>1535 个坏文件名批量修复 + 51 个垃圾清理</td>
+<td>零失败</td>
+</tr>
+<tr>
+<td>批次 1</td>
+<td>顶层小尾巴归位、05 考研升学建骨架</td>
+<td>根目录清空</td>
+</tr>
+<tr>
+<td>批次 2</td>
+<td>毕业传承：答辩视频按年份 + 95 本书分类</td>
+<td>书籍全归位</td>
+</tr>
+<tr>
+<td>批次 3</td>
+<td>竞赛区：五大赛事统一「六件套」结构</td>
+<td>根层零散件清零</td>
+</tr>
+<tr>
+<td>批次 4</td>
+<td>部门档案：统一「七件套」+ 基地历史年份制</td>
+<td>三个部门结构一致</td>
+</tr>
+<tr>
+<td>收尾</td>
+<td>密码文件外迁、顶层收敛为 <strong>00~07 八分区</strong></td>
+<td>文档全部重写</td>
+</tr>
+</tbody></table>
+<p>整理后的顶层结构（强迫症狂喜）：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ftp_seven/</span><br><span class="line">├── 00-使用规范/      ├── 04毕业传承/</span><br><span class="line">├── 01课程学习/      ├── 05考研升学/</span><br><span class="line">├── 02竞赛资料/      ├── 06软件与工具/</span><br><span class="line">├── 03部门档案/      └── 07设备与运维/</span><br></pre></td></tr></table></figure>
+
+<p>最终 <strong>11,455 份文件 &#x2F; 2,397 个文件夹 &#x2F; 132.7 GB</strong>，每个批次重扫核对、<strong>文件数守恒，零数据丢失</strong>。</p>
+<h2 id="🛡️-隐私治理"><a href="#🛡️-隐私治理" class="headerlink" title="🛡️ 隐私治理"></a>🛡️ 隐私治理</h2><p>整理过程中还做了一次<strong>内容级隐私扫描</strong>：学生信息表、历年通讯录移出了成员可见区；散落的 6 个密码&#x2F;账号文件统一抽到管理员专用目录。FTP 的成员账号也顺手改成了<strong>只读</strong>——下载随便下，上传删除只有管理员能做。</p>
+<h2 id="🎁-给下一届的遗产"><a href="#🎁-给下一届的遗产" class="headerlink" title="🎁 给下一届的遗产"></a>🎁 给下一届的遗产</h2><p>这次整理最大的成果不是「变干净了」，而是<strong>沉淀了可复用的工具和规矩</strong>：</p>
+<ul>
+<li><code>fixnames3.sh</code> —— 坏文件名批量修复脚本，先预演再 apply</li>
+<li>上传须知 —— 一页纸写清「放哪、怎么命名、什么不许传」</li>
+<li>每学年重扫一次生成导航文档，结构变化一目了然</li>
+</ul>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>整个整理断断续续花了几天，改脚本改到深夜的时候确实有点上头——但看到 1535 个打不开的文件全部复活、三年乱账变成八个整整齐齐的分区，值了。</p>
+<p>其实整理 FTP 和整理代码仓库是一回事：<strong>混乱不可怕，可怕的是没有规矩</strong>。规矩立下了，剩下的就是执行。</p>
+<p>如果你也有一个年久失修的共享盘，希望这篇的四个坑和三条铁律能帮到你 💬</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div id="giscus-wrap" style="margin-top: 40px;"></div>
+<script>
+  (function () {
+    if (!document.querySelector('.post-body')) return;
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.setAttribute('data-repo', 'xiaoxiaoyu-123/xiaoxiaoyu-123.github.io');
+    s.setAttribute('data-repo-id', 'R_kgDOP_riHQ');
+    s.setAttribute('data-category', 'General');
+    s.setAttribute('data-category-id', 'DIC_kwDOP_riHc4DJubq');
+    s.setAttribute('data-mapping', 'pathname');
+    s.setAttribute('data-reactions-enabled', '1');
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-lang', 'zh-CN');
+    s.setAttribute('data-theme', 'light');
+    s.crossOrigin = 'anonymous';
+    s.async = true;
+    document.getElementById('giscus-wrap').appendChild(s);
+  })();
+</script>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Shell/" rel="tag"># Shell</a>
+              <a href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="tag"># 文件管理</a>
+              <a href="/tags/%E6%89%B9%E9%87%8F%E6%94%B9%E5%90%8D/" rel="tag"># 批量改名</a>
+              <a href="/tags/%E6%95%B4%E7%90%86%E5%AE%9E%E5%BD%95/" rel="tag"># 整理实录</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/13/%E5%9F%BA%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%8A%A2%E4%BF%AE/" rel="prev" title="🔧 半年狂崩之谜：基地服务器 OOM 抢修实录">
+                  <i class="fa fa-angle-left"></i> 🔧 半年狂崩之谜：基地服务器 OOM 抢修实录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/09/28/%E5%9F%BA%E5%9C%B0OJ%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%B4%BB/" rel="next" title="🚀 OJ 复活：从 HTTP 500 到第一个 AC">
+                  🚀 OJ 复活：从 HTTP 500 到第一个 AC <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">每天都很困😴</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

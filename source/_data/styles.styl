@@ -16,3 +16,36 @@ body {
 hr {
   background-image: linear-gradient(90deg, transparent, rgba(139, 94, 52, .35), transparent);
 }
+
+// ---------- 黑色元素改暖棕配色（站名章 + 阅读全文按钮） ----------
+
+// 站名「小🐟博客」：黑底白字章 → 透明底墨字（贴暖纸底色）
+.brand {
+  background: transparent;
+  color: #3d3a33;
+  &:hover {
+    color: #8b5e34;
+    background: transparent;
+  }
+}
+
+// 阅读全文按钮：黑色 → 棕色（只给内层 a.btn 上色，外层 .post-button 保持透明）
+.post-button {
+  background: transparent !important;
+  border: none;
+
+  .btn {
+    background: #8b5e34 !important;
+    color: #fdfaf4 !important;
+    border: none !important;
+    border-radius: 4px;
+    padding: 6px 22px;
+    transition: background .2s ease, transform .2s ease;
+
+    &:hover {
+      background: #6b4a2c !important;
+      color: #fff !important;
+      transform: translateY(-1px);
+    }
+  }
+}

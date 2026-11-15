@@ -12,12 +12,16 @@ date: 2025-10-11 00:13:24
 ## 🔗 我的友链
 
 <div class="flink-list">
+  <a class="flink-item" href="https://xn--7gqr3hs9ecxao51c822e.cn/" target="_blank" rel="noopener">
+    <div class="flink-avatar"><img src="/img/flink-qiyuan.png" alt="七院创新基地"></div>
+    <div class="flink-info"><div class="flink-name">七院创新基地</div><div class="flink-desc">真实、专注、卓越、不设限——桂电七院创新基地</div></div>
+  </a>
   <a class="flink-item" href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">
-    <div class="flink-avatar"><img src="https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg" alt="Hexo"></div>
+    <div class="flink-avatar"><img src="/img/flink-hexo.svg" alt="Hexo"></div>
     <div class="flink-info"><div class="flink-name">Hexo</div><div class="flink-desc">快速、简单且强大的静态博客框架</div></div>
   </a>
   <a class="flink-item" href="https://butterfly.js.org/" target="_blank" rel="noopener">
-    <div class="flink-avatar"><img src="https://butterfly.js.org/img/favicon.png" alt="Butterfly"></div>
+    <div class="flink-avatar"><img src="/img/flink-butterfly.png" alt="Butterfly"></div>
     <div class="flink-info"><div class="flink-name">Butterfly</div><div class="flink-desc">博客此前使用的主题，陪伴了整个花哨时期</div></div>
   </a>
 </div>

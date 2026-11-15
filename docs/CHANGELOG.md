@@ -2,6 +2,21 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-11-15] 极简 NexT.Muse 版全量上线（线上验收通过）
+
+### 上线内容
+- NexT.Muse 档案流主题 + 暖纸墨香配色（纸底 #f7f3ea / 墨字 #3d3a33 / 棕强调 #8b5e34）
+- Giscus 评论（文章页原生注入，6 处配置标记）
+- 本地搜索（search.xml 数据 + local_search 弹窗，输入即搜）
+- Umami 统计（原生 umami 配置，云托管脚本）
+- 独立 404 页（「页面去潜水了…」暖纸风格）
+- 移除重复的 Umami inject（保留原生配置，避免脚本双载）
+
+### 线上验收
+- 首页/文章页/搜索数据/atom RSS/404 页/searchdb 脚本全部 200
+- 新昵称 28 处、umami 2 处、旧粉底 0、busuanzi 0
+- 文章页 giscus 配置 3 处（iframe 由访客浏览器加载 giscus.app 后渲染）
+
 ## [2026-11-15] 极简改版阶段 1：主题切换 async + 基础配置与页面迁移
 
 ### 变更

@@ -2,6 +2,22 @@
 
 记录博客项目的所有结构变动、配置修改、内容发布与 skill 调整。**新条目追加在文件顶部**，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [2026-11-15] 极简改版阶段 1：主题切换 async + 基础配置与页面迁移
+
+### 变更
+- `theme: butterfly` → `theme: async`（hexo-theme-async 2.2.7），Butterfly 保留可回滚
+- `_config.async.yml` 迁移 11 处：昵称/头像/邮箱/域名、本站友链条目、favicon(png)、导航菜单（首页/归档/分类/标签/音乐/友链/关于）、侧栏打字动画与社交链接、关于页文案、封面 `type: date` 极简模式、目录开启、字数统计开启、404 文案、破图占位
+- 页面重建：about/categories/tags 换 async layout；友链页 link→**links**（URL 变更）；archives 页面文件删除（Hexo 默认机制）
+- `_data/links.yml` 转 async 扁平格式
+
+### 踩坑修复
+1. **hexo-butterfly-extjs 残留**：切 async 后该 Butterfly 专属插件路径解析全 undefined，警告刷屏且干扰生成——已卸载
+2. **async 主题样式为 LESS 源码**：需安装 `hexo-renderer-less` 编译（已装），否则主题主样式 404 整站裸奔
+3. async 自带 `not_found` 404 配置（返回按钮+文案），无需自建 source/404.html
+
+### 验证
+- 首页/文章/about/links/music/categories/tags/archives 全部 200；首页截图确认极简形态生效（无封面卡片、日期牌、暗色 banner）
+
 ## [2026-10-28] 音乐页大屏歌词模式（对齐网易云体验）
 
 ### 新增

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NexT.Muse × NapCat WebUI 风格 · 设计效果模拟稿</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    min-height: 100vh;
+    color: #3a3a4a;
+    /* NapCat 式柔和粉紫极光背景 */
+    background:
+      radial-gradient(900px 600px at 12% 8%,  rgba(255, 182, 214, .55), transparent 60%),
+      radial-gradient(1000px 700px at 88% 12%, rgba(214, 197, 255, .5), transparent 62%),
+      radial-gradient(900px 700px at 80% 92%, rgba(255, 214, 230, .45), transparent 60%),
+      radial-gradient(700px 500px at 8% 88%,  rgba(230, 224, 255, .5), transparent 65%),
+      linear-gradient(160deg, #fdf7fb 0%, #f7f3fc 50%, #fdf5fa 100%);
+    background-attachment: fixed;
+  }
+  /* 顶部玻璃导航条 */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    background: rgba(255, 255, 255, .55);
+    border-bottom: 1px solid rgba(255, 255, 255, .65);
+  }
+  .nav-in { max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 28px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #4a4a5a; }
+  .logo img { width: 34px; height: 34px; border-radius: 10px; }
+  .menu { display: flex; gap: 4px; list-style: none; }
+  .menu a {
+    text-decoration: none; color: #5a5a6e; font-size: 14px;
+    padding: 7px 14px; border-radius: 999px; transition: all .25s ease;
+  }
+  .menu a.active, .menu a:hover { color: #e8468f; background: rgba(255, 124, 156, .12); }
+
+  /* 居中毛玻璃内容卡 */
+  .glass {
+    max-width: 780px; margin: 34px auto 60px;
+    background: rgba(255, 255, 255, .58);
+    backdrop-filter: blur(28px) saturate(1.5);
+    -webkit-backdrop-filter: blur(28px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 26px;
+    box-shadow: 0 20px 60px rgba(190, 120, 170, .18), 0 2px 8px rgba(190, 120, 170, .08);
+    padding: 44px 52px;
+  }
+  /* 站点头部 */
+  .site-head { text-align: center; margin-bottom: 30px; }
+  .site-head img { width: 88px; height: 88px; border-radius: 50%; border: 3px solid rgba(255,255,255,.9); box-shadow: 0 8px 26px rgba(232, 70, 143, .22); }
+  .site-head h1 { font-size: 26px; color: #3f3f52; margin-top: 14px; }
+  .site-head .tag { font-size: 13px; color: #9a9ab0; margin-top: 6px; letter-spacing: 1px; }
+  .typed { color: #e8468f; font-weight: 600; }
+  .typed::after { content: "|"; animation: blink 1s step-end infinite; color: #e8468f; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* 文章列表 */
+  .post-list { list-style: none; }
+  .post {
+    padding: 22px 20px; margin: 0 -20px 8px; border-radius: 18px;
+    transition: background .25s ease;
+  }
+  .post:hover { background: rgba(255, 124, 156, .07); }
+  .post a { text-decoration: none; color: #3f3f52; font-size: 17px; font-weight: 700; }
+  .post a:hover { color: #e8468f; }
+  .post .meta { font-size: 12.5px; color: #a8a8bd; margin-top: 7px; display: flex; gap: 14px; }
+  .post .meta .cat { color: #e8468f; background: rgba(232, 70, 143, .1); padding: 2px 10px; border-radius: 999px; }
+  .post .meta .cat:hover { color: #e8468f; }
+  .post .excerpt { font-size: 13.5px; color: #8f8fa5; margin-top: 9px; line-height: 1.7; }
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(232,70,143,.25), transparent); margin: 6px 0 14px; }
+
+  footer { text-align: center; padding: 26px 0 40px; font-size: 12.5px; color: #a8a8bd; }
+  footer a { color: #e8468f; text-decoration: none; }
+</style>
+</head>
+<body>
+  <nav><div class="nav-in">
+    <div class="logo"><img src="/img/tx01.jpg" alt=""><span>每天都很困😴</span></div>
+    <ul class="menu">
+      <li><a class="active" href="#">首页</a></li><li><a href="#">归档</a></li><li><a href="#">分类</a></li><li><a href="#">标签</a></li><li><a href="#">音乐</a></li><li><a href="#">友链</a></li><li><a href="#">关于</a></li>
+    </ul>
+  </div></nav>
+
+  <div class="glass">
+    <div class="site-head">
+      <img src="/img/tx01.jpg" alt="">
+      <h1>小🐟博客</h1>
+      <div class="tag">这是一条潜水的🐟儿</div>
+      <div class="typed">我是 每天都很困😴</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <ul class="post-list">
+      <li class="post">
+        <a href="#">📝 基地官网重构记录：从 Docusaurus 到 Next.js</a>
+        <div class="meta"><span>2026/10/27</span><span class="cat">项目实战</span><span>Next.js · TypeScript · 重构</span></div>
+        <div class="excerpt">从 2020 年的 Docusaurus 旧站到 Next.js 新站的完整重构记录，包含技术选型、3D 首页、资源整合与评论系统迁移…</div>
+      </li>
+      <li class="post">
+        <a href="#">🚀 基地 OJ 复活：从 HTTP 500 到第一个 AC</a>
+        <div class="meta"><span>2026/09/28</span><span class="cat">部署运维</span><span>Linux · MySQL · HUSTOJ</span></div>
+        <div class="excerpt">基地 OJ 半年没人管彻底瘫痪：HTTP 500、页面卡 30 秒、首页花屏、密码失传。从误删数据库到离线装回…</div>
+      </li>
+      <li class="post">
+        <a href="#">✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布</a>
+        <div class="meta"><span>2026/10/27</span><span class="cat">部署运维</span><span>Hexo · Butterfly · GitHub Actions</span></div>
+        <div class="excerpt">一次从扫描诊断到全量上线的博客大重构：图片瘦身 33MB~15MB、角色垫图封面流水线、搜索评论统计三件套…</div>
+      </li>
+      <li class="post">
+        <a href="#">🔧 半年狂崩之谜：基地服务器 OOM 抢修实录</a>
+        <div class="meta"><span>2026/09/13</span><span class="cat">部署运维</span><span>Linux · OOM · systemctl</span></div>
+        <div class="excerpt">基地服务器半年反复假死崩溃的排查修复实录：从机房屏幕上的 OOM 日志揪出失控的系统自动更新服务…</div>
+      </li>
+    </ul>
+  </div>
+
+  <footer>© 2025 – 2026 每天都很困😴 · 由 <a href="#">Hexo</a> 强力驱动 · <a href="#">RSS</a></footer>
+</body>
+</html>

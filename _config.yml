@@ -14,6 +14,11 @@ sitemap:
     - sitemap.xml
     - sitemap.txt
   rel: false
+search:
+  path: search.xml
+  format: xml
+  limit: 0
+
 feed:
   enable: true
   type: atom
@@ -119,7 +124,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: async
+theme: next
 
 deploy:
   type: git

@@ -1,5 +1,5 @@
 ---
-title: "✨ 我的 Hexo 博客大重构：从 33MB 图片到 push 即发布"
+title: "✨ 我的 Hexo 博客重构
 date: 2026-10-27 22:00:00
 categories: [部署运维]
 tags: [Hexo, Butterfly, GitHub-Actions, Seedream, Giscus, 重构, 踩坑]
@@ -7,7 +7,7 @@ description: 一次从扫描诊断到全量上线的博客大重构：图片瘦�
 cover: ../img/anime-tech-blogrefactor-20261027.jpg
 ---
 
-# ✨ 我的 Hexo 博客大重构
+# ✨ 我的 Hexo 博客重构
 
 ## 📖 前言：起因是一次「惨不忍睹」的全面扫描
 

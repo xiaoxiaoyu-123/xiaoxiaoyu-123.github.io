@@ -1,6 +1,6 @@
 ---
 title: "Linux快速入门"
-date: 2026-04-19 19:00
+date: 2026-04-15 19:00
 description: 从零开始的 Linux 完整入门指南，包含环境安装、远程连接、系统管理和常用命令详解，附实战示例
 categories: [部署运维]
 tags: [Linux, 零基础教程]

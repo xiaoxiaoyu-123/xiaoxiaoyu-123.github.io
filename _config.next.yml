@@ -909,4 +909,3 @@ images: images
 # ---------------------------------------------------------------
 injects:
   head:
-    - <script defer src="https://cloud.umami.is/script.js" data-website-id="215130f2-7efc-4218-b160-8df1a92d1906" data-domains="xiaoxiaoyu-123.github.io"></script>
